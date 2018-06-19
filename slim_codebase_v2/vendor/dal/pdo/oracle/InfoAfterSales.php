@@ -29,12 +29,21 @@ class InfoAfterSales extends \DAL\DalSlim {
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');   
             $sql ="
-                 select SERVISID ID, 
+               /*  select SERVISID ID, 
                        ISORTAKAD AD 
                 from vt_servisler where 
                     DURUMID = 1 AND 
                     dilkod = 'Turkish' 
-                    order by id     
+                    order by id      */ 
+                    
+                   SELECT
+                        vtsxy.SERVISID ID,  
+                        vtsxy.GIZLIAD AD
+                    FROM SASON.PERFORMANSSERVISLER vtsxy
+                    WHERE vtsxy.active =0 
+                    order by id
+
+
                                  ";
              $statement = $pdo->prepare( $sql);
           //  echo debugPDO($sql, $params);
