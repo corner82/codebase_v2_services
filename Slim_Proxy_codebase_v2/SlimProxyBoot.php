@@ -10,6 +10,13 @@
  */
 
 /**
+ * set max execution time to 5 minutes
+ * @since 12/06/2018
+ * @author Mustafa Zeynel Dağlı
+ */
+ini_set('max_execution_time', 300);
+
+/**
  * "Cross-origin resource sharing" özelliğinin farklı domainlerden 
  * proxy içine istek yaparken engel ve kısıtlarından kaçınılması
  * için koyulmuştur.
@@ -65,7 +72,7 @@ $proxyClass = new \Slim\SlimHmacProxy();
  */ 
  
   $proxyClass->setRestApiBaseUrl("http://slim.codebase_v2.com:9990/"); 
-   
+ //$proxyClass->setRestApiBaseUrl("http://localhost/slim.codebase_v2.com:9990/");   
 
 $proxyClass->setRestApiEndPoint("index.php/");
 //$proxyClass->setEndPointUrl('http://88.249.18.205:8090/slim2_ecoman/index.php/');
