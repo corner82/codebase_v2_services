@@ -4586,31 +4586,57 @@ class InfoAfterSales extends \DAL\DalSlim {
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //servis.servisid =94 and 
             $servicesQuery = ' servis.servisid in ('.$_GET['src'].') and  ';
-            // vv.servisid in (94, 96) and 
-            $servicesQuery2 = ' and vv.servisid in  ('.$_GET['src'].')  ';
+            // vv.servisid   in (94, 96, 98 )  AND
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
         } 
         
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
+                SELECT servisid , 
+                --(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                   tarih ,
+                            sum(yedekparcatoplamsatis)   yedekparcatoplamsatis 
+                     FROM (  
+                               SELECT   vv.servisid,
+                                 to_char(tarihicin.tar) tarih ,
+                                 nvl(data1.yedekparcatoplamsatis,0) yedekparcatoplamsatis   
+                               from vt_servisler vv  
+                               left join (
+                                    select distinct 
+                                        to_date(x.tarih,'dd/mm/yyyy') tar   
+                                    from sason.tarihler x where
+                                          x.tarih between  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                                ) tarihicin on 1=1
+                                LEFT JOIN (
+                                   select  distinct a.SIPARISSERVISID servisid,  
+                                         to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') AS TARIH,
+                                       /*    CASE
+                                              WHEN SERVISSTOKTURID = 6
+                                              THEN
+                                                sum (tutar)
+                                           END  yagsatistutar */
+
+                                           CASE
+                                              WHEN SERVISSTOKTURID <> 6
+                                              THEN
+                                                sum (tutar)
+                                           END  yedekparcatoplamsatis    
+                                     from sason.ypdata  a
+                                     WHERE
+                                         a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                                     GROUP BY to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') ,a.SERVISSTOKTURID ,a.SIPARISSERVISID
+                                  ) data1 on  data1.servisid = vv.servisid and  data1.TARIH = tarihicin.tar 
+                                  WHERE 
+                                         vv.servisid not in (1,134,136) and 
+                                         --vv.servisid   in (94, 96, 98 )  AND
+                                         ".$servicesQuery2."
+                                          vv.dilkod ='Turkish'
+                             ) asd
+                 group  by servisid,tarih   
+                 ORDER BY  servisid ,tarih  asc
                 
-            SELECT
-                        /*(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = servis.servisid) as servisad, */ 
-                        (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = servis.servisid) as servisad, 
-                        --sum(ags.arac_giris) as ARAC_GIRIS_SAYISI
-                        servis.servisid,
-                        tarihler.tarih, 
-                        ags.arac_giris
-                    FROM 
-                        (SELECT TARIH, YIL, AY FROM TARIHLER WHERE TARIH BETWEEN  to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')) tarihler
-                    left join vt_servisler servis on 
-                    --servis.servisid =94 and 
-                                ".$servicesQuery."
-                                servis.dilkod = 'Turkish'
-                    left join mobilags ags on AGS.SERVIS = servis.servisid and 
-                            AGS.TARIH = tarihler.tarih
-                    --GROUP BY tarihler.tarih
-                    order by servis.servisid ,tarihler.tarih asc 
             ";
              
             $statement = $pdo->prepare($sql);  
@@ -4713,47 +4739,63 @@ class InfoAfterSales extends \DAL\DalSlim {
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //zx.servis =94 AND 
             $servicesQuery = ' zx.servis in ('.$_GET['src'].') and  ';
-            // and vv.servisid in
-            $servicesQuery2 = ' and vv.servisid in  ('.$_GET['src'].')  ';
+            // vv.servisid   in (94, 96, 98) and
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
         } 
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
-                
-            SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
-                tarihicin.tar as tarih,
-                tarihicin.yil as yil,            
-                nvl(data1.arac_giris,0) arac_giris  
-               
-              from vt_servisler vv  
-             left join (
-               select distinct 
-                    to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww')) tar  ,
-                    to_number(to_char(x.tarih,'yyyy')) yil  
-               from sason.tarihler x WHERE     
-                     to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy'), 'ww')) -3   and  to_number(to_char(to_date(sysdate, 'dd/mm/yyyy'), 'ww'))
-                      and to_number(to_char(x.tarih,'yyyy'))  =  to_number(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy'),'yyyy'))                                      
-             ) tarihicin on 1=1
-             LEFT JOIN ( 
-                  
-                select  distinct  zx.servis servisid,  
-                      to_number(to_char(zx.tarih,'yyyy')) yil ,
-                      to_number(to_char(to_date(zx.tarih, 'dd/mm/yyyy'), 'ww')) tarih ,
-                      sum(zx.arac_giris) arac_giris     
-                FROM mobilags zx 
-                WHERE
-                        ".$servicesQuery."   
-                        to_number(to_char(to_date(zx.tarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy'), 'ww')) -3   and  to_number(to_char(to_date(sysdate, 'dd/mm/yyyy'), 'ww'))
-                        and to_number(to_char(zx.tarih,'yyyy'))  =  to_number(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy'),'yyyy'))   
-                
-                group by servis ,  to_number(to_char(zx.tarih,'yyyy')),to_number(to_char(to_date(zx.tarih, 'dd/mm/yyyy'), 'ww'))
-             ) data1 on data1.servisid = vv.servisid and data1.TARIH = tarihicin.tar AND data1.yil = tarihicin.yil  
-             WHERE 
-                 vv.servisid not in (1,134,136)  
-                 ".$servicesQuery2." 
-                 and vv.dilkod ='Turkish'  
-             ORDER BY vv.servisid, yil, tarih desc
+                SELECT servisid , 
+                    --(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad,
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    tarih,
+                    yil,            
+                    sum(yedekparcatoplamsatis) yedekparcatoplamsatis
+                  FROM ( 
+
+                  SELECT   distinct vv.servisid,
+                                tarihicin.tar as tarih,
+                                tarihicin.yil as yil,            
+                                nvl(data1.yedekparcatoplamsatis,0) yedekparcatoplamsatis
+                              from vt_servisler vv  
+                             left join (
+                               select distinct 
+                                    to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww')) tar  ,
+                                    to_number(to_char(x.tarih,'yyyy')) yil  
+                               from sason.tarihler x WHERE 
+                                     to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) and  
+                                     x.tarih between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                             ) tarihicin on 1=1             
+                             LEFT JOIN (
+                              select  distinct a.SIPARISSERVISID servisid, 
+                                  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                                  to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) tarih,  
+                                  /*    CASE
+                                         WHEN SERVISSTOKTURID = 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yagsatistutar */
+
+                                      CASE
+                                         WHEN SERVISSTOKTURID <> 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yedekparcatoplamsatis 
+                                from sason.ypdata  a
+                                WHERE 
+                                   to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) AND
+                                   a.YEDEKPARCARAPORTARIHI  between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                                GROUP BY   to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) ,SERVISSTOKTURID ,a.SIPARISSERVISID
+                             ) data1 on  data1.servisid = vv.servisid and  data1.TARIH = tarihicin.tar AND data1.yil = tarihicin.yil  
+                             WHERE 
+                                vv.servisid not in (1,134,136) and 
+                                --vv.servisid   in (94, 96, 98) and
+                                ".$servicesQuery2."
+                                vv.dilkod ='Turkish'  
+                             ORDER BY  tarih desc 
+                             ) ASD 
+             group by servisid,tarih, yil 
+             order by  servisid,tarih asc, yil asc
 
             ";
              
@@ -4858,47 +4900,62 @@ class InfoAfterSales extends \DAL\DalSlim {
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //a.servisid in (94, 96) and 
             $servicesQuery = ' zx.servis  in ('.$_GET['src'].') and  ';
-            // vv.servisid in (94)
-            $servicesQuery2 = ' and vv.servisid in  ('.$_GET['src'].')  ';
+            // vv.servisid in (94) and
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].')  and ';
         } 
         
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "     
-            SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
-                tarihicin.ay as tarih,
-                tarihicin.yil as yil,            
-                nvl(data1.arac_giris,0) arac_giris  
-               
-              from vt_servisler vv  
-             left join (
-               select distinct 
-                    to_number(to_char(x.tarih,'yyyy')) yil  ,
-                    to_number(to_char(x.tarih,'MM')) ay 
-               from sason.tarihler x 
-               WHERE     
-                     x.tarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
-                                                           
-             ) tarihicin on 1=1
-             LEFT JOIN ( 
-                  
-                select  distinct  zx.servis servisid,  
-                      to_number(to_char(zx.tarih,'yyyy')) yil ,
-                      to_number(to_char(zx.tarih,'MM')) ay ,
-                      sum(zx.arac_giris) arac_giris     
-                FROM mobilags zx 
-                WHERE
-                        ".$servicesQuery."  
-                        zx.tarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy') , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')                
-                
-                group by servis ,  to_number(to_char(zx.tarih,'yyyy')),to_number(to_char(zx.tarih,'MM'))
-             ) data1 on data1.servisid = vv.servisid and data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
-             WHERE 
-                 vv.servisid not in (1,134,136)  
-                 ".$servicesQuery2." 
-                 and vv.dilkod ='Turkish'  
-              ORDER BY vv.servisid, yil, tarih  
+                   SELECT servisid  ,  
+                    --(Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    ay,
+                    yil,            
+                    sum(yedekparcatoplamsatis) yedekparcatoplamsatis
+                  FROM (     
+                        SELECT  vv.servisid,
+                            tarihicin.ay as ay,
+                            tarihicin.yil as yil,            
+                            nvl(data1.yedekparcatoplamsatis,0) yedekparcatoplamsatis  
+                        from vt_servisler vv  
+                         left join (
+                               select distinct 
+                                    to_number(to_char(x.tarih,'yyyy')) yil  ,
+                                    to_number(to_char(x.tarih,'MM')) ay 
+                               from sason.tarihler x WHERE  
+                                     x.tarih  between  to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')  
+                             ) tarihicin on 1=1
+                             LEFT JOIN (
+                              select  distinct a.SIPARISSERVISID servisid, 
+                                  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                                  to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ay,  
+                                  /*    CASE
+                                         WHEN SERVISSTOKTURID = 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yagsatistutar 
+                                      ,*/
+                                      CASE
+                                         WHEN SERVISSTOKTURID <> 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yedekparcatoplamsatis 
+                                from sason.ypdata  a
+                                WHERE  
+                                  a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                                GROUP BY  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ,SERVISSTOKTURID  ,a.SIPARISSERVISID
+
+                             ) data1 on  data1.servisid = vv.servisid and  data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
+                             WHERE 
+                                  vv.servisid not in (1,134,136) and 
+                                --vv.servisid   in (94, 96, 98) and
+                                ".$servicesQuery2."
+                                 vv.dilkod ='Turkish' 
+                             ORDER BY servisid,yil, ay     
+            ) ASD 
+             group by servisid, yil, ay 
+             order by servisid, yil, ay 
             ";
              
             $statement = $pdo->prepare($sql);  
@@ -5378,48 +5435,62 @@ class InfoAfterSales extends \DAL\DalSlim {
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //a.servisid in (94, 96) and 
             $servicesQuery = ' zx.servis  in ('.$_GET['src'].') and  ';
-            // vv.servisid in (94)
-            $servicesQuery2 = ' and vv.servisid in  ('.$_GET['src'].')  ';
+            //vv.servisid   in (94, 96, 98) and
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
         } 
         
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "     
-            SELECT  vv.servisid , 
-                /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
-                tarihicin.ay as tarih,
-                tarihicin.yil as yil,            
-                nvl(data1.arac_giris,0) arac_giris  
-               
-              from vt_servisler vv  
-             left join (
-               select distinct 
-                    to_number(to_char(x.tarih,'yyyy')) yil  ,
-                    to_number(to_char(x.tarih,'MM')) ay 
-               from sason.tarihler x 
-               WHERE     
-                     x.tarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
-                                                           
-             ) tarihicin on 1=1
-             LEFT JOIN ( 
-                  
-                select  distinct  zx.servis servisid,  
-                      to_number(to_char(zx.tarih,'yyyy')) yil ,
-                      to_number(to_char(zx.tarih,'MM')) ay ,
-                      sum(zx.arac_giris) arac_giris     
-                FROM mobilags zx 
-                WHERE
-                        ".$servicesQuery."  
-                        zx.tarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy') , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')                
-                
-                group by servis ,  to_number(to_char(zx.tarih,'yyyy')),to_number(to_char(zx.tarih,'MM'))
-             ) data1 on data1.servisid = vv.servisid and data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
-             WHERE 
-                 vv.servisid not in (1,134,136)  
-                 ".$servicesQuery2." 
-                 and vv.dilkod ='Turkish'  
-              ORDER BY vv.servisid, yil, tarih  
+                SELECT servisid , 
+                --(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    ay,
+                    yil,            
+                    sum(yagsatistutar) yagsatistutar
+                  FROM (     
+                        SELECT  vv.servisid,
+                            tarihicin.ay as ay,
+                            tarihicin.yil as yil,            
+                            nvl(data1.yagsatistutar,0) yagsatistutar  
+                        from vt_servisler vv  
+                         left join (
+                               select distinct 
+                                    to_number(to_char(x.tarih,'yyyy')) yil  ,
+                                    to_number(to_char(x.tarih,'MM')) ay 
+                               from sason.tarihler x WHERE  
+                                     x.tarih  between  to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')  
+                             ) tarihicin on 1=1
+                             LEFT JOIN (
+                              select  distinct a.SIPARISSERVISID servisid, 
+                                  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                                  to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ay,  
+                                      CASE
+                                         WHEN SERVISSTOKTURID = 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yagsatistutar 
+                                      /*,
+                                      CASE
+                                         WHEN SERVISSTOKTURID <> 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yedekparcatoplamsatis */
+                                from sason.ypdata  a
+                                WHERE  
+                                  a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                                GROUP BY  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ,SERVISSTOKTURID  ,a.SIPARISSERVISID
+
+                             ) data1 on  data1.servisid = vv.servisid and  data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
+                             WHERE 
+                                  vv.servisid not in (1,134,136) and 
+                                --vv.servisid   in (94, 96, 98) and
+                                ".$servicesQuery2."
+                                 vv.dilkod ='Turkish' 
+                             ORDER BY servisid,yil, ay     
+            ) ASD 
+             group by servisid, yil, ay 
+             order by servisid, yil, ay    
             ";
              
             $statement = $pdo->prepare($sql);  
@@ -5436,6 +5507,1116 @@ class InfoAfterSales extends \DAL\DalSlim {
             return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
         }
     }
+    
+   
+    
+    
+    
+    
+    
+    
+    
+     /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardAtolyeCirosu($args = array()) {
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                    select  
+                    TO_CHAR(ROUND(sum(nvl(atolyecirosugaranti,0)), 0), '999,999,999,999,999') atolyecirosugaranti 
+
+                    from ( 
+                    select  
+                    /*
+                    1 - isemri 
+                    2 - icmal
+                    3 - satis
+                    */  
+
+                      CASE
+                             WHEN faturaturid= 3
+                             THEN
+                               sum (toplam)
+                          END  direksatistutar,
+
+                          CASE
+                             WHEN faturaturid = 1
+                             THEN
+                               sum (toplam)
+                          END  atolyecirosucari  , 
+                          CASE
+                             WHEN faturaturid = 2
+                             THEN
+                               sum (toplam)
+                          END  atolyecirosugaranti  
+
+                    from faturalar 
+                    where  
+                        durumid=1 and faturaturid in(1,2,3) and
+                        islemtarihi   < to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                    ";
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+     /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayAtolyeCirosu($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        $weekBefore = date('d/m/Y', strtotime(' -6 day'));
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "   
+                
+
+            SELECT 
+               tarih ,
+               sum(yagsatistutar) yagsatistutar  
+            FROM (  
+                SELECT   
+                to_char(tarihicin.tar) tarih ,
+                nvl(data1.yagsatistutar,0) yagsatistutar   
+                  from vt_servisler vv  
+                 left join (
+                   select distinct 
+                       to_date(x.tarih,'dd/mm/yyyy') tar   
+                   from sason.tarihler x where
+                         x.tarih between  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                 ) tarihicin on 1=1
+                 LEFT JOIN (
+                  select  distinct
+                     --   count( a.servisid) as MIKTAR,
+                        to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') AS TARIH,
+                          CASE
+                             WHEN SERVISSTOKTURID = 6
+                             THEN
+                               sum (tutar)
+                          END  yagsatistutar 
+                          /*,
+                          CASE
+                             WHEN SERVISSTOKTURID <> 6
+                             THEN
+                               sum (tutar)
+                          END  yedekparcatoplamsatis */   
+                    from sason.ypdata  a
+                    WHERE
+                        a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                    GROUP BY to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') ,SERVISSTOKTURID 
+                 ) data1 on data1.TARIH = tarihicin.tar
+                 WHERE 
+                       vv.servisid   in (1 )  
+                       AND vv.dilkod ='Turkish'
+                       ) asd
+                   group  by tarih   
+             ORDER BY  tarih  asc
+            ";
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayAtolyeCirosuWithServices($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        $weekBefore = date('d/m/Y', strtotime(' -6 day'));
+        
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //servis.servisid =94 and 
+            $servicesQuery = ' servis.servisid in ('.$_GET['src'].') and  ';
+            // vv.servisid   in (94, 96, 98 )  AND
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        } 
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+                SELECT servisid , 
+                      /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad,  */ 
+                         (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    tarih ,
+                    sum(yagsatistutar)   yagsatistutar 
+                 FROM (  
+                           SELECT   vv.servisid,
+                             to_char(tarihicin.tar) tarih ,
+                             nvl(data1.yagsatistutar,0) yagsatistutar   
+                           from vt_servisler vv  
+                           left join (
+                                select distinct 
+                                    to_date(x.tarih,'dd/mm/yyyy') tar   
+                                from sason.tarihler x where
+                                      x.tarih between  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                            ) tarihicin on 1=1
+                            LEFT JOIN (
+                               select  distinct a.SIPARISSERVISID servisid,  
+                                     to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') AS TARIH,
+                                       CASE
+                                          WHEN SERVISSTOKTURID = 6
+                                          THEN
+                                            sum (tutar)
+                                       END  yagsatistutar 
+                                    /*
+                                       CASE
+                                          WHEN SERVISSTOKTURID <> 6
+                                          THEN
+                                            sum (tutar)
+                                       END  yedekparcatoplamsatis    */
+                                 from sason.ypdata  a
+                                 WHERE
+                                     a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                                 GROUP BY to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') ,a.SERVISSTOKTURID ,a.SIPARISSERVISID
+                              ) data1 on  data1.servisid = vv.servisid and  data1.TARIH = tarihicin.tar 
+                              WHERE 
+                                    --vv.servisid   in (94, 96, 98 )  AND
+                                    ".$servicesQuery2."
+                                     vv.dilkod ='Turkish'
+                         ) asd
+                      group  by servisid,tarih   
+                      ORDER BY  servisid,tarih  asc 
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+     /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayAtolyeCirosuAylik($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        $treeMonthsBefore = date('d/m/Y', strtotime(' -90 day'));
+        try     {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+                SELECT
+                tarih,
+                yil,            
+                sum(yagsatistutar) yagsatistutar
+              FROM ( 
+
+              SELECT   distinct
+                            tarihicin.tar as tarih,
+                            tarihicin.yil as yil,            
+                            nvl(data1.yagsatistutar,0) yagsatistutar
+                          from vt_servisler vv  
+                         left join (
+                           select distinct 
+                                to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww')) tar  ,
+                                to_number(to_char(x.tarih,'yyyy')) yil  
+                           from sason.tarihler x WHERE 
+                                 to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) and  
+                                 x.tarih between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                         ) tarihicin on 1=1             
+                         LEFT JOIN (
+                          select  distinct
+                              to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                              to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) tarih,  
+                                  CASE
+                                     WHEN SERVISSTOKTURID = 6
+                                     THEN
+                                       sum (tutar)
+                                  END  yagsatistutar 
+                                  /*,
+                                  CASE
+                                     WHEN SERVISSTOKTURID <> 6
+                                     THEN
+                                       sum (tutar)
+                                  END  yedekparcatoplamsatis */   
+                            from sason.ypdata  a
+                            WHERE 
+                               to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) AND
+                               a.YEDEKPARCARAPORTARIHI  between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                            GROUP BY   to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) ,SERVISSTOKTURID 
+                         ) data1 on data1.TARIH = tarihicin.tar AND data1.yil = tarihicin.yil  
+                         WHERE 
+                             vv.servisid   in (1) and
+                             vv.dilkod ='Turkish'  
+                         ORDER BY  tarih desc 
+                         ) ASD 
+                group by tarih , yil 
+                ORDER BY tarih asc, yil asc   
+
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+           // print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayAtolyeCirosuAylikWithServices($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        $fourWeekBefore = date('d/m/Y', strtotime(' -4 week'));
+        //print_r($fourWeekBefore);
+        
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //zx.servis =94 AND 
+            $servicesQuery = ' zx.servis in ('.$_GET['src'].') and  ';
+            // vv.servisid   in (94, 96, 98) and 
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        } 
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+                
+            SELECT servisid , 
+                /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad,  */ 
+                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                tarih,
+                yil,            
+                sum(yagsatistutar) yagsatistutar
+              FROM ( 
+
+              SELECT   distinct vv.servisid,
+                            tarihicin.tar as tarih,
+                            tarihicin.yil as yil,            
+                            nvl(data1.yagsatistutar,0) yagsatistutar
+                          from vt_servisler vv  
+                         left join (
+                           select distinct 
+                                to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww')) tar  ,
+                                to_number(to_char(x.tarih,'yyyy')) yil  
+                           from sason.tarihler x WHERE 
+                                 to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) and  
+                                 x.tarih between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                         ) tarihicin on 1=1             
+                         LEFT JOIN (
+                          select  distinct a.SIPARISSERVISID servisid, 
+                              to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                              to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) tarih,  
+                                  CASE
+                                     WHEN SERVISSTOKTURID = 6
+                                     THEN
+                                       sum (tutar)
+                                  END  yagsatistutar 
+                                  /*,
+                                  CASE
+                                     WHEN SERVISSTOKTURID <> 6
+                                     THEN
+                                       sum (tutar)
+                                  END  yedekparcatoplamsatis */   
+                            from sason.ypdata  a
+                            WHERE 
+                               to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) AND
+                               a.YEDEKPARCARAPORTARIHI  between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                            GROUP BY   to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) ,SERVISSTOKTURID ,a.SIPARISSERVISID
+                         ) data1 on  data1.servisid = vv.servisid and  data1.TARIH = tarihicin.tar AND data1.yil = tarihicin.yil  
+                         WHERE 
+                            vv.servisid not in (1,134,136) and 
+                            --vv.servisid   in (94, 96, 98) and 
+                            ".$servicesQuery2."
+                            vv.dilkod ='Turkish'  
+                         ORDER BY  tarih desc 
+                         ) ASD 
+             group by servisid,tarih, yil 
+             ORDER BY  servisid,tarih asc, yil  asc   
+
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayAtolyeCirosuYillik($args = array()) {
+        $date = new \DateTime(); //Today
+        $lastDay = $date->format("t/m/Y"); //Get last day
+        $dateMinus12 = $date->modify("-12 months"); // Last day 12 months ago
+        $yearAgoToday = $dateMinus12->format("t/m/Y"); //Get last day
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+            SELECT
+            ay,
+            yil,            
+            sum(yagsatistutar) yagsatistutar
+                FROM ( 
+                 SELECT  
+                              tarihicin.ay as ay,
+                              tarihicin.yil as yil,            
+                              nvl(data1.yagsatistutar,0) yagsatistutar  
+                            from vt_servisler vv  
+                           left join (
+                             select distinct  
+                                  to_number(to_char(x.tarih,'yyyy')) yil  ,
+                                  to_number(to_char(x.tarih,'MM')) ay 
+                             from sason.tarihler x WHERE  
+                                   x.tarih  between  to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+
+                           ) tarihicin on 1=1
+                           LEFT JOIN (
+                            select  distinct
+                                to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                                to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ay,  
+                                    CASE
+                                       WHEN SERVISSTOKTURID = 6
+                                       THEN
+                                         sum (tutar)
+                                    END  yagsatistutar 
+                                    /*,
+                                    CASE
+                                       WHEN SERVISSTOKTURID <> 6
+                                       THEN
+                                         sum (tutar)
+                                    END  yedekparcatoplamsatis */   
+                              from sason.ypdata  a
+                              WHERE  
+                                a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                              GROUP BY  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ,SERVISSTOKTURID 
+
+                           ) data1 on   data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
+                     WHERE 
+                         vv.servisid in (1) and  
+                         vv.dilkod ='Turkish'  
+                     ORDER BY yil, ay  
+             
+                          ) ASD 
+             group by yil, ay     
+             order by    yil, ay
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayAtolyeCirosuYillikWithServices($args = array()) {
+        //print_r($fourWeekBefore);
+        
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //a.servisid in (94, 96) and 
+            $servicesQuery = ' zx.servis  in ('.$_GET['src'].') and  ';
+            //vv.servisid   in (94, 96, 98) and
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        } 
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "     
+                SELECT servisid , 
+                --(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    ay,
+                    yil,            
+                    sum(yagsatistutar) yagsatistutar
+                  FROM (     
+                        SELECT  vv.servisid,
+                            tarihicin.ay as ay,
+                            tarihicin.yil as yil,            
+                            nvl(data1.yagsatistutar,0) yagsatistutar  
+                        from vt_servisler vv  
+                         left join (
+                               select distinct 
+                                    to_number(to_char(x.tarih,'yyyy')) yil  ,
+                                    to_number(to_char(x.tarih,'MM')) ay 
+                               from sason.tarihler x WHERE  
+                                     x.tarih  between  to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')  
+                             ) tarihicin on 1=1
+                             LEFT JOIN (
+                              select  distinct a.SIPARISSERVISID servisid, 
+                                  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                                  to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ay,  
+                                      CASE
+                                         WHEN SERVISSTOKTURID = 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yagsatistutar 
+                                      /*,
+                                      CASE
+                                         WHEN SERVISSTOKTURID <> 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yedekparcatoplamsatis */
+                                from sason.ypdata  a
+                                WHERE  
+                                  a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                                GROUP BY  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ,SERVISSTOKTURID  ,a.SIPARISSERVISID
+
+                             ) data1 on  data1.servisid = vv.servisid and  data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
+                             WHERE 
+                                  vv.servisid not in (1,134,136) and 
+                                --vv.servisid   in (94, 96, 98) and
+                                ".$servicesQuery2."
+                                 vv.dilkod ='Turkish' 
+                             ORDER BY servisid,yil, ay     
+            ) ASD 
+             group by servisid, yil, ay 
+             order by servisid, yil, ay    
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+     /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardGarantiCirosu($args = array()) {
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                    select  
+                    TO_CHAR(ROUND(sum(nvl(atolyecirosugaranti,0)), 0), '999,999,999,999,999') atolyecirosugaranti 
+
+                    from ( 
+                    select  
+                    /*
+                    1 - isemri 
+                    2 - icmal
+                    3 - satis
+                    */  
+
+                      CASE
+                             WHEN faturaturid= 3
+                             THEN
+                               sum (toplam)
+                          END  direksatistutar,
+
+                          CASE
+                             WHEN faturaturid = 1
+                             THEN
+                               sum (toplam)
+                          END  atolyecirosucari  , 
+                          CASE
+                             WHEN faturaturid = 2
+                             THEN
+                               sum (toplam)
+                          END  atolyecirosugaranti  
+
+                    from faturalar 
+                    where  
+                        durumid=1 and faturaturid in(1,2,3) and
+                        islemtarihi   < to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                    ";
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+     /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayGarantiCirosu($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        $weekBefore = date('d/m/Y', strtotime(' -6 day'));
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "   
+                
+
+            SELECT 
+               tarih ,
+               sum(yagsatistutar) yagsatistutar  
+            FROM (  
+                SELECT   
+                to_char(tarihicin.tar) tarih ,
+                nvl(data1.yagsatistutar,0) yagsatistutar   
+                  from vt_servisler vv  
+                 left join (
+                   select distinct 
+                       to_date(x.tarih,'dd/mm/yyyy') tar   
+                   from sason.tarihler x where
+                         x.tarih between  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                 ) tarihicin on 1=1
+                 LEFT JOIN (
+                  select  distinct
+                     --   count( a.servisid) as MIKTAR,
+                        to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') AS TARIH,
+                          CASE
+                             WHEN SERVISSTOKTURID = 6
+                             THEN
+                               sum (tutar)
+                          END  yagsatistutar 
+                          /*,
+                          CASE
+                             WHEN SERVISSTOKTURID <> 6
+                             THEN
+                               sum (tutar)
+                          END  yedekparcatoplamsatis */   
+                    from sason.ypdata  a
+                    WHERE
+                        a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                    GROUP BY to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') ,SERVISSTOKTURID 
+                 ) data1 on data1.TARIH = tarihicin.tar
+                 WHERE 
+                       vv.servisid   in (1 )  
+                       AND vv.dilkod ='Turkish'
+                       ) asd
+                   group  by tarih   
+             ORDER BY  tarih  asc
+            ";
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayGarantiCirosuWithServices($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        $weekBefore = date('d/m/Y', strtotime(' -6 day'));
+        
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //servis.servisid =94 and 
+            $servicesQuery = ' servis.servisid in ('.$_GET['src'].') and  ';
+            // vv.servisid   in (94, 96, 98 )  AND
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        } 
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+                SELECT servisid , 
+                      /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad,  */ 
+                         (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    tarih ,
+                    sum(yagsatistutar)   yagsatistutar 
+                 FROM (  
+                           SELECT   vv.servisid,
+                             to_char(tarihicin.tar) tarih ,
+                             nvl(data1.yagsatistutar,0) yagsatistutar   
+                           from vt_servisler vv  
+                           left join (
+                                select distinct 
+                                    to_date(x.tarih,'dd/mm/yyyy') tar   
+                                from sason.tarihler x where
+                                      x.tarih between  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                            ) tarihicin on 1=1
+                            LEFT JOIN (
+                               select  distinct a.SIPARISSERVISID servisid,  
+                                     to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') AS TARIH,
+                                       CASE
+                                          WHEN SERVISSTOKTURID = 6
+                                          THEN
+                                            sum (tutar)
+                                       END  yagsatistutar 
+                                    /*
+                                       CASE
+                                          WHEN SERVISSTOKTURID <> 6
+                                          THEN
+                                            sum (tutar)
+                                       END  yedekparcatoplamsatis    */
+                                 from sason.ypdata  a
+                                 WHERE
+                                     a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                                 GROUP BY to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') ,a.SERVISSTOKTURID ,a.SIPARISSERVISID
+                              ) data1 on  data1.servisid = vv.servisid and  data1.TARIH = tarihicin.tar 
+                              WHERE 
+                                    --vv.servisid   in (94, 96, 98 )  AND
+                                    ".$servicesQuery2."
+                                     vv.dilkod ='Turkish'
+                         ) asd
+                      group  by servisid,tarih   
+                      ORDER BY  servisid,tarih  asc 
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+     /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayGarantiCirosuAylik($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        $treeMonthsBefore = date('d/m/Y', strtotime(' -90 day'));
+        try     {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+                SELECT
+                tarih,
+                yil,            
+                sum(yagsatistutar) yagsatistutar
+              FROM ( 
+
+              SELECT   distinct
+                            tarihicin.tar as tarih,
+                            tarihicin.yil as yil,            
+                            nvl(data1.yagsatistutar,0) yagsatistutar
+                          from vt_servisler vv  
+                         left join (
+                           select distinct 
+                                to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww')) tar  ,
+                                to_number(to_char(x.tarih,'yyyy')) yil  
+                           from sason.tarihler x WHERE 
+                                 to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) and  
+                                 x.tarih between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                         ) tarihicin on 1=1             
+                         LEFT JOIN (
+                          select  distinct
+                              to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                              to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) tarih,  
+                                  CASE
+                                     WHEN SERVISSTOKTURID = 6
+                                     THEN
+                                       sum (tutar)
+                                  END  yagsatistutar 
+                                  /*,
+                                  CASE
+                                     WHEN SERVISSTOKTURID <> 6
+                                     THEN
+                                       sum (tutar)
+                                  END  yedekparcatoplamsatis */   
+                            from sason.ypdata  a
+                            WHERE 
+                               to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) AND
+                               a.YEDEKPARCARAPORTARIHI  between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                            GROUP BY   to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) ,SERVISSTOKTURID 
+                         ) data1 on data1.TARIH = tarihicin.tar AND data1.yil = tarihicin.yil  
+                         WHERE 
+                             vv.servisid   in (1) and
+                             vv.dilkod ='Turkish'  
+                         ORDER BY  tarih desc 
+                         ) ASD 
+                group by tarih , yil 
+                ORDER BY tarih asc, yil asc   
+
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+           // print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayGarantiCirosuAylikWithServices($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        $fourWeekBefore = date('d/m/Y', strtotime(' -4 week'));
+        //print_r($fourWeekBefore);
+        
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //zx.servis =94 AND 
+            $servicesQuery = ' zx.servis in ('.$_GET['src'].') and  ';
+            // vv.servisid   in (94, 96, 98) and 
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        } 
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+                
+            SELECT servisid , 
+                /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad,  */ 
+                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                tarih,
+                yil,            
+                sum(yagsatistutar) yagsatistutar
+              FROM ( 
+
+              SELECT   distinct vv.servisid,
+                            tarihicin.tar as tarih,
+                            tarihicin.yil as yil,            
+                            nvl(data1.yagsatistutar,0) yagsatistutar
+                          from vt_servisler vv  
+                         left join (
+                           select distinct 
+                                to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww')) tar  ,
+                                to_number(to_char(x.tarih,'yyyy')) yil  
+                           from sason.tarihler x WHERE 
+                                 to_number(to_char(to_date(x.tarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) and  
+                                 x.tarih between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                         ) tarihicin on 1=1             
+                         LEFT JOIN (
+                          select  distinct a.SIPARISSERVISID servisid, 
+                              to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                              to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) tarih,  
+                                  CASE
+                                     WHEN SERVISSTOKTURID = 6
+                                     THEN
+                                       sum (tutar)
+                                  END  yagsatistutar 
+                                  /*,
+                                  CASE
+                                     WHEN SERVISSTOKTURID <> 6
+                                     THEN
+                                       sum (tutar)
+                                  END  yedekparcatoplamsatis */   
+                            from sason.ypdata  a
+                            WHERE 
+                               to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(sysdate, 'ww')) -3  and  to_number(to_char(sysdate,'ww')) AND
+                               a.YEDEKPARCARAPORTARIHI  between  to_date(to_char(sysdate-30, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                            GROUP BY   to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'ww')) ,SERVISSTOKTURID ,a.SIPARISSERVISID
+                         ) data1 on  data1.servisid = vv.servisid and  data1.TARIH = tarihicin.tar AND data1.yil = tarihicin.yil  
+                         WHERE 
+                            vv.servisid not in (1,134,136) and 
+                            --vv.servisid   in (94, 96, 98) and 
+                            ".$servicesQuery2."
+                            vv.dilkod ='Turkish'  
+                         ORDER BY  tarih desc 
+                         ) ASD 
+             group by servisid,tarih, yil 
+             ORDER BY  servisid,tarih asc, yil  asc   
+
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayGarantiCirosuYillik($args = array()) {
+        $date = new \DateTime(); //Today
+        $lastDay = $date->format("t/m/Y"); //Get last day
+        $dateMinus12 = $date->modify("-12 months"); // Last day 12 months ago
+        $yearAgoToday = $dateMinus12->format("t/m/Y"); //Get last day
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+            SELECT
+            ay,
+            yil,            
+            sum(yagsatistutar) yagsatistutar
+                FROM ( 
+                 SELECT  
+                              tarihicin.ay as ay,
+                              tarihicin.yil as yil,            
+                              nvl(data1.yagsatistutar,0) yagsatistutar  
+                            from vt_servisler vv  
+                           left join (
+                             select distinct  
+                                  to_number(to_char(x.tarih,'yyyy')) yil  ,
+                                  to_number(to_char(x.tarih,'MM')) ay 
+                             from sason.tarihler x WHERE  
+                                   x.tarih  between  to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+
+                           ) tarihicin on 1=1
+                           LEFT JOIN (
+                            select  distinct
+                                to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                                to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ay,  
+                                    CASE
+                                       WHEN SERVISSTOKTURID = 6
+                                       THEN
+                                         sum (tutar)
+                                    END  yagsatistutar 
+                                    /*,
+                                    CASE
+                                       WHEN SERVISSTOKTURID <> 6
+                                       THEN
+                                         sum (tutar)
+                                    END  yedekparcatoplamsatis */   
+                              from sason.ypdata  a
+                              WHERE  
+                                a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                              GROUP BY  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ,SERVISSTOKTURID 
+
+                           ) data1 on   data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
+                     WHERE 
+                         vv.servisid in (1) and  
+                         vv.dilkod ='Turkish'  
+                     ORDER BY yil, ay  
+             
+                          ) ASD 
+             group by yil, ay     
+             order by    yil, ay
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDetayGarantiCirosuYillikWithServices($args = array()) {
+        //print_r($fourWeekBefore);
+        
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //a.servisid in (94, 96) and 
+            $servicesQuery = ' zx.servis  in ('.$_GET['src'].') and  ';
+            //vv.servisid   in (94, 96, 98) and
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        } 
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "     
+                SELECT servisid , 
+                --(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    ay,
+                    yil,            
+                    sum(yagsatistutar) yagsatistutar
+                  FROM (     
+                        SELECT  vv.servisid,
+                            tarihicin.ay as ay,
+                            tarihicin.yil as yil,            
+                            nvl(data1.yagsatistutar,0) yagsatistutar  
+                        from vt_servisler vv  
+                         left join (
+                               select distinct 
+                                    to_number(to_char(x.tarih,'yyyy')) yil  ,
+                                    to_number(to_char(x.tarih,'MM')) ay 
+                               from sason.tarihler x WHERE  
+                                     x.tarih  between  to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')  
+                             ) tarihicin on 1=1
+                             LEFT JOIN (
+                              select  distinct a.SIPARISSERVISID servisid, 
+                                  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')) yil,  
+                                  to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ay,  
+                                      CASE
+                                         WHEN SERVISSTOKTURID = 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yagsatistutar 
+                                      /*,
+                                      CASE
+                                         WHEN SERVISSTOKTURID <> 6
+                                         THEN
+                                           sum (tutar)
+                                      END  yedekparcatoplamsatis */
+                                from sason.ypdata  a
+                                WHERE  
+                                  a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                                GROUP BY  to_number(to_char(a.YEDEKPARCARAPORTARIHI,'yyyy')), to_number(to_char(to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy'), 'MM')) ,SERVISSTOKTURID  ,a.SIPARISSERVISID
+
+                             ) data1 on  data1.servisid = vv.servisid and  data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
+                             WHERE 
+                                  vv.servisid not in (1,134,136) and 
+                                --vv.servisid   in (94, 96, 98) and
+                                ".$servicesQuery2."
+                                 vv.dilkod ='Turkish' 
+                             ORDER BY servisid,yil, ay     
+            ) ASD 
+             group by servisid, yil, ay 
+             order by servisid, yil, ay    
+            ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      * @param array | null $args

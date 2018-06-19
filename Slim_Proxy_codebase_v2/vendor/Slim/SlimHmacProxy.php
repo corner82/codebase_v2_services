@@ -67,6 +67,36 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'getAfterSalesDetayYedekParcaYSYillik_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayYedekParcaYSYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
         
+        
+                                    'getAfterSalesDashboardAtolyeCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuAylik_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuAylikWithServices_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuYillik_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
+        
+                                    
+                                    'getAfterSalesDashboardGarantiCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuAylik_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuAylikWithServices_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuYillik_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
+                                    
+        
+                                    
+                                    'getAfterSalesDashboardDirekSatisCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuAylik_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuAylikWithServices_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDirekSatisCirosuYillik_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
+        
+        
+        
                                     'getAfterSalesDashboardMMCSI_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardMMCSIWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayMMCSIYillik_infoAfterSales' => 'restApiDefaultCall',
