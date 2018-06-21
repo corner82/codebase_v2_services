@@ -860,6 +860,17 @@ class InfoAfterSales extends \BLL\BLLSlim{
     }
     
     /**
+     * get aftersales atolye cirosu summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardAtolyeCirosuWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardAtolyeCirosuWithServices($params);
+    }
+    
+    /**
      * get aftersales invoice summary data for dashboard
      * @param array | null $params
      * @return array
@@ -945,6 +956,17 @@ class InfoAfterSales extends \BLL\BLLSlim{
     }
     
     /**
+     * get aftersales atolye cirosu summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardGarantiCirosuWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardGarantiCirosuWithServices($params);
+    }
+    
+    /**
      * get aftersales invoice summary data for dashboard
      * @param array | null $params
      * @return array
@@ -1010,6 +1032,105 @@ class InfoAfterSales extends \BLL\BLLSlim{
         return $DAL->getAfterSalesDetayGarantiCirosuYillikWithServices($params);
     }
     
+    
+    
+    
+    
+    
+    
+    
+   
+    
+    
+    
+    /**
+     * get aftersales atolye cirosu summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardDirekSatisCirosu($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardDirekSatisCirosu($params);
+    }
+    
+    
+    /**
+     * get aftersales atolye cirosu summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardDirekSatisCirosuWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardDirekSatisCirosuWithServices($params);
+    }
+    
+    /**
+     * get aftersales invoice summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDetayDirekSatisCirosu($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDetayDirekSatisCirosu($params);
+    }
+    
+    /**
+     * get aftersales invoice summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDetayDirekSatisCirosuWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDetayDirekSatisCirosuWithServices($params);
+    }
+    
+    /**
+     * get aftersales invoice summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDetayDirekSatisCirosuAylik($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDetayDirekSatisCirosuAylik($params);
+    }
+    
+    /**
+     * get aftersales invoice summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDetayDirekSatisCirosuAylikWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDetayDirekSatisCirosuAylikWithServices($params);
+    }
+    
+    /**
+     * get aftersales invoice summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDetayDirekSatisCirosuYillik($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDetayDirekSatisCirosuYillik($params);
+    }
+    
+    /**
+     * get aftersales invoice summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDetayDirekSatisCirosuYillikWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDetayDirekSatisCirosuYillikWithServices($params);
+    }
     
     
     

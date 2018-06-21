@@ -69,6 +69,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
         
         
                                     'getAfterSalesDashboardAtolyeCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardAtolyeCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayAtolyeCirosu_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayAtolyeCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayAtolyeCirosuAylik_infoAfterSales' => 'restApiDefaultCall',
@@ -78,6 +79,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
         
                                     
                                     'getAfterSalesDashboardGarantiCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardGarantiCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayGarantiCirosu_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayGarantiCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayGarantiCirosuAylik_infoAfterSales' => 'restApiDefaultCall',
@@ -88,6 +90,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
         
                                     
                                     'getAfterSalesDashboardDirekSatisCirosu_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardDirekSatisCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayDirekSatisCirosu_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayDirekSatisCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayDirekSatisCirosuAylik_infoAfterSales' => 'restApiDefaultCall',
