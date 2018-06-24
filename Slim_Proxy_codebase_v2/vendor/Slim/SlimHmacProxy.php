@@ -95,7 +95,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'getAfterSalesDetayDirekSatisCirosuWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayDirekSatisCirosuAylik_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayDirekSatisCirosuAylikWithServices_infoAfterSales' => 'restApiDefaultCall',
-                                    'getAfterSalesDirekSatisCirosuYillik_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuYillik_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayDirekSatisCirosuYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
         
         
@@ -168,7 +168,15 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'getAfterSalesDetayStoklarGrid_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayStoklarGridWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardIsEmriLastDataMusteri_infoAfterSales' => 'restApiDefaultCall',
-                                      
+                                     
+        
+        
+                                    'getAfterSalesDashboardFaalYedekParca_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayFaalYedekParca_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaalYagToplam_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaalStokToplam_infoAfterSales' => 'restApiDefaultCall',
+        
+        
          //**---- afterSales ------------------- 
         
         //** Sales ----------------------

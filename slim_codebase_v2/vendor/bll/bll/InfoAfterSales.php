@@ -1460,6 +1460,54 @@ class InfoAfterSales extends \BLL\BLLSlim{
     public function update($params = array()) {
         
     }
+    
+    
+    //detay yedek parça sayfası fonk. baş
+    /**
+     * Function yedek parça toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesDashboardFaalYedekParca ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesDashboardFaalYedekParca($params);  
+        return $resultSet['resultSet'];
+    }
+    
+    /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesDetayFaalYedekParca ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesDetayFaalYedekParca($params);  
+        return $resultSet['resultSet'];
+    }
+    
+    /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesDashboardFaalYagToplam ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesDashboardFaalYagToplam($params);  
+        return $resultSet['resultSet'];
+    }
+    
+    /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesDashboardFaalStokToplam ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesDashboardFaalStokToplam($params);  
+        return $resultSet['resultSet'];
+    }
 
+    
+    //detay yedek parça sayfası fonk. son
 }
 
