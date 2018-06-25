@@ -2500,9 +2500,9 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                 SELECT              
-                    /*asd.SERVISID , 
-                    servisad,*/
-                    sum(asd.stoktutar)  stoktutar from (
+                     
+                   --TO_CHAR(sum(stoktutar), '999,999,999,999,999') A from (
+                    sum(asd.stoktutar)  A from (
                    SELECT
                             p.HSERVISID SERVISID, 
                             /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = p.HSERVISID   )  as servisad,  */
@@ -2578,7 +2578,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                  ".$servicesQuery4."
                 ) asd  
              
-                //group by asd.servisid,servisad 
+                
                 order by  asd.SERVISID
                     ";
              
@@ -2872,6 +2872,63 @@ class InfoAfterSales extends \DAL\DalSlim {
             return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
         }
     }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardAracGirisSayilariWithServices($args = array()) {
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        $servicesQuery3 = '';
+        $servicesQuery4 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            // servis.servisid =96 and 
+            $servicesQuery = '   servis.servisid in ('.$_GET['src'].') and  ';
+            // and  c.servisid in (94,96) 
+            $servicesQuery2 = ' and c.servisid in   ('.$_GET['src'].')  ';
+            // AND a.servisid in (94,96)
+            $servicesQuery3 = ' AND a.servisid in  ('.$_GET['src'].')  ';
+            // AND hservisid  in (94,96)
+            $servicesQuery4 = ' AND hservisid  in  ('.$_GET['src'].')  ';
+        } 
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        //print_r($today);
+        //print_r($dayAfter);
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                    SELECT
+               
+                         sum(ags.arac_giris) as A
+                     
+                    
+                    FROM 
+                     
+                          (SELECT TARIH, YIL, AY FROM TARIHLER WHERE TARIH BETWEEN  to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')) tarihler
+                    left join vt_servisler servis on 
+                           -- servis.servisid =96 and 
+                           ".$servicesQuery."
+                                servis.dilkod = 'Turkish'
+                    left join mobilags ags on AGS.SERVIS = servis.servisid and 
+                            AGS.TARIH = tarihler.tarih 
+                    ";
+             
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
     
     /**
      * @param array | null $args
@@ -4502,6 +4559,84 @@ class InfoAfterSales extends \DAL\DalSlim {
         }
     }
     
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardYedekParcaTSWithServices($args = array()) {
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //a.servisid   in (94 )   and 
+            $servicesQuery = ' a.servisid   in  ('.$_GET['src'].') and  ';
+            // and vv.servisid   in (94 ) 
+            $servicesQuery2 = ' and vv.servisid in  ('.$_GET['src'].')   ';
+        } 
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                    SELECT 
+            TO_CHAR(sum(yedekparcatoplamsatis), '999,999,999,999,999') yedekparcatoplamsatis
+            --sum(yedekparcatoplamsatis)     
+        --    yedekparcatoplamsatis
+         FROM (  
+         SELECT   
+                     to_char(tarihicin.tar) tarih ,
+                     nvl(data1.yedekparcatoplamsatis,0) yedekparcatoplamsatis   
+                       from vt_servisler vv  
+                      left join (
+                        select distinct 
+                            to_date(x.tarih,'dd/mm/yyyy') tar   
+                        from sason.tarihler x where
+                              x.tarih between  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                      ) tarihicin on 1=1
+                      LEFT JOIN (
+                       select  distinct
+                            a.servisid , 
+                             to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') AS TARIH,
+                             /*  CASE
+                                  WHEN SERVISSTOKTURID = 6
+                                  THEN
+                                    sum (tutar)
+                               END  yagsatistutar 
+                              */
+                               CASE
+                                  WHEN SERVISSTOKTURID <> 6
+                                  THEN
+                                    sum (tutar)
+                               END  yedekparcatoplamsatis    
+                         from sason.ypdata  a
+                         WHERE 
+                             --a.servisid   in (94 )   and 
+                               ".$servicesQuery."
+                             a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                         GROUP BY to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') ,SERVISSTOKTURID ,servisid  
+                      ) data1 on data1.servisid = vv.servisid and data1.TARIH = tarihicin.tar 
+                      WHERE 
+                           vv.servisid  not in (1 , 134 , 136 )   
+                            --and vv.servisid   in (94 )
+                            ".$servicesQuery2."
+                            AND vv.dilkod ='Turkish'
+                   ) asd
+                    ";
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
+    
     /**
      * @param array | null $args
      * @return Array
@@ -5025,6 +5160,82 @@ class InfoAfterSales extends \DAL\DalSlim {
         }
     }
     
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardYedekParcaYSWithServices($args = array()) {
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //a.servisid   in (94 )   and 
+            $servicesQuery = ' a.servisid in ('.$_GET['src'].') and  ';
+            // and  vv.servisid   in (94 )  
+            $servicesQuery2 = ' and  vv.servisid in  ('.$_GET['src'].')   ';
+        } 
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                    SELECT 
+        TO_CHAR(sum(yagsatistutar), '999,999,999,999,999') yagsatistutar
+            --sum(yagsatistutar)     yagsatistutar
+         FROM (  
+         SELECT   
+                     to_char(tarihicin.tar) tarih ,
+                     nvl(data1.yagsatistutar,0) yagsatistutar   
+                       from vt_servisler vv  
+                      left join (
+                        select distinct 
+                            to_date(x.tarih,'dd/mm/yyyy') tar   
+                        from sason.tarihler x where
+                              x.tarih between  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                      ) tarihicin on 1=1
+                      LEFT JOIN (
+                       select  distinct
+                            a.servisid , 
+                             to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') AS TARIH,
+                        CASE
+                                  WHEN SERVISSTOKTURID = 6
+                                  THEN
+                                    sum (tutar)
+                               END  yagsatistutar 
+                             
+                            /*   CASE
+                                  WHEN SERVISSTOKTURID <> 6
+                                  THEN
+                                    sum (tutar)
+                               END  yedekparcatoplamsatis    
+                               */
+                         from sason.ypdata  a
+                         WHERE 
+                            -- a.servisid   in (94 )   and 
+                            ".$servicesQuery."
+                             a.YEDEKPARCARAPORTARIHI BETWEEN to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                         GROUP BY to_date(a.YEDEKPARCARAPORTARIHI, 'dd/mm/yyyy') ,SERVISSTOKTURID ,servisid  
+                      ) data1 on data1.servisid = vv.servisid and data1.TARIH = tarihicin.tar 
+                      WHERE 
+                           vv.servisid  not in (1 , 134 , 136 )   
+                           -- and  vv.servisid   in (94 ) 
+                           ".$servicesQuery2."
+                            AND vv.dilkod ='Turkish'
+                   ) asd
+              
+                    ";
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
      /**
      * @param array | null $args
      * @return Array
@@ -5102,9 +5313,6 @@ class InfoAfterSales extends \DAL\DalSlim {
      * @throws \PDOException
      */
     public function getAfterSalesDetayYedekParcaYSWithServices($args = array()) {
-        $today = date('d/m/Y');
-        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
-        $weekBefore = date('d/m/Y', strtotime(' -6 day'));
         
         $servicesQuery = '';
         $servicesQuery2 = '';
@@ -5581,18 +5789,21 @@ class InfoAfterSales extends \DAL\DalSlim {
         $servicesQuery2 = '';
         if (isset($_GET['src'])  && $_GET['src']!='') {
             // and servisid in (94,96)
-            $servicesQuery = ' and servis.servisid in ('.$_GET['src'].')   ';
+            $servicesQuery = ' and servisid in ('.$_GET['src'].')   ';
             // vv.servisid   in (94, 96, 98 )  AND
             $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
         } 
         
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
-            $sql = "  
+            $sql = "
+                
+            select TO_CHAR(ROUND(sum(de.atolyecirosucari2),0), '999,999,999,999,999') atolyecirosucari from(
                     select  servisid ,  
                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
-                    TO_CHAR(ROUND(sum(nvl(atolyecirosugaranti,0)), 0), '999,999,999,999,999') atolyecirosugaranti 
-
+                    TO_CHAR(ROUND(sum(nvl(atolyecirosucari,0)), 0), '999,999,999,999,999') atolyecirosucari, 
+                    sum(nvl(atolyecirosucari,0)) atolyecirosucari2
+                    
                     from ( 
                     select    
                     /*
@@ -5625,9 +5836,9 @@ class InfoAfterSales extends \DAL\DalSlim {
                         --and servisid in (94,96)  
                         ".$servicesQuery."
 
-                    group  by  servisid ,faturaturid 
+                    group  by faturaturid , servisid 
                     ) asd 
-                    group by  servisid  
+                    group by  servisid  ) de
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -6349,18 +6560,19 @@ SELECT servisid  ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy w
         $servicesQuery2 = '';
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //and servisid in (94,96)   
-            $servicesQuery = ' and  servis.servisid in ('.$_GET['src'].')  ';
+            $servicesQuery = ' and  servisid in ('.$_GET['src'].')  ';
             // vv.servisid   in (94, 96, 98 )  AND
             $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
         } 
         
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
-            $sql = "  
+            $sql = " 
+             select TO_CHAR(ROUND(sum(de.atolyecirosugaranti2),0), '999,999,999,999,999') atolyecirosugaranti from(   
                 select  servisid ,  
                 (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
-                        TO_CHAR(ROUND(sum(nvl(atolyecirosugaranti,0)), 0), '999,999,999,999,999') atolyecirosugaranti 
-
+                        TO_CHAR(ROUND(sum(nvl(atolyecirosugaranti,0)), 0), '999,999,999,999,999') atolyecirosugaranti, 
+                        sum(nvl(atolyecirosugaranti,0)) atolyecirosugaranti2
                         from ( 
                         select    
                         /*
@@ -6394,7 +6606,7 @@ SELECT servisid  ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy w
                             ".$servicesQuery."
                         group  by  servisid ,faturaturid 
                         ) asd 
-                        group by  servisid  
+                        group by  servisid ) de  
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -7118,16 +7330,17 @@ SELECT servisid  ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy w
         $servicesQuery2 = '';
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //and servisid in (94,96)
-            $servicesQuery = ' and servis.servisid in ('.$_GET['src'].')   ';
+            $servicesQuery = ' and servisid in ('.$_GET['src'].')   ';
             // vv.servisid   in (94, 96, 98 )  AND
             $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
         }
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
-            $sql = "  
+            $sql = " 
+                select TO_CHAR(ROUND(sum(de.direksatistutar2),0), '999,999,999,999,999') direksatistutar from(  
                     select  servisid ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
-                    TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar
-
+                    TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar,
+                    sum(nvl(direksatistutar,0)) direksatistutar2
                     from ( 
                     select    
                     /*
@@ -7161,7 +7374,7 @@ SELECT servisid  ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy w
                         ".$servicesQuery."
                     group  by  servisid ,faturaturid 
                     ) asd 
-                    group by  servisid  
+                    group by  servisid ) de   
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -9066,6 +9279,72 @@ select  rownum as rid , asd.* from (
         }
     }
     
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardIsEmirDataWithServices($args = array()) {
+        
+        
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //and servisid in (  94 )
+            $servicesQuery = ' and servisid  in ('.$_GET['src'].')  ';
+            // and vv.servisid in (94,96,98)
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        } 
+        
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "
+                     select count(id) a,
+                            cast( 'Açık İş Emirleri' AS varchar2(300)) as  aciklama,
+                            1 as controler
+                                from servisisemirler
+                                where  teknikolaraktamamla is null or teknikolaraktamamla = 0 
+                                --and servisid in (  94 )
+                                ".$servicesQuery."
+                    UNION
+                    select  NVL(count(si.id), 0) a,
+                            cast( 'Kapanan İş Emri' AS varchar2(300)) as  aciklama,
+                            3 as controler
+                        from servisisemirler  si
+                        where  si.teknikolaraktamamla = 1
+                        and SI.TAMAMLANMATARIH   BETWEEN to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy') 
+                             --and servisid in (  94 )
+                             ".$servicesQuery."
+                    UNION 
+                    select count(a.id) a, 
+                        cast( 'Açılan İş Emri' AS varchar2(300)) as  aciklama,
+                        2 as controler
+                        from servisisemirler a
+                        where  teknikolaraktamamla is null or teknikolaraktamamla = 0 AND 
+                        (a.KAYITTARIH between to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy')) 
+                            -- and servisid in (  94)
+                            ".$servicesQuery."
+                    ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
     /**
      * @param array | null $args
      * @return Array
@@ -9081,74 +9360,209 @@ select  rownum as rid , asd.* from (
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     select 
-                        CASE 
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 3 THEN '1'
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 0 THEN '0'
-                            WHEN NVL(sum(a.NETTUTAR), 0)= 0 THEN '0'
-                            ELSE CONCAT(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')), ' Bin TL') END as a, 
+                        TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a,
+                        /*CASE
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.NETTUTAR), 0)= 0 THEN  '0 TL'
+                            ELSE  TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL'))  END as a, */
                         --NVL(sum(a.NETTUTAR), 0) a,
                         cast( 'Alış Faturaları ' AS varchar2(300)) as  aciklama,
                         1 as controler
                         FROM faturalar a
                         WHERE  
-                        a.ISLEMTARIHI between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy') and
-                         a.faturaturid=4
+                         a.ISLEMTARIHI > 
+                          to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                         a.faturaturid = 4
                     UNION
-                    select 
-                        CASE 
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 3 THEN '1'
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0'
-                            WHEN NVL(sum(a.toplam), 0)= 0 THEN '0'
-                            ELSE CONCAT(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')), ' Bin TL') END as a, 
+                    select
+                         TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a, 
+                        /*CASE  
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.toplam), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.toplam), 0)= 0 THEN  '0 TL'
+                            ELSE  TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.toplam)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL'))  END as a, */  
                         --NVL(sum(a.toplam), 0) a,
                         cast( 'İş Emri Faturaları ' AS varchar2(300)) as aciklama,
                         2 as controler
                         FROM faturalar a
                         WHERE 
-                        a.ISLEMTARIHI between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
-                        and a.faturaturid=1
+                        a.ISLEMTARIHI >  
+                         to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                        a.faturaturid=1
                     UNION
-                    select 
-                        CASE 
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 3 THEN '1'
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0'
-                            WHEN NVL(sum(a.toplam), 0)= 0 THEN '0'
-                            ELSE CONCAT(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')), ' Bin TL') END as a, 
+                    select
+                        TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a, 
+                       /* CASE 
+                           WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.toplam), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.toplam), 0)= 0 THEN  '0 TL'
+                            ELSE  TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.toplam)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL')) END as a,*/   
                         --NVL(sum(a.toplam), 0) a,
                         cast( 'Satış Faturaları ' AS varchar2(300)) as aciklama,
                         3 as controler
                         FROM faturalar a
                         WHERE  
-                        a.islemtarihi between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
-                        and a.faturaturid=3 
+                        a.islemtarihi >  
+                         to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                        a.faturaturid=3 
                     UNION
                     select 
-                        CASE 
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 3 THEN '1 Bin TL'
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0 TL'
-                            WHEN NVL(sum(a.toplam), 0)= 0 THEN '0'
-                            ELSE CONCAT(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')), ' Bin TL') END as a,
+                    TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a,
+                        /*CASE 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.toplam), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.toplam), 0)= 0 THEN  '0 TL'
+                            ELSE TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.toplam)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL')) END as a, */  
                         --NVL(sum(a.toplam), 0) toplam,
                         cast( 'İcmal Faturaları' AS varchar2(300)) as aciklama,
                         4 as controler
                         FROM faturalar a
                         WHERE  
-                        a.ISLEMTARIHI between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
-                        and a.faturaturid=2
+                        a.ISLEMTARIHI > 
+                         to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                        a.faturaturid=2
                     UNION
                     select 
-                        CASE 
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 3 THEN '1'
-                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 0 THEN '0'
-                            WHEN NVL(sum(a.NETTUTAR), 0)= 0 THEN '0'
-                            ELSE CONCAT(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')), ' Bin TL') END as a,
+                        TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a,
+                        /*CASE 
+                             WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.NETTUTAR), 0)= 0 THEN  '0 TL'
+                            ELSE  TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL')) END as a, */
                         --NVL(sum(a.NETTUTAR), 0) a,
                         cast( 'Dış Hizmet Faturaları' AS varchar2(300)) as aciklama,
                         5 as controler
                         FROM faturalar a
                         WHERE 
-                        a.islemtarihi between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
-                        and a.faturaturid=5 
+                        a.islemtarihi >  
+                         to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and 
+                        a.faturaturid=5 
+
+                    ";
+             
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardFaturaDataWithServices($args = array()) {
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //and ie.servisid in (94,96,98)
+            $servicesQuery = ' and a.servisid  in ('.$_GET['src'].')  ';
+            // and vv.servisid in (94,96,98)
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        }
+        //print_r($today);
+        //print_r($dayAfter);
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                    select 
+                        TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a,
+                        /*CASE
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.NETTUTAR), 0)= 0 THEN  '0 TL'
+                            ELSE  TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL'))  END as a, */
+                        --NVL(sum(a.NETTUTAR), 0) a,
+                        cast( 'Alış Faturaları ' AS varchar2(300)) as  aciklama,
+                        1 as controler
+                        FROM faturalar a
+                        WHERE  
+                         a.ISLEMTARIHI > 
+                          to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                         a.faturaturid = 4
+                         --and a.servisid in (94)
+                         ".$servicesQuery."
+                    UNION
+                    select
+                         TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a, 
+                        /*CASE  
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.toplam), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.toplam), 0)= 0 THEN  '0 TL'
+                            ELSE  TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.toplam)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL'))  END as a, */  
+                        --NVL(sum(a.toplam), 0) a,
+                        cast( 'İş Emri Faturaları ' AS varchar2(300)) as aciklama,
+                        2 as controler
+                        FROM faturalar a
+                        WHERE 
+                        a.ISLEMTARIHI >  
+                         to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                        a.faturaturid=1
+                         --and a.servisid in (94)
+                         ".$servicesQuery."
+                    UNION
+                    select
+                        TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a, 
+                       /* CASE 
+                           WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.toplam), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.toplam), 0)= 0 THEN  '0 TL'
+                            ELSE  TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.toplam)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL')) END as a,*/   
+                        --NVL(sum(a.toplam), 0) a,
+                        cast( 'Satış Faturaları ' AS varchar2(300)) as aciklama,
+                        3 as controler
+                        FROM faturalar a
+                        WHERE  
+                        a.islemtarihi >  
+                         to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                        a.faturaturid=3 
+                        --and a.servisid in (94)
+                         ".$servicesQuery."
+                    UNION
+                    select 
+                    TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a,
+                        /*CASE 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.toplam), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.toplam), 0)= 0 THEN  '0 TL'
+                            ELSE TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.toplam)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL')) END as a, */  
+                        --NVL(sum(a.toplam), 0) toplam,
+                        cast( 'İcmal Faturaları' AS varchar2(300)) as aciklama,
+                        4 as controler
+                        FROM faturalar a
+                        WHERE  
+                        a.ISLEMTARIHI > 
+                         to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                        a.faturaturid=2
+                         --and a.servisid in (94)
+                         ".$servicesQuery."
+                    UNION
+                    select 
+                    TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a
+                       /* CASE 
+                             WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 0 THEN '0 TL' 
+                            WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR), 0),0) , '999,999,999,999,999'), ' TL')
+                            WHEN NVL(sum(a.NETTUTAR), 0)= 0 THEN  '0 TL'
+                            ELSE  TRIM(CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR)/1000, 0),0) , '999,999,999,999,999'), ' BİN TL')) END as a*/, 
+                        --NVL(sum(a.NETTUTAR), 0) a,
+                        cast( 'Dış Hizmet Faturaları' AS varchar2(300)) as aciklama,
+                        5 as controler
+                        FROM faturalar a
+                        WHERE 
+                        a.islemtarihi >  
+                         to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and 
+                        a.faturaturid=5 
+                         --and a.servisid in (94)
+                         ".$servicesQuery."
+
                     ";
              
             $statement = $pdo->prepare($sql);            

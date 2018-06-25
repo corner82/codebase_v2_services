@@ -30,6 +30,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'getAfterSalesDetayAracGirisSayilariYillik_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayAracGirisSayilariYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardAracGirisSayilari_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardAracGirisSayilariWithServices_infoAfterSales' => 'restApiDefaultCall',
         
                                     'getAfterSalesDashboardDowntime_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardDowntimeWithServices_infoAfterSales' => 'restApiDefaultCall',
@@ -52,6 +53,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'getAfterSalesDetayEtkinlikYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
         
                                     'getAfterSalesDashboardYedekParcaTS_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardYedekParcaTSWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayYedekParcaTS_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayYedekParcaTSWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayYedekParcaTSAylik_infoAfterSales' => 'restApiDefaultCall',
@@ -60,6 +62,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'getAfterSalesDetayYedekParcaTSYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
         
                                     'getAfterSalesDashboardYedekParcaYS_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardYedekParcaYSWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayYedekParcaYS_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayYedekParcaYSWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayYedekParcaYSAylik_infoAfterSales' => 'restApiDefaultCall',
@@ -161,7 +164,9 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'getAfterSalesDetayIsEmriAcilanKapananYillik_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayIsEmriAcilanKapananYillikWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardIsEmriData_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardIsEmriDataWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardFaturaData_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaturaDataWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardCiroYedekParca_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardStoklar_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardStoklarWithServices_infoAfterSales' => 'restApiDefaultCall',

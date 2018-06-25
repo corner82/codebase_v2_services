@@ -447,6 +447,17 @@ class InfoAfterSales extends \BLL\BLLSlim{
      * @return array
      * @author Mustafa Zeynel Dağlı
      */
+    public function getAfterSalesDashboardAracGirisSayilariWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardAracGirisSayilariWithServices($params);
+    }
+    
+    /**
+     * get aftersales invoice summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
     public function getAfterSalesDetayAracGirisSayilari($params = array()) {
         $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
         return $DAL->getAfterSalesDetayAracGirisSayilari($params);
@@ -695,6 +706,17 @@ class InfoAfterSales extends \BLL\BLLSlim{
     }
     
     /**
+     * get aftersales yedek parca toplam satış summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardYedekParcaTSWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardYedekParcaTSWithServices($params);
+    }
+    
+    /**
      * get aftersales invoice summary data for dashboard
      * @param array | null $params
      * @return array
@@ -770,6 +792,18 @@ class InfoAfterSales extends \BLL\BLLSlim{
         $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
         return $DAL->getAfterSalesDashboardYedekParcaYS($params);
     }
+    
+    /**
+     * get aftersales yedek parca yag satış summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardYedekParcaYSWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardYedekParcaYSWithServices($params);
+    }
+    
     
     /**
      * get aftersales invoice summary data for dashboard
@@ -1380,6 +1414,17 @@ class InfoAfterSales extends \BLL\BLLSlim{
     }
     
     /**
+     * get aftersales is emirleri summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardIsEmirDataWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardIsEmirDataWithServices($params);
+    }
+    
+    /**
      * get aftersales invoice summary data for dashboard
      * @param array | null $params
      * @return array
@@ -1388,6 +1433,17 @@ class InfoAfterSales extends \BLL\BLLSlim{
     public function getAfterSalesDashboardFaturaData($params = array()) {
         $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
         return $DAL->getAfterSalesDashboardFaturaData($params);
+    }
+    
+    /**
+     * get aftersales invoice summary data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardFaturaDataWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        return $DAL->getAfterSalesDashboardFaturaDataWithServices($params);
     }
     
     /**

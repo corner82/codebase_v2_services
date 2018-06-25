@@ -1504,6 +1504,41 @@ $app->get("/getAfterSalesDashboardAracGirisSayilari_infoAfterSales/", function (
  * @since 31-05-2018
  * @author Mustafa Zeynel Dağlı
  */
+$app->get("/getAfterSalesDashboardAracGirisSayilariWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesDashboardAracGirisSayilariWithServices(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    /*$resultArray = array();
+    $resultArray['rows'] = $flows;
+    $app->response()->body(json_encode($resultArray));*/
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+/**
+ * 
+ * @since 31-05-2018
+ * @author Mustafa Zeynel Dağlı
+ */
 $app->get("/getAfterSalesDetayAracGirisSayilari_infoAfterSales/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
@@ -2272,6 +2307,40 @@ $app->get("/getAfterSalesDashboardYedekParcaTS_infoAfterSales/", function () use
     $app->response()->body(json_encode($resDataGrid));
 });
 
+/** 
+ * @since 14-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesDashboardYedekParcaTSWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesDashboardYedekParcaTSWithServices(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    /*$resultArray = array();
+    $resultArray['rows'] = $flows;
+    $app->response()->body(json_encode($resultArray));*/
+    $app->response()->body(json_encode($resDataGrid));
+});
+
 /**
  * 
  * @since 14-06-2018
@@ -2509,6 +2578,40 @@ $app->get("/getAfterSalesDashboardYedekParcaYS_infoAfterSales/", function () use
     
     
     $resDataGrid = $BLL->getAfterSalesDashboardYedekParcaYS(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    /*$resultArray = array();
+    $resultArray['rows'] = $flows;
+    $app->response()->body(json_encode($resultArray));*/
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+/** 
+ * @since 14-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesDashboardYedekParcaYSWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesDashboardYedekParcaYSWithServices(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
@@ -4564,6 +4667,43 @@ $app->get("/getAfterSalesDashboardIsEmriData_infoAfterSales/", function () use (
     $app->response()->body(json_encode($resDataGrid));
 });
 
+
+/**
+ * 
+ * @since 24-04-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesDashboardIsEmriDataWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesDashboardIsEmirDataWithServices(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    /*$resultArray = array();
+    $resultArray['rows'] = $flows;
+    $app->response()->body(json_encode($resultArray));*/
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+
 /**
  * 
  * @since 24-04-2018
@@ -4588,6 +4728,41 @@ $app->get("/getAfterSalesDashboardFaturaData_infoAfterSales/", function () use (
     
     
     $resDataGrid = $BLL->getAfterSalesDashboardFaturaData(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    /*$resultArray = array();
+    $resultArray['rows'] = $flows;
+    $app->response()->body(json_encode($resultArray));*/
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+/**
+ * 
+ * @since 24-04-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesDashboardFaturaDataWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesDashboardFaturaDataWithServices(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
