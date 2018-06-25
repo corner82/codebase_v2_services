@@ -9997,5 +9997,181 @@ select  rownum as rid , asd.* from (
     
     //detay yedek parça sayfası fonk. son
     
+    
+    
+    
+    //detay yedek parça hedef fonk. baş
+    
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesYedekParcaHedefServissiz($args = array()) {
+        
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                select   SERVISID,  
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
+                 TYPE ,                    
+                 to_number(OCAK_MAYIS2017) OCAK_MAYIS2017,               
+                 to_number(OCAK_MAYIS2018) OCAK_MAYIS2018   ,         
+                 to_number(KARSILASTIRMA_1718_OM) KARSILASTIRMA_1718_OM   ,   
+                 to_number(TOPLAM_2017) TOPLAM_2017 ,               
+                 to_number(Y3ILLIK_ORTALAMA) Y3ILLIK_ORTALAMA  ,            
+                 to_number(AYLIK_GERCEKLESME_MIKTARI) AYLIK_GERCEKLESME_MIKTARI  ,
+                 to_number(AYLIK_7ICIN_GEREKEN_MIKTAR) AYLIK_7ICIN_GEREKEN_MIKTAR , 
+                 to_number(AYLIK_8ICIN_GEREKEN_MIKTAR) AYLIK_8ICIN_GEREKEN_MIKTAR ,
+                 to_number(AYLIK_9ICIN_GEREKEN_MIKTAR) AYLIK_9ICIN_GEREKEN_MIKTAR  ,
+                 to_number(YILLIK_7ICIN_GEREKEN_MIKTAR) YILLIK_7ICIN_GEREKEN_MIKTAR  ,
+                 to_number(YILLIK_8ICIN_GEREKEN_MIKTAR) YILLIK_8ICIN_GEREKEN_MIKTAR ,
+                 to_number(YILLIK_9ICIN_GEREKEN_MIKTAR) YILLIK_9ICIN_GEREKEN_MIKTAR  ,
+                 PARTNERCODE                
 
+               from   SASON.PERFORMANS_YPHEDEF  zz
+
+               order by servisid , id 
+                    ";
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesYedekParcaHedefServisli($args = array()) {
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //servisid in (96)
+            $servicesQuery = ' servisid  in ('.$_GET['src'].')  ';
+            // and vv.servisid in (94,96,98)
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+        }
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+            select   SERVISID,  
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
+                 TYPE ,                    
+                 to_number(OCAK_MAYIS2017) OCAK_MAYIS2017,               
+                 to_number(OCAK_MAYIS2018) OCAK_MAYIS2018   ,         
+                 to_number(KARSILASTIRMA_1718_OM) KARSILASTIRMA_1718_OM   ,   
+                 to_number(TOPLAM_2017) TOPLAM_2017 ,               
+                 to_number(Y3ILLIK_ORTALAMA) Y3ILLIK_ORTALAMA  ,            
+                 to_number(AYLIK_GERCEKLESME_MIKTARI) AYLIK_GERCEKLESME_MIKTARI  ,
+                 to_number(AYLIK_7ICIN_GEREKEN_MIKTAR) AYLIK_7ICIN_GEREKEN_MIKTAR , 
+                 to_number(AYLIK_8ICIN_GEREKEN_MIKTAR) AYLIK_8ICIN_GEREKEN_MIKTAR ,
+                 to_number(AYLIK_9ICIN_GEREKEN_MIKTAR) AYLIK_9ICIN_GEREKEN_MIKTAR  ,
+                 to_number(YILLIK_7ICIN_GEREKEN_MIKTAR) YILLIK_7ICIN_GEREKEN_MIKTAR  ,
+                 to_number(YILLIK_8ICIN_GEREKEN_MIKTAR) YILLIK_8ICIN_GEREKEN_MIKTAR ,
+                 to_number(YILLIK_9ICIN_GEREKEN_MIKTAR) YILLIK_9ICIN_GEREKEN_MIKTAR  ,
+                 PARTNERCODE                
+
+               from   SASON.PERFORMANS_YPHEDEF  zz
+               where 
+               --servisid in (96)
+                ".$servicesQuery."
+               order by id 
+                    ";
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesYedekParcaPDFServissiz($args = array()) {
+        
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                select  
+                servisid , (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as servisad,  
+                concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) linkpdf
+
+                 from SASON.PERFORMANS_PDF a
+                    ";
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesYedekParcaPDFServisli($args = array()) {
+        $servicesQuery = '';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //servisid = 94
+            $servicesQuery = ' servisid  in ('.$_GET['src'].')  ';
+           
+        }
+        
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+                select  
+                servisid , (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as servisad,  
+                concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) linkpdf
+
+                 from SASON.PERFORMANS_PDF a
+                where 
+                --servisid = 94 
+                ".$servicesQuery."
+                    ";
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
+    //detay yedek parça hedef fonk. son
 }

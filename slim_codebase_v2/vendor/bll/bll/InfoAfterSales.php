@@ -1565,5 +1565,57 @@ class InfoAfterSales extends \BLL\BLLSlim{
 
     
     //detay yedek parça sayfası fonk. son
+    
+    
+    
+    
+    //detay yedek parça hedef fonk. baş
+    
+    /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesYedekParcaHedefServissiz ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesYedekParcaHedefServissiz($params);  
+        return $resultSet['resultSet'];
+    }
+    
+    /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesYedekParcaHedefServisli ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesYedekParcaHedefServisli($params);  
+        return $resultSet['resultSet'];
+    }
+    
+    /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesYedekParcaPDFServissiz ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesYedekParcaPDFServissiz($params);  
+        return $resultSet['resultSet'];
+    }
+    
+    /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesYedekParcaPDFServisli ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesYedekParcaPDFServisli($params);  
+        return $resultSet['resultSet'];
+    }
+    
+    
+    //detay yedek parça hedef fonk. son
 }
 

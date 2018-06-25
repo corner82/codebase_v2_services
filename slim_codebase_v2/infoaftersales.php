@@ -4936,4 +4936,134 @@ $app->get("/getAfterSalesDashboardFaalStokToplam_infoAfterSales/", function () u
 //detay yedek parça sayfası fonk. son
 
 
+
+//detay yedek parça hedef fonk. baş
+
+/**
+ * @since 21-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesYedekParcaHedefServissiz(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+/**
+ * @since 21-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesYedekParcaHedefServisli_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesYedekParcaHedefServisli(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+/**
+ * @since 21-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesYedekParcaPDFServissiz(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+/**
+ * @since 21-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesYedekParcaPDFServisli_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesYedekParcaPDFServisli(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+//detay yedek parça hedef fonk. son
+
+
 $app->run();
