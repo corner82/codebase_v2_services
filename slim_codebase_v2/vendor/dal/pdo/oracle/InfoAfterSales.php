@@ -3349,11 +3349,14 @@ class InfoAfterSales extends \DAL\DalSlim {
                     FROM 
                         servisisemirler ie,
                         vt_servisler vtsrv,
-                        aracturler ar 
+                        aracturler ar ,
+                        servisvarliklar servar
                     WHERE   
                           (ie.arackazali <> 1 or ie.arackazaaciklama is null or ie.arackazaaciklama = '')
                         and vtsrv.dilkod(+) = 'Turkish' 
                         and ar.kod =  ie.aractipad and ar.durumid =1 
+                        and IE.SERVISVARLIKID=servar.id
+                        and SERVAR.VARLIKTIPID<>3
                         AND ie.tamamlanmatarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
                         AND ie.servisid not in (1,134,136)
                      GROUP BY  to_number(to_char(ie.tamamlanmatarih,'yyyy')),  to_number(to_char(ie.tamamlanmatarih,'MM'))
@@ -3433,12 +3436,15 @@ class InfoAfterSales extends \DAL\DalSlim {
                             FROM 
                                 servisisemirler ie,
                                 vt_servisler vtsrv,
-                                aracturler ar 
+                                aracturler ar ,
+                                servisvarliklar servar
                             WHERE -- ie.tamamlanmatarih between   to_date('01/05/2018') and  to_date('30/05/2018') and
                                 ie.teknikolaraktamamla=1 
                                 ".$servicesQuery."
                                 and (ie.arackazali <> 1 or ie.arackazaaciklama is null or ie.arackazaaciklama = '')
                                 and vtsrv.dilkod(+) = 'Turkish' and vtsrv.servisid(+)=ie.servisid
+                                and IE.SERVISVARLIKID=servar.id
+                                and SERVAR.VARLIKTIPID<>3
                                 and ar.kod =  ie.aractipad and ar.durumid =1  
                                 AND ie.tamamlanmatarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
 
@@ -3503,10 +3509,12 @@ class InfoAfterSales extends \DAL\DalSlim {
                         FROM 
                             servisisemirler ie,
                             vt_servisler vtsrv,
-                            aracturler ar 
+                            aracturler ar ,
+                            servisvarliklar servar
                         WHERE -- ie.tamamlanmatarih between   to_date('01/05/2018') and  to_date('30/05/2018') and
                             ie.teknikolaraktamamla=1 
-
+                            and IE.SERVISVARLIKID=servar.id
+                            and SERVAR.VARLIKTIPID<>3
                             and (ie.arackazali <> 1 or ie.arackazaaciklama is null or ie.arackazaaciklama = '')
                             and vtsrv.dilkod(+) = 'Turkish' and vtsrv.servisid(+)=ie.servisid
                             and ar.kod =  ie.aractipad and ar.durumid =1  
@@ -3578,12 +3586,15 @@ class InfoAfterSales extends \DAL\DalSlim {
                             FROM 
                                 servisisemirler ie,
                                 vt_servisler vtsrv,
-                                aracturler ar 
+                                aracturler ar ,
+                                servisvarliklar servar
                             WHERE -- ie.tamamlanmatarih between   to_date('01/05/2018') and  to_date('30/05/2018') and
                                 ie.teknikolaraktamamla=1 
                                 ".$servicesQuery."
                                 and (ie.arackazali <> 1 or ie.arackazaaciklama is null or ie.arackazaaciklama = '')
                                 and vtsrv.dilkod(+) = 'Turkish' and vtsrv.servisid(+)=ie.servisid
+                                and IE.SERVISVARLIKID=servar.id
+                                and SERVAR.VARLIKTIPID<>3
                                 and ar.kod =  ie.aractipad and ar.durumid =1  
                                 AND ie.tamamlanmatarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
 
