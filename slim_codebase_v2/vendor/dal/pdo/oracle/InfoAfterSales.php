@@ -10113,7 +10113,7 @@ select  rownum as rid , asd.* from (
      * @throws \PDOException
      */
     public function getAfterSalesDashboardFaalStokToplamWithServices($args = array()) { 
-        $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+        $servicesQuery = ' and a.servisid not in (1,134,136) ';
     
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //and ie.servisid in (94,96,98)
