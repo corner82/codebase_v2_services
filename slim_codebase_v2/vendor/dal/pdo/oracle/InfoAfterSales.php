@@ -9786,6 +9786,67 @@ select  rownum as rid , asd.* from (
         }
     }
     
+            /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardFaalYedekParcaServisDisiWithServices($args = array()) { 
+        $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+    
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //and ie.servisid in (94,96,98)
+            $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+        }
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+             SELECT 
+                servisid, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = dsf.servisid) as servisad,
+                  /*----------------------------------üst grup---------Servis içinde onarıma kullanılan----------------------------*/ 
+                 TO_CHAR(ROUND(sum(nvl(servisiciuygunparca,0)), 0), '999,999,999,999,999') servisiciuygunparca  ,
+                  TO_CHAR(ROUND(sum(nvl(servisiciucretliuygunparca,0)), 0), '999,999,999,999,999') servisiciucretliuygunparca  ,
+                 TO_CHAR(ROUND(sum(nvl(servisicigaranti,0)), 0), '999,999,999,999,999') servisicigaranti,  
+                 TO_CHAR(ROUND(sum(nvl(servisiciuygunparca,0)), 0), '999,999,999,999,999') kutu1toplam,         /*  1. toplam alanı*/
+                 TO_CHAR(ROUND(sum(nvl(servisicioem,0)), 0), '999,999,999,999,999') servisicioem,
+                 TO_CHAR(ROUND(sum(nvl(servisicioes,0)), 0), '999,999,999,999,999') servisicioes,
+                 TO_CHAR(ROUND(sum(nvl(servisiciesdeger,0)), 0), '999,999,999,999,999') servisiciesdeger, 
+                 TO_CHAR(ROUND(sum(nvl(servisiciyansanayitoplam,0)), 0), '999,999,999,999,999') kutu2usttoplam,  /*  2. toplamalanı */
+                 TO_CHAR(ROUND(sum(nvl(servisiciyansanayi,0)), 0), '999,999,999,999,999') servisiciyansanayi,
+                 TO_CHAR(ROUND(sum(nvl(servisicimyok,0)), 0), '999,999,999,999,999') servisicimyok,
+                 TO_CHAR(ROUND(sum(nvl(servisicitoplam,0)), 0), '999,999,999,999,999') kutu2yantoplam,       /*   3. toplam alanı*/ 
+                 /*----------------------------------alt grup------Servis dışına/direk satılan--------------------------------------*/
+                 TO_CHAR(ROUND(sum(nvl(servisdisiuygunparca,0)), 0), '999,999,999,999,999') servisdisiuygunparca,  /*  1. toplam alanı*/
+                 TO_CHAR(ROUND(sum(nvl(servisdisioem,0)), 0), '999,999,999,999,999') servisdisioem,
+                 TO_CHAR(ROUND(sum(nvl(servisdisioes,0)), 0), '999,999,999,999,999') servisdisioes,
+                 TO_CHAR(ROUND(sum(nvl(servisdisiesdeger,0)), 0), '999,999,999,999,999') servisdisiesdeger, 
+                 TO_CHAR(ROUND(sum(nvl(servisdisiystoplam,0)), 0), '999,999,999,999,999') kutu2usttoplam,  /*  2. toplamalanı */
+                 TO_CHAR(ROUND(sum(nvl(servisdisiyansanayi,0)), 0), '999,999,999,999,999') servisdisiyansanayi,
+                 TO_CHAR(ROUND(sum(nvl(servisdisimyok,0)), 0), '999,999,999,999,999') servisdisimyok,
+                 TO_CHAR(ROUND(sum(nvl(servisdisitoplam,0)), 0), '999,999,999,999,999') servisdisitoplam      /*   3. toplam alanı*/
+
+                 FROM  sason.ypfaaliyet dsf 
+                 WHERE    
+                    dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                    ".$servicesQuery."  
+                    group by  servisid  
+            ) asd               
+                    ";
+             
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+   
     
     /**
      * @param array | null $args
@@ -10056,6 +10117,98 @@ select  rownum as rid , asd.* from (
             return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
         }
     }
+    
+    
+    
+              /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardFaalStokToplamWithServices($args = array()) { 
+        $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+    
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //and ie.servisid in (94,96,98)
+            $servicesQuery = ' and a.servisid in ('.$_GET['src'].')  '; 
+        }
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+             
+    SELECT servisid, 
+          (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asasd.servisid) as servisad,
+          TO_CHAR(ROUND( sum(nvl(stok_oes,0)) , 0), '999,999,999,999,999') stok_oes  ,
+          TO_CHAR(ROUND( sum(nvl(stok_oeM,0)) , 0), '999,999,999,999,999') stok_oeM  ,
+          TO_CHAR(ROUND( sum(nvl(stok_essanayi,0)) , 0), '999,999,999,999,999') stok_esdsanayi  ,
+          TO_CHAR(ROUND( sum(nvl(stok_my,0)) , 0), '999,999,999,999,999') stok_my  ,
+          TO_CHAR(ROUND( sum(nvl(stok_yansanayi,0)) , 0), '999,999,999,999,999') stok_yansanayi  ,
+          TO_CHAR(ROUND(nvl( sum( nvl(stok_oes,0) +nvl(stok_oeM,0) + nvl(stok_essanayi,0) + nvl(stok_my,0) +nvl(stok_yansanayi,0)) ,0), 0), '999,999,999,999,999') stok_toplam
+    FROM (  
+      SELECT   asd.HSERVISID servisid, 
+                case asd.SERVISSTOKTURID
+                        when 1 then  sum(nvl(asd.ORTALAMAMALIYET,0) * asd.STOKMIKTAR)
+                     end   as stok_oem, 
+                case asd.SERVISSTOKTURID
+                        when 7 then  sum(nvl(asd.ORTALAMAMALIYET,0) * asd.STOKMIKTAR)                   
+                     end   as stok_oes,
+                case asd.SERVISSTOKTURID
+                        when 8 then  sum(nvl(asd.ORTALAMAMALIYET,0)*asd.STOKMIKTAR)
+                     end   as stok_essanayi,
+                case asd.SERVISSTOKTURID
+                        when 9 then  sum(nvl(asd.ORTALAMAMALIYET,0)*asd.STOKMIKTAR)
+                     end   as stok_yansanayi,
+                case asd.SERVISSTOKTURID
+                        when 11 then sum(nvl(asd.ORTALAMAMALIYET,0) *asd.STOKMIKTAR)
+                     end   as stok_my
+              FROM(
+                SELECT
+                       a.kod tur, 
+                       p.ID,
+                       p.HSERVISID,
+                       p.servisstokturid,  
+                       P.ORTALAMAMALIYET ORTALAMAMALIYET,
+                       p.STOKMIKTAR 
+                  FROM(SELECT servisstokturid,
+                               a.id,
+                               a.servisid hservisid, 
+                               C.STOKMIKTAR,   
+                               kurlar_pkg.ORTALAMAMALIYET(a.id) ORTALAMAMALIYET 
+                          FROM(SELECT DISTINCT servisstokid
+                                  FROM sason.servisstokhareketdetaylar
+                                            ) h,
+                               sason.servisstoklar a,
+                               sason.vt_genelstok c 
+                         WHERE  h.servisstokid = a.id
+                               AND A.ID = C.SERVISSTOKID
+                               AND C.STOKMIKTAR <> 0
+                               AND a.servisid = c.servisid 
+                                ".$servicesQuery."  
+                            ) p,
+                       servisstokturler a
+                 WHERE p.servisstokturid = a.id
+                 ) asd
+                 group by  asd.SERVISSTOKTURID ,asd.HSERVISID
+              ) asasd
+              group  by asasd.SERVISID 
+            
+                    ";
+             
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
+    
     
     /**
      * @param array | null $args

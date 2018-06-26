@@ -4891,6 +4891,27 @@ $app->get("/getAfterSalesDashboardFaalYedekParcaWithServices_infoAfterSales/", f
 
 
 /**
+ * 
+ * @since 13-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesDashboardFaalYedekParcaServisDisiWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    $headerParams = $app->request()->headers();
+
+    $resDataGrid = $BLL->getAfterSalesDashboardFaalYedekParcaServisDisiWithServices(array(
+        'url' =>  $_GET['url'],    
+    ));
+     $app->response()->header("Content-Type", "application/json"); 
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+
+
+
+/**
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */
@@ -4936,9 +4957,7 @@ $app->get("/getAfterSalesDashboardFaalYagToplamWithServices_infoAfterSales/", fu
     $resDataGrid = $BLL->getAfterSalesDashboardFaalYagToplamWithServices(array(
         'url' =>  $_GET['url'],    
     ));
-    $counts = 0; 
-    $resDataGrid = $resDataGrid['resultSet'];  
-    $app->response()->header("Content-Type", "application/json");
+     $app->response()->header("Content-Type", "application/json"); 
     $app->response()->body(json_encode($resDataGrid));
 });
 
@@ -4977,6 +4996,31 @@ $app->get("/getAfterSalesDashboardFaalStokToplam_infoAfterSales/", function () u
     $app->response()->header("Content-Type", "application/json");
     $app->response()->body(json_encode($resDataGrid));
 });
+
+
+
+
+/**
+ * 
+ * @since 13-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesDashboardFaalStokToplamWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    $headerParams = $app->request()->headers();
+
+    $resDataGrid = $BLL->getAfterSalesDashboardFaalStokToplamWithServices(array(
+        'url' =>  $_GET['url'],    
+    ));
+     $app->response()->header("Content-Type", "application/json"); 
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+
+
+
 
 //detay yedek parça sayfası fonk. son
 

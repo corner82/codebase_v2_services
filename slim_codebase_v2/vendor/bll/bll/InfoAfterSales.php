@@ -55,6 +55,7 @@ class InfoAfterSales extends \BLL\BLLSlim{
         return $DAL->getAfterSalesDetayAlisFaturalariWeeklyWithServices($params);
     }
     
+    
     /**
      * get aftersales alış faturaları  monthly data for detailed graphs
      * @param array | null $params
@@ -1552,6 +1553,18 @@ class InfoAfterSales extends \BLL\BLLSlim{
         return $resultSet['resultSet'];
     }
     
+    
+         /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesDashboardFaalYedekParcaServisDisiWithServices ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesDashboardFaalYedekParcaServisDisiWithServices($params);  
+        return $resultSet['resultSet'];
+    }
+    
     /**
      * Function yağ toplam on user interface layer
      * @param array | null $params
@@ -1587,6 +1600,16 @@ class InfoAfterSales extends \BLL\BLLSlim{
     }
 
     
+      /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesDashboardFaalStokToplamWithServices ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesDashboardFaalStokToplamWithServices($params);  
+        return $resultSet['resultSet'];
+    }
     //detay yedek parça sayfası fonk. son
     
     
