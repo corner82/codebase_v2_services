@@ -4885,9 +4885,7 @@ $app->get("/getAfterSalesDashboardFaalYedekParcaWithServices_infoAfterSales/", f
     $resDataGrid = $BLL->getAfterSalesDashboardFaalYedekParcaWithServices(array(
         'url' =>  $_GET['url'],    
     ));
-    $counts = 0; 
-    $resDataGrid = $resDataGrid['resultSet'];  
-    $app->response()->header("Content-Type", "application/json");
+     $app->response()->header("Content-Type", "application/json"); 
     $app->response()->body(json_encode($resDataGrid));
 });
 
