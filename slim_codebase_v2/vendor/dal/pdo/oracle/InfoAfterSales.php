@@ -9723,6 +9723,70 @@ select  rownum as rid , asd.* from (
         }
     }
     
+    
+    
+        /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardFaalYedekParcaWithServices($args = array()) { 
+        $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+    
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //and ie.servisid in (94,96,98)
+            $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+        }
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+             SELECT 
+                servisid, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = dsf.servisid) as servisad,
+                  /*----------------------------------üst grup---------Servis içinde onarıma kullanılan----------------------------*/ 
+                 TO_CHAR(ROUND(sum(nvl(servisiciuygunparca,0)), 0), '999,999,999,999,999') servisiciuygunparca  ,
+                  TO_CHAR(ROUND(sum(nvl(servisiciucretliuygunparca,0)), 0), '999,999,999,999,999') servisiciucretliuygunparca  ,
+                 TO_CHAR(ROUND(sum(nvl(servisicigaranti,0)), 0), '999,999,999,999,999') servisicigaranti,  
+                 TO_CHAR(ROUND(sum(nvl(servisiciuygunparca,0)), 0), '999,999,999,999,999') kutu1toplam,         /*  1. toplam alanı*/
+                 TO_CHAR(ROUND(sum(nvl(servisicioem,0)), 0), '999,999,999,999,999') servisicioem,
+                 TO_CHAR(ROUND(sum(nvl(servisicioes,0)), 0), '999,999,999,999,999') servisicioes,
+                 TO_CHAR(ROUND(sum(nvl(servisiciesdeger,0)), 0), '999,999,999,999,999') servisiciesdeger, 
+                 TO_CHAR(ROUND(sum(nvl(servisiciyansanayitoplam,0)), 0), '999,999,999,999,999') kutu2usttoplam,  /*  2. toplamalanı */
+                 TO_CHAR(ROUND(sum(nvl(servisiciyansanayi,0)), 0), '999,999,999,999,999') servisiciyansanayi,
+                 TO_CHAR(ROUND(sum(nvl(servisicimyok,0)), 0), '999,999,999,999,999') servisicimyok,
+                 TO_CHAR(ROUND(sum(nvl(servisicitoplam,0)), 0), '999,999,999,999,999') kutu2yantoplam,       /*   3. toplam alanı*/ 
+                 /*----------------------------------alt grup------Servis dışına/direk satılan--------------------------------------*/
+                 TO_CHAR(ROUND(sum(nvl(servisdisiuygunparca,0)), 0), '999,999,999,999,999') servisdisiuygunparca,  /*  1. toplam alanı*/
+                 TO_CHAR(ROUND(sum(nvl(servisdisioem,0)), 0), '999,999,999,999,999') servisdisioem,
+                 TO_CHAR(ROUND(sum(nvl(servisdisioes,0)), 0), '999,999,999,999,999') servisdisioes,
+                 TO_CHAR(ROUND(sum(nvl(servisdisiesdeger,0)), 0), '999,999,999,999,999') servisdisiesdeger, 
+                 TO_CHAR(ROUND(sum(nvl(servisdisiystoplam,0)), 0), '999,999,999,999,999') kutu2usttoplam,  /*  2. toplamalanı */
+                 TO_CHAR(ROUND(sum(nvl(servisdisiyansanayi,0)), 0), '999,999,999,999,999') servisdisiyansanayi,
+                 TO_CHAR(ROUND(sum(nvl(servisdisimyok,0)), 0), '999,999,999,999,999') servisdisimyok,
+                 TO_CHAR(ROUND(sum(nvl(servisdisitoplam,0)), 0), '999,999,999,999,999') servisdisitoplam      /*   3. toplam alanı*/
+
+                 FROM  sason.ypfaaliyet dsf 
+                 WHERE    
+                    dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                    ".$servicesQuery."  
+                    group by  servisid  
+            ) asd               
+                    ";
+             
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
     /**
      * @param array | null $args
      * @return Array
@@ -10032,7 +10096,7 @@ select  rownum as rid , asd.* from (
                  PARTNERCODE                
 
                from   SASON.PERFORMANS_YPHEDEF  zz
-			   where servisid not in (1,134,136)
+              where servisid not in (1,134,136)
 
                order by servisid , id 
                     ";
