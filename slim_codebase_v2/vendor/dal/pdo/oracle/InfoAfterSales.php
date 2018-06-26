@@ -9770,7 +9770,7 @@ select  rownum as rid , asd.* from (
                     dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
                     ".$servicesQuery."  
                     group by  servisid  
-            ) asd               
+                      
                     ";
              
             $statement = $pdo->prepare($sql);            
