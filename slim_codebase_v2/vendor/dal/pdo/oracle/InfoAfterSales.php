@@ -9753,17 +9753,9 @@ select  rownum as rid , asd.* from (
                  TO_CHAR(ROUND(sum(nvl(servisiciyansanayitoplam,0)), 0), '999,999,999,999,999') kutu2usttoplam,  /*  2. toplamalanı */
                  TO_CHAR(ROUND(sum(nvl(servisiciyansanayi,0)), 0), '999,999,999,999,999') servisiciyansanayi,
                  TO_CHAR(ROUND(sum(nvl(servisicimyok,0)), 0), '999,999,999,999,999') servisicimyok,
-                 TO_CHAR(ROUND(sum(nvl(servisicitoplam,0)), 0), '999,999,999,999,999') kutu2yantoplam,       /*   3. toplam alanı*/ 
+                 TO_CHAR(ROUND(sum(nvl(servisicitoplam,0)), 0), '999,999,999,999,999') kutu2yantoplam      /*   3. toplam alanı*/ 
                  /*----------------------------------alt grup------Servis dışına/direk satılan--------------------------------------*/
-                 TO_CHAR(ROUND(sum(nvl(servisdisiuygunparca,0)), 0), '999,999,999,999,999') servisdisiuygunparca,  /*  1. toplam alanı*/
-                 TO_CHAR(ROUND(sum(nvl(servisdisioem,0)), 0), '999,999,999,999,999') servisdisioem,
-                 TO_CHAR(ROUND(sum(nvl(servisdisioes,0)), 0), '999,999,999,999,999') servisdisioes,
-                 TO_CHAR(ROUND(sum(nvl(servisdisiesdeger,0)), 0), '999,999,999,999,999') servisdisiesdeger, 
-                 TO_CHAR(ROUND(sum(nvl(servisdisiystoplam,0)), 0), '999,999,999,999,999') kutu2usttoplam,  /*  2. toplamalanı */
-                 TO_CHAR(ROUND(sum(nvl(servisdisiyansanayi,0)), 0), '999,999,999,999,999') servisdisiyansanayi,
-                 TO_CHAR(ROUND(sum(nvl(servisdisimyok,0)), 0), '999,999,999,999,999') servisdisimyok,
-                 TO_CHAR(ROUND(sum(nvl(servisdisitoplam,0)), 0), '999,999,999,999,999') servisdisitoplam      /*   3. toplam alanı*/
-
+               
                  FROM  sason.ypfaaliyet dsf 
                  WHERE    
                     dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
