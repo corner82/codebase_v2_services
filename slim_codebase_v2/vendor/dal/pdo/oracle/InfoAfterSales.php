@@ -9801,8 +9801,7 @@ select  rownum as rid , asd.* from (
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
              SELECT 
-                servisid, 
-                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = dsf.servisid) as servisad,
+               
                   /*----------------------------------üst grup---------Servis içinde onarıma kullanılan----------------------------*/ 
                  TO_CHAR(ROUND(sum(nvl(servisiciuygunparca,0)), 0), '999,999,999,999,999') servisiciuygunparca  ,
                   TO_CHAR(ROUND(sum(nvl(servisiciucretliuygunparca,0)), 0), '999,999,999,999,999') servisiciucretliuygunparca  ,
