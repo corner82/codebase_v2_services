@@ -9741,8 +9741,7 @@ select  rownum as rid , asd.* from (
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
              SELECT 
-                servisid, 
-                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = dsf.servisid) as servisad,
+              
                   /*----------------------------------üst grup---------Servis içinde onarıma kullanılan----------------------------*/ 
                  TO_CHAR(ROUND(sum(nvl(servisiciuygunparca,0)), 0), '999,999,999,999,999') servisiciuygunparca  ,
                   TO_CHAR(ROUND(sum(nvl(servisiciucretliuygunparca,0)), 0), '999,999,999,999,999') servisiciucretliuygunparca  ,
@@ -9769,7 +9768,7 @@ select  rownum as rid , asd.* from (
                  WHERE    
                     dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
                     ".$servicesQuery."  
-                    group by  servisid  
+                
                       
                     ";
              
@@ -9830,8 +9829,8 @@ select  rownum as rid , asd.* from (
                  WHERE    
                     dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
                     ".$servicesQuery."  
-                    group by  servisid  
-            ) asd               
+                 
+                        
                     ";
              
             $statement = $pdo->prepare($sql);            
@@ -10008,8 +10007,8 @@ select  rownum as rid , asd.* from (
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
              
-            SELECT servisid, 
-                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = dsf.servisid) as servisad,
+            SELECT   
+                 
                  /*----------------------------------------Servis içinde onarıma kullanılan----------------------------*/ 
                 TO_CHAR(ROUND(sum(nvl(servisiciyag,0)), 0), '999,999,999,999,999') servisiciyag  ,
                  /*--------------------------------------Servis dışına/direk satılan--------------------------------------*/
@@ -10022,7 +10021,7 @@ select  rownum as rid , asd.* from (
                         
                     dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
                     ".$servicesQuery."  
-                group by  servisid  
+               
                     ";
              
             $statement = $pdo->prepare($sql);            
@@ -10136,8 +10135,7 @@ select  rownum as rid , asd.* from (
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
              
-    SELECT servisid, 
-          (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asasd.servisid) as servisad,
+    SELECT  
           TO_CHAR(ROUND( sum(nvl(stok_oes,0)) , 0), '999,999,999,999,999') stok_oes  ,
           TO_CHAR(ROUND( sum(nvl(stok_oeM,0)) , 0), '999,999,999,999,999') stok_oeM  ,
           TO_CHAR(ROUND( sum(nvl(stok_essanayi,0)) , 0), '999,999,999,999,999') stok_esdsanayi  ,
@@ -10190,7 +10188,7 @@ select  rownum as rid , asd.* from (
                  ) asd
                  group by  asd.SERVISSTOKTURID ,asd.HSERVISID
               ) asasd
-              group  by asasd.SERVISID 
+            
             
                     ";
              
