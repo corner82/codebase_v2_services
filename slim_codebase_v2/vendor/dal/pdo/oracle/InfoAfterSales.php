@@ -9802,18 +9802,7 @@ select  rownum as rid , asd.* from (
             $sql = "  
              SELECT 
                
-                  /*----------------------------------üst grup---------Servis içinde onarıma kullanılan----------------------------*/ 
-                 TO_CHAR(ROUND(sum(nvl(servisiciuygunparca,0)), 0), '999,999,999,999,999') servisiciuygunparca  ,
-                  TO_CHAR(ROUND(sum(nvl(servisiciucretliuygunparca,0)), 0), '999,999,999,999,999') servisiciucretliuygunparca  ,
-                 TO_CHAR(ROUND(sum(nvl(servisicigaranti,0)), 0), '999,999,999,999,999') servisicigaranti,  
-                 TO_CHAR(ROUND(sum(nvl(servisiciuygunparca,0)), 0), '999,999,999,999,999') kutu1toplam,         /*  1. toplam alanı*/
-                 TO_CHAR(ROUND(sum(nvl(servisicioem,0)), 0), '999,999,999,999,999') servisicioem,
-                 TO_CHAR(ROUND(sum(nvl(servisicioes,0)), 0), '999,999,999,999,999') servisicioes,
-                 TO_CHAR(ROUND(sum(nvl(servisiciesdeger,0)), 0), '999,999,999,999,999') servisiciesdeger, 
-                 TO_CHAR(ROUND(sum(nvl(servisiciyansanayitoplam,0)), 0), '999,999,999,999,999') kutu2usttoplam,  /*  2. toplamalanı */
-                 TO_CHAR(ROUND(sum(nvl(servisiciyansanayi,0)), 0), '999,999,999,999,999') servisiciyansanayi,
-                 TO_CHAR(ROUND(sum(nvl(servisicimyok,0)), 0), '999,999,999,999,999') servisicimyok,
-                 TO_CHAR(ROUND(sum(nvl(servisicitoplam,0)), 0), '999,999,999,999,999') kutu2yantoplam,       /*   3. toplam alanı*/ 
+                 
                  /*----------------------------------alt grup------Servis dışına/direk satılan--------------------------------------*/
                  TO_CHAR(ROUND(sum(nvl(servisdisiuygunparca,0)), 0), '999,999,999,999,999') servisdisiuygunparca,  /*  1. toplam alanı*/
                  TO_CHAR(ROUND(sum(nvl(servisdisioem,0)), 0), '999,999,999,999,999') servisdisioem,
