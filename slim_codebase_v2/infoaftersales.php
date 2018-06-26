@@ -5058,9 +5058,29 @@ $app->get("/getAfterSalesYedekParcaPDFServisli_infoAfterSales/", function () use
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
-     
+   
+   //
+   //  print_r($resDataGrid);
+     $flows = array();
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
+            "SERVISID" => $flow["SERVISID"],            
+            'SERVISAD' => $flow["SERVISAD"],            
+            'LINKPDF' => $flow["LINKPDF"], 
+        );
+    }     
     $app->response()->header("Content-Type", "application/json");
+    $resultArray = array();
+  
+    $resultArray['rows'] = $flows;
+    $app->response()->body(json_encode($resultArray));
+    
+    
+    
+    /*$app->response()->header("Content-Type", "application/json");
     $app->response()->body(json_encode($resDataGrid));
+     * *
+     */
 });
 
 //detay yedek parça hedef fonk. son

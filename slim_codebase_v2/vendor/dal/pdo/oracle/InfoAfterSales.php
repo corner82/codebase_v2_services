@@ -10010,7 +10010,7 @@ select  rownum as rid , asd.* from (
      */
     public function getAfterSalesYedekParcaHedefServissiz($args = array()) {
         
-        
+       
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
@@ -10032,6 +10032,7 @@ select  rownum as rid , asd.* from (
                  PARTNERCODE                
 
                from   SASON.PERFORMANS_YPHEDEF  zz
+			   where servisid not in (1,134,136)
 
                order by servisid , id 
                     ";
