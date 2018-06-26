@@ -9930,6 +9930,57 @@ select  rownum as rid , asd.* from (
         }
     }
     
+    
+           /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardFaalYagToplamWithServices($args = array()) { 
+        $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+    
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //and ie.servisid in (94,96,98)
+            $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+        }
+        try {
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = "  
+             
+            SELECT servisid, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = dsf.servisid) as servisad,
+                 /*----------------------------------------Servis içinde onarıma kullanılan----------------------------*/ 
+                TO_CHAR(ROUND(sum(nvl(servisiciyag,0)), 0), '999,999,999,999,999') servisiciyag  ,
+                 /*--------------------------------------Servis dışına/direk satılan--------------------------------------*/
+                TO_CHAR(ROUND(sum(nvl(servisdisiyag,0)), 0), '999,999,999,999,999') servisdisiyag,  
+
+                TO_CHAR(ROUND(sum(nvl(yagtoplam,0)), 0), '999,999,999,999,999') yagtoplam           /*  1. toplam alanı*/
+
+                FROM  sason.ypfaaliyet dsf 
+                WHERE
+                        
+                    dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                    ".$servicesQuery."  
+                group by  servisid  
+                    ";
+             
+            $statement = $pdo->prepare($sql);            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
+    
+    
+    
     /**
      * @param array | null $args
      * @return Array

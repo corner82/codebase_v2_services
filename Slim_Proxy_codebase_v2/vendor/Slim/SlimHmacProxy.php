@@ -184,6 +184,8 @@ class SlimHmacProxy extends \Proxy\Proxy {
         
         
                                     'getAfterSalesDashboardFaalYedekParcaWithServices_infoAfterSales' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaalYagToplamWithServices_infoAfterSales' => 'restApiDefaultCall',
+        
         
         
         

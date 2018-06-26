@@ -4925,6 +4925,31 @@ $app->get("/getAfterSalesDashboardFaalYagToplam_infoAfterSales/", function () us
 
 
 /**
+ * 
+ * @since 13-06-2018
+ * @author Mustafa Zeynel Dağlı
+ */
+$app->get("/getAfterSalesDashboardFaalYagToplamWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    $headerParams = $app->request()->headers();
+
+    $resDataGrid = $BLL->getAfterSalesDashboardFaalYagToplamWithServices(array(
+        'url' =>  $_GET['url'],    
+    ));
+    $counts = 0; 
+    $resDataGrid = $resDataGrid['resultSet'];  
+    $app->response()->header("Content-Type", "application/json");
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+
+
+
+
+
+/**
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */

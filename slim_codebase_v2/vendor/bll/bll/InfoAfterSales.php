@@ -1563,6 +1563,18 @@ class InfoAfterSales extends \BLL\BLLSlim{
         return $resultSet['resultSet'];
     }
     
+     
+       /**
+     * Function yağ toplam on user interface layer
+     * @param array | null $params
+     * @return array
+     */
+    public function getAfterSalesDashboardFaalYagToplamWithServices ($params = array()) {        
+        $DAL = $this->slimApp->getDALManager()->get('infoAfterSalesOraclePDO');
+        $resultSet = $DAL->getAfterSalesDashboardFaalYagToplamWithServices($params);  
+        return $resultSet['resultSet'];
+    }
+    
     /**
      * Function yağ toplam on user interface layer
      * @param array | null $params
