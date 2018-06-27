@@ -5054,9 +5054,35 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
-     
+    ///////////////
+    $flows = array();
+                
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
+                $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["TYPE"],
+                $flow["OCAK_MAYIS2017"],
+                $flow["OCAK_MAYIS2018"],
+                $flow["KARSILASTIRMA_1718_OM"],
+                $flow["TOPLAM_2017"],
+                $flow["Y3ILLIK_ORTALAMA"],
+                $flow["AYLIK_GERCEKLESME_MIKTARI"],   
+                $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],   
+                $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],   
+                $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"],   
+                $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],   
+                $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"],   
+                $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]             
+                ); 
+    }     
     $app->response()->header("Content-Type", "application/json");
-    $app->response()->body(json_encode($resDataGrid));
+    $resultArray = array();
+  
+    $resultArray['data'] = $flows;
+    $app->response()->body(json_encode($resultArray)); 
+    //$app->response()->header("Content-Type", "application/json");
+    //$app->response()->body(json_encode($resDataGrid));
 });
 
 /**
@@ -5085,9 +5111,40 @@ $app->get("/getAfterSalesYedekParcaHedefServisli_infoAfterSales/", function () u
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
-     
+    ///////////////
+    $flows = array();
+                
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
+                             $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["TYPE"],
+                $flow["OCAK_MAYIS2017"],
+                $flow["OCAK_MAYIS2018"],
+                $flow["KARSILASTIRMA_1718_OM"],
+                $flow["TOPLAM_2017"],
+                $flow["Y3ILLIK_ORTALAMA"],
+                $flow["AYLIK_GERCEKLESME_MIKTARI"],   
+                $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],   
+                $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],   
+                $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"],   
+                $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],   
+                $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"],   
+                $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]                
+                ); 
+        //$flows[] = array(
+        //    "SERVISID" => $flow["SERVISID"],            
+        //    'SERVISAD' => $flow["SERVISAD"],            
+        //    'LINKPDF' => $flow["LINKPDF"], 
+        //);
+    }     
     $app->response()->header("Content-Type", "application/json");
-    $app->response()->body(json_encode($resDataGrid));
+    $resultArray = array();
+  
+    $resultArray['data'] = $flows;
+    $app->response()->body(json_encode($resultArray)); 
+    //$app->response()->header("Content-Type", "application/json");
+    //$app->response()->body(json_encode($resDataGrid));
 });
 
 /**
@@ -5117,8 +5174,30 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
         'language_code' => $vLanguageCode,       
     ));
      
+    
+    ///////////////
+    $flows = array();
+                
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
+                $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["LINKPDF"]                 
+                ); 
+        //$flows[] = array(
+        //    "SERVISID" => $flow["SERVISID"],            
+        //    'SERVISAD' => $flow["SERVISAD"],            
+        //    'LINKPDF' => $flow["LINKPDF"], 
+        //);
+    }     
     $app->response()->header("Content-Type", "application/json");
-    $app->response()->body(json_encode($resDataGrid));
+    $resultArray = array();
+  
+    $resultArray['data'] = $flows;
+    $app->response()->body(json_encode($resultArray));
+    //////////////
+    //$app->response()->header("Content-Type", "application/json");
+    //$app->response()->body(json_encode($resDataGrid));
 });
 
 /**
@@ -5151,17 +5230,23 @@ $app->get("/getAfterSalesYedekParcaPDFServisli_infoAfterSales/", function () use
    //
    //  print_r($resDataGrid);
      $flows = array();
+                
     foreach ($resDataGrid as $flow) {
         $flows[] = array(
-            "SERVISID" => $flow["SERVISID"],            
-            'SERVISAD' => $flow["SERVISAD"],            
-            'LINKPDF' => $flow["LINKPDF"], 
-        );
+                $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["LINKPDF"]                 
+                ); 
+        //$flows[] = array(
+        //    "SERVISID" => $flow["SERVISID"],            
+        //    'SERVISAD' => $flow["SERVISAD"],            
+        //    'LINKPDF' => $flow["LINKPDF"], 
+        //);
     }     
     $app->response()->header("Content-Type", "application/json");
     $resultArray = array();
   
-    $resultArray['rows'] = $flows;
+    $resultArray['data'] = $flows;
     $app->response()->body(json_encode($resultArray));
     
     
