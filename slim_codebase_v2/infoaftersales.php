@@ -5059,22 +5059,27 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
                 
     foreach ($resDataGrid as $flow) {
         $flows[] = array(
-                $flow["SERVISID"],
-                html_entity_decode($flow["SERVISAD"]),
-                $flow["TYPE"],
-                $flow["OCAKMAYIS2017"],
-                $flow["OCAKMAYIS2018"],
-                $flow["KARSILASTIRMA_1718_OM"],
-                $flow["TOPLAM_2017"],
-                $flow["Y3ILLIK_ORTALAMA"],
-                $flow["AYLIK_GERCEKLESME MIKTARI"],
-                $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
-                $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
-                $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"], 
-                $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],  
-                $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"], 
-                $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]
+           "SERVISID" =>      $flow["SERVISID"],
+           "SERVISAD" =>      html_entity_decode($flow["SERVISAD"]),
+           "TYPE" =>      $flow["TYPE"],
+           "OCAKMAYIS2017" =>      $flow["OCAKMAYIS2017"],
+           "OCAKMAYIS2018" =>      $flow["OCAKMAYIS2018"],
+            "KARSILASTIRMA_1718_OM" =>     $flow["KARSILASTIRMA_1718_OM"],
+            "TOPLAM_2017" =>     $flow["TOPLAM_2017"],
+            "Y3ILLIK_ORTALAMA" =>     $flow["Y3ILLIK_ORTALAMA"],
+           "AYLIK_GERCEKLESME" =>      $flow["AYLIK_GERCEKLESME MIKTARI"],
+            "AYLIK_7ICIN_GEREKEN_MIKTAR" =>     $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
+           "AYLIK_8ICIN_GEREKEN_MIKTAR" =>      $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
+            "AYLIK_9ICIN_GEREKEN_MIKTAR" =>     $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"], 
+            "YILLIK_7ICIN_GEREKEN_MIKTAR" =>     $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],  
+            "YILLIK_8ICIN_GEREKEN_MIKTAR" =>     $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"], 
+            "YILLIK_9ICIN_GEREKEN_MIKTAR" =>     $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]
                 //$flow["PARTNERCODE"]
+                
+                 //$flows[] = array(
+        //    "SERVISID" => $flow["SERVISID"],            
+        //    'SERVISAD' => $flow["SERVISAD"],            
+        //    'LINKPDF' => $flow["LINKPDF"], 
                 ); 
     }     
     $app->response()->header("Content-Type", "application/json");
@@ -5118,21 +5123,21 @@ $app->get("/getAfterSalesYedekParcaHedefServisli_infoAfterSales/", function () u
                 
     foreach ($resDataGrid as $flow) {
         $flows[] = array(
-                $flow["SERVISID"],
-                html_entity_decode($flow["SERVISAD"]),
-                $flow["TYPE"],
-                $flow["OCAKMAYIS2017"],
-                $flow["OCAKMAYIS2018"],
-                $flow["KARSILASTIRMA_1718_OM"],
-                $flow["TOPLAM_2017"],
-                $flow["Y3ILLIK_ORTALAMA"],
-                $flow["AYLIK_GERCEKLESME MIKTARI"],
-                $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
-                $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
-                $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"], 
-                $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],  
-                $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"], 
-                $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]//,
+            "SERVISID" =>      $flow["SERVISID"],
+           "SERVISAD" =>      html_entity_decode($flow["SERVISAD"]),
+           "TYPE" =>      $flow["TYPE"],
+           "OCAKMAYIS2017" =>      $flow["OCAKMAYIS2017"],
+           "OCAKMAYIS2018" =>      $flow["OCAKMAYIS2018"],
+            "KARSILASTIRMA_1718_OM" =>     $flow["KARSILASTIRMA_1718_OM"],
+            "TOPLAM_2017" =>     $flow["TOPLAM_2017"],
+            "Y3ILLIK_ORTALAMA" =>     $flow["Y3ILLIK_ORTALAMA"],
+           "AYLIK_GERCEKLESME" =>      $flow["AYLIK_GERCEKLESME MIKTARI"],
+            "AYLIK_7ICIN_GEREKEN_MIKTAR" =>     $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
+           "AYLIK_8ICIN_GEREKEN_MIKTAR" =>      $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
+            "AYLIK_9ICIN_GEREKEN_MIKTAR" =>     $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"], 
+            "YILLIK_7ICIN_GEREKEN_MIKTAR" =>     $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],  
+            "YILLIK_8ICIN_GEREKEN_MIKTAR" =>     $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"], 
+            "YILLIK_9ICIN_GEREKEN_MIKTAR" =>     $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]
                 //$flow["PARTNERCODE"]
                 ); 
     }     
@@ -5178,9 +5183,9 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
                 
     foreach ($resDataGrid as $flow) {
         $flows[] = array(
-                $flow["SERVISID"],
-                html_entity_decode($flow["SERVISAD"]),
-                $flow["LINKPDF"]                 
+          "SERVISID" =>       $flow["SERVISID"],
+           'SERVISAD' =>       html_entity_decode($flow["SERVISAD"]),
+           'LINKPDF' =>      $flow["LINKPDF"]                 
                 ); 
         //$flows[] = array(
         //    "SERVISID" => $flow["SERVISID"],            
@@ -5231,9 +5236,9 @@ $app->get("/getAfterSalesYedekParcaPDFServisli_infoAfterSales/", function () use
                 
     foreach ($resDataGrid as $flow) {
         $flows[] = array(
-                $flow["SERVISID"],
-                html_entity_decode($flow["SERVISAD"]),
-                $flow["LINKPDF"]                 
+              "SERVISID" =>       $flow["SERVISID"],
+           'SERVISAD' =>       html_entity_decode($flow["SERVISAD"]),
+           'LINKPDF' =>      $flow["LINKPDF"]                    
                 ); 
         //$flows[] = array(
         //    "SERVISID" => $flow["SERVISID"],            
