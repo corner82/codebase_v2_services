@@ -5121,18 +5121,18 @@ $app->get("/getAfterSalesYedekParcaHedefServisli_infoAfterSales/", function () u
                 $flow["SERVISID"],
                 html_entity_decode($flow["SERVISAD"]),
                 $flow["TYPE"],
-                $flow["OCAKMAYIS2017"],
+                $flow["OCAKMAYIS2017"], 
                 $flow["OCAKMAYIS2018"],
                 $flow["KARSILASTIRMA_1718_OM"],
                 $flow["TOPLAM_2017"],
                 $flow["Y3ILLIK_ORTALAMA"],
-                $flow["AYLIK_GERCEKLESME MIKTARI"],
+                $flow["AYLIK_GERCEKLESME_MIKTARI"],
                 $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
                 $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
                 $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"], 
                 $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],  
                 $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"], 
-                $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]//,
+                $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]
                 //$flow["PARTNERCODE"]
                 ); 
         
