@@ -5075,11 +5075,7 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
                 
                    $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"],
                    $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"],
-                   $flow["PARTNERCODE"],
-                
-           
-                    
-                    
+                   $flow["PARTNERCODE"], 
                 );
         };
     }
@@ -5147,8 +5143,20 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
         'language_code' => $vLanguageCode,       
     ));
      
+     $flows = array();
+    if (isset($resDataGrid[0]['SERVISID'])) {
+        foreach ($resDataGrid as $flow) {
+          $flows[] = array(
+            "SERVISID" => $flow["SERVISID"],            
+            'SERVISAD' => $flow["SERVISAD"],            
+            'LINKPDF' => $flow["LINKPDF"], 
+        );
+        };
+    }
     $app->response()->header("Content-Type", "application/json");
-    $app->response()->body(json_encode($resDataGrid));
+    $resultArray = array();
+    $resultArray['data'] = $flows;
+    $app->response()->body(json_encode($resultArray));
 });
 
 /**
@@ -5181,25 +5189,19 @@ $app->get("/getAfterSalesYedekParcaPDFServisli_infoAfterSales/", function () use
    //
    //  print_r($resDataGrid);
      $flows = array();
-    foreach ($resDataGrid as $flow) {
-        $flows[] = array(
+    if (isset($resDataGrid[0]['SERVISID'])) {
+        foreach ($resDataGrid as $flow) {
+          $flows[] = array(
             "SERVISID" => $flow["SERVISID"],            
             'SERVISAD' => $flow["SERVISAD"],            
             'LINKPDF' => $flow["LINKPDF"], 
         );
-    }     
+        };
+    }
     $app->response()->header("Content-Type", "application/json");
     $resultArray = array();
-  
-    $resultArray['rows'] = $flows;
+    $resultArray['data'] = $flows;
     $app->response()->body(json_encode($resultArray));
-    
-    
-    
-    /*$app->response()->header("Content-Type", "application/json");
-    $app->response()->body(json_encode($resDataGrid));
-     * *
-     */
 });
 
 //detay yedek parça hedef fonk. son
