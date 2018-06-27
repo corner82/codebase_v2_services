@@ -9383,7 +9383,7 @@ select  rownum as rid , asd.* from (
                         FROM faturalar a
                         WHERE  
                          a.ISLEMTARIHI > 
-                          to_date(to_char('01/01/2018',  'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                          to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
                          a.faturaturid = 4
                     UNION
                     select
@@ -9497,7 +9497,7 @@ select  rownum as rid , asd.* from (
                         FROM faturalar a
                         WHERE  
                          a.ISLEMTARIHI > 
-                            to_date(to_char('01/01/2018', 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                          to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
                          a.faturaturid = 4
                          --and a.servisid in (94)
                          ".$servicesQuery."
