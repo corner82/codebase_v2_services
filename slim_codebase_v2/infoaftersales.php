@@ -5067,7 +5067,7 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
                 $flow["KARSILASTIRMA_1718_OM"],
                 $flow["TOPLAM_2017"],
                 $flow["Y3ILLIK_ORTALAMA"],
-                $flow["AYLIK_GERCEKLESME MIKTARI"],
+                $flow["AYLIK_GERCEKLESME_MIKTARI"],
                 $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
                 $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
                 $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"], 
