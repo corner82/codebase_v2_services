@@ -5062,7 +5062,7 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
                 $flow["SERVISID"],
                 html_entity_decode($flow["SERVISAD"]),
                 $flow["TYPE"],
-                $flow["OCAKMAYIS2017"],
+                $flow["OCAKMAYIS2017"], 
                 $flow["OCAKMAYIS2018"],
                 $flow["KARSILASTIRMA_1718_OM"],
                 $flow["TOPLAM_2017"],
