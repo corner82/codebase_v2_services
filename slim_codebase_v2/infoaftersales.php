@@ -5033,11 +5033,11 @@ $app->get("/getAfterSalesDashboardFaalStokToplamWithServices_infoAfterSales/", f
  * @author Mustafa Zeynel Dağlı
  */
 $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () use ($app ) {
-   /*  $stripper = $app->getServiceManager()->get('filterChainerCustom');
-    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();*/
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('afterSalesBLL');
     
-  /*  $vLanguageCode = 'tr';
+    $vLanguageCode = 'tr';
     if (isset($_GET['language_code'])) {
          $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
                                                 $app,
@@ -5045,44 +5045,46 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
     }  
 
     $stripper->strip();
-    if ($stripper->offsetExistfs('language_code')) {
+    if ($stripper->offsetExists('language_code')) {
         $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
     }     
-    */
-     $vLanguageCode = 'tr';
+    
+    
     $resDataGrid = $BLL->getAfterSalesYedekParcaHedefServissiz(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
-     
-     $flows = array();
-    if (isset($resDataGrid[0]['SERVISID'])) {
-        foreach ($resDataGrid as $flow) {
-            $flows[] = array(
+    ///////////////
+   $flows = array();
+                
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
                 $flow["SERVISID"],
                 html_entity_decode($flow["SERVISAD"]),
                 $flow["TYPE"],
-                $flow["OCAK_MAYIS2017"],
-                $flow["OCAK_MAYIS2018"] ,
-                 $flow["KARSILASTIRMA_1718_OM"],
-                 $flow["TOPLAM_2017"],
-                 $flow["Y3ILLIK_ORTALAMA"],
-                 $flow["AYLIK_GERCEKLESME_MIKTARI"],
-                 $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
-                 $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
-                 $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"],
-                 $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],
-                
-                   $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"],
-                   $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"],
-                   $flow["PARTNERCODE"], 
-                );
-        };
-    }
+                $flow["OCAKMAYIS2017"],
+                $flow["OCAKMAYIS2018"],
+                $flow["KARSILASTIRMA_1718_OM"],
+                $flow["TOPLAM_2017"],
+                $flow["Y3ILLIK_ORTALAMA"],
+                $flow["AYLIK_GERCEKLESME MIKTARI"],
+                $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
+                $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
+                $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"], 
+                $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],  
+                $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"], 
+                $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]
+                //$flow["PARTNERCODE"]
+                ); 
+    }     
     $app->response()->header("Content-Type", "application/json");
     $resultArray = array();
+  
     $resultArray['data'] = $flows;
-    $app->response()->body(json_encode($resultArray));
+    $app->response()->body(json_encode($resultArray)); 
+    
+    //$app->response()->header("Content-Type", "application/json");
+    //$app->response()->body(json_encode($resDataGrid));
 });
 
 /**
@@ -5111,9 +5113,36 @@ $app->get("/getAfterSalesYedekParcaHedefServisli_infoAfterSales/", function () u
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
-     
+
+    $flows = array();
+                
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
+                $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["TYPE"],
+                $flow["OCAKMAYIS2017"],
+                $flow["OCAKMAYIS2018"],
+                $flow["KARSILASTIRMA_1718_OM"],
+                $flow["TOPLAM_2017"],
+                $flow["Y3ILLIK_ORTALAMA"],
+                $flow["AYLIK_GERCEKLESME MIKTARI"],
+                $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
+                $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
+                $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"], 
+                $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],  
+                $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"], 
+                $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"]//,
+                //$flow["PARTNERCODE"]
+                ); 
+    }     
     $app->response()->header("Content-Type", "application/json");
-    $app->response()->body(json_encode($resDataGrid));
+    $resultArray = array();
+  
+    $resultArray['data'] = $flows;
+    $app->response()->body(json_encode($resultArray)); 
+    //$app->response()->header("Content-Type", "application/json");
+    //$app->response()->body(json_encode($resDataGrid));
 });
 
 /**
@@ -5121,11 +5150,9 @@ $app->get("/getAfterSalesYedekParcaHedefServisli_infoAfterSales/", function () u
  * @author Mustafa Zeynel Dağlı
  */
 $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () use ($app ) {
-    
-     $BLL = $app->getBLLManager()->get('afterSalesBLL');
-  /*  $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
-   
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
     
     $vLanguageCode = 'tr';
     if (isset($_GET['language_code'])) {
@@ -5139,27 +5166,36 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
         $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
     }     
     
-    */
-       $vLanguageCode = 'tr';
+    
     $resDataGrid = $BLL->getAfterSalesYedekParcaPDFServissiz(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
      
-     $flows = array();
-    if (isset($resDataGrid[0]['SERVISID'])) {
-        foreach ($resDataGrid as $flow) {
-          $flows[] = array(
-            "SERVISID" => $flow["SERVISID"],            
-            'SERVISAD' => $flow["SERVISAD"],            
-            'LINKPDF' => $flow["LINKPDF"], 
-        );
-        };
-    }
+    
+    ///////////////
+    $flows = array();
+                
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
+                $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["LINKPDF"]                 
+                ); 
+        //$flows[] = array(
+        //    "SERVISID" => $flow["SERVISID"],            
+        //    'SERVISAD' => $flow["SERVISAD"],            
+        //    'LINKPDF' => $flow["LINKPDF"], 
+        //);
+    }     
     $app->response()->header("Content-Type", "application/json");
     $resultArray = array();
+  
     $resultArray['data'] = $flows;
     $app->response()->body(json_encode($resultArray));
+    //////////////
+    //$app->response()->header("Content-Type", "application/json");
+    //$app->response()->body(json_encode($resDataGrid));
 });
 
 /**
@@ -5192,19 +5228,31 @@ $app->get("/getAfterSalesYedekParcaPDFServisli_infoAfterSales/", function () use
    //
    //  print_r($resDataGrid);
      $flows = array();
-    if (isset($resDataGrid[0]['SERVISID'])) {
-        foreach ($resDataGrid as $flow) {
-          $flows[] = array(
-            "SERVISID" => $flow["SERVISID"],            
-            'SERVISAD' => $flow["SERVISAD"],            
-            'LINKPDF' => $flow["LINKPDF"], 
-        );
-        };
-    }
+                
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
+                $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["LINKPDF"]                 
+                ); 
+        //$flows[] = array(
+        //    "SERVISID" => $flow["SERVISID"],            
+        //    'SERVISAD' => $flow["SERVISAD"],            
+        //    'LINKPDF' => $flow["LINKPDF"], 
+        //);
+    }     
     $app->response()->header("Content-Type", "application/json");
     $resultArray = array();
+  
     $resultArray['data'] = $flows;
     $app->response()->body(json_encode($resultArray));
+    
+    
+    
+    /*$app->response()->header("Content-Type", "application/json");
+    $app->response()->body(json_encode($resDataGrid));
+     * *
+     */
 });
 
 //detay yedek parça hedef fonk. son
