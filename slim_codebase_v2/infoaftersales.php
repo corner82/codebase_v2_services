@@ -5121,9 +5121,11 @@ $app->get("/getAfterSalesYedekParcaHedefServisli_infoAfterSales/", function () u
  * @author Mustafa Zeynel Dağlı
  */
 $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () use ($app ) {
-    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    
+     $BLL = $app->getBLLManager()->get('afterSalesBLL');
+  /*  $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
-    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+   
     
     $vLanguageCode = 'tr';
     if (isset($_GET['language_code'])) {
@@ -5137,7 +5139,8 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
         $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
     }     
     
-    
+    */
+       $vLanguageCode = 'tr';
     $resDataGrid = $BLL->getAfterSalesYedekParcaPDFServissiz(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       

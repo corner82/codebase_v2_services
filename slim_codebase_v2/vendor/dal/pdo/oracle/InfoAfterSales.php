@@ -9382,8 +9382,8 @@ select  rownum as rid , asd.* from (
                         1 as controler
                         FROM faturalar a
                         WHERE  
-                         a.ISLEMTARIHI > 
-                          to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                         to_number(to_char( a.ISLEMTARIHI,'yyyy'))  =   to_number(to_char(sysdate,'yyyy')) and 
+                         /* to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') */ and
                          a.faturaturid = 4
                     UNION
                     select
@@ -9496,8 +9496,9 @@ select  rownum as rid , asd.* from (
                         1 as controler
                         FROM faturalar a
                         WHERE  
-                         a.ISLEMTARIHI > 
-                          to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                        /* a.ISLEMTARIHI > 
+                          to_date(to_char(sysdate-8, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and */ 
+                            to_number(to_char( a.ISLEMTARIHI,'yyyy'))  =   to_number(to_char(sysdate,'yyyy')) and 
                          a.faturaturid = 4
                          --and a.servisid in (94)
                          ".$servicesQuery."
