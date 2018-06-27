@@ -5033,11 +5033,11 @@ $app->get("/getAfterSalesDashboardFaalStokToplamWithServices_infoAfterSales/", f
  * @author Mustafa Zeynel Dağlı
  */
 $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () use ($app ) {
-    $stripper = $app->getServiceManager()->get('filterChainerCustom');
-    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+   /*  $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();*/
     $BLL = $app->getBLLManager()->get('afterSalesBLL');
     
-    $vLanguageCode = 'tr';
+  /*  $vLanguageCode = 'tr';
     if (isset($_GET['language_code'])) {
          $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
                                                 $app,
@@ -5048,8 +5048,8 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
     if ($stripper->offsetExistfs('language_code')) {
         $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
     }     
-    
-    
+    */
+     $vLanguageCode = 'tr';
     $resDataGrid = $BLL->getAfterSalesYedekParcaHedefServissiz(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
