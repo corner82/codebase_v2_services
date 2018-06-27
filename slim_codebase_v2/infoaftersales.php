@@ -5045,7 +5045,7 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
     }  
 
     $stripper->strip();
-    if ($stripper->offsetExists('language_code')) {
+    if ($stripper->offsetExistfs('language_code')) {
         $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
     }     
     
@@ -5055,8 +5055,38 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoAfterSales/", function () 
         'language_code' => $vLanguageCode,       
     ));
      
+     $flows = array();
+    if (isset($resDataGrid[0]['SERVISID'])) {
+        foreach ($resDataGrid as $flow) {
+            $flows[] = array(
+                $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["TYPE"],
+                $flow["OCAK_MAYIS2017"],
+                $flow["OCAK_MAYIS2018"] ,
+                 $flow["KARSILASTIRMA_1718_OM"],
+                 $flow["TOPLAM_2017"],
+                 $flow["Y3ILLIK_ORTALAMA"],
+                 $flow["AYLIK_GERCEKLESME_MIKTARI"],
+                 $flow["AYLIK_7ICIN_GEREKEN_MIKTAR"],
+                 $flow["AYLIK_8ICIN_GEREKEN_MIKTAR"],
+                 $flow["AYLIK_9ICIN_GEREKEN_MIKTAR"],
+                 $flow["YILLIK_7ICIN_GEREKEN_MIKTAR"],
+                
+                   $flow["YILLIK_8ICIN_GEREKEN_MIKTAR"],
+                   $flow["YILLIK_9ICIN_GEREKEN_MIKTAR"],
+                   $flow["PARTNERCODE"],
+                
+           
+                    
+                    
+                );
+        };
+    }
     $app->response()->header("Content-Type", "application/json");
-    $app->response()->body(json_encode($resDataGrid));
+    $resultArray = array();
+    $resultArray['data'] = $flows;
+    $app->response()->body(json_encode($resultArray));
 });
 
 /**
