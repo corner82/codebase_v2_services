@@ -5188,14 +5188,14 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
            'LINKPDF' => $flow["LINKPDF"], 
            );
     }     
-//    $app->response()->header("Content-Type", "application/json");
- //   $resultArray = array();
-  //
-  //  $resultArray['data'] = $flows;
-  //  $app->response()->body(json_encode($resultArray));
-    //////////////
     $app->response()->header("Content-Type", "application/json");
-    $app->response()->body(json_encode($resDataGrid));
+    $resultArray = array();
+  
+    $resultArray['data'] = $flows;
+   $app->response()->body(json_encode($resultArray));
+    //////////////
+ //   $app->response()->header("Content-Type", "application/json");
+  //  $app->response()->body(json_encode($resDataGrid));
 });
 
 /**
