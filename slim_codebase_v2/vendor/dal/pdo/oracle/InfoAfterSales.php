@@ -10372,8 +10372,9 @@ select  rownum as rid , asd.* from (
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                 select  
-                servisid , (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as servisad,  
-                concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) linkpdf
+                     SERVISID , 
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as SERVISAD,  
+                    concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) LINKPDF
 
                  from SASON.PERFORMANS_PDF a
                     ";
@@ -10409,8 +10410,8 @@ select  rownum as rid , asd.* from (
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                 select  
-                servisid , (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as servisad,  
-                concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) linkpdf
+                SERVISID , (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as SERVISAD,  
+                concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) LINKPDF
 
                  from SASON.PERFORMANS_PDF a
                 where 
