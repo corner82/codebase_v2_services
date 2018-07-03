@@ -10405,6 +10405,7 @@ select  rownum as rid , asd.* from (
             $servicesQuery = ' servisid  in ('.$_GET['src'].')  ';
            
         }
+        else      $servicesQuery = ' servisid  in (94)  ';
         
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
