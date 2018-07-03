@@ -5151,6 +5151,7 @@ $app->get("/getAfterSalesYedekParcaHedefServisli_infoAfterSales/", function () u
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */
+/*
 $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
@@ -5183,9 +5184,7 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
            $flow["SERVISID"],            
             $flow["SERVISAD"],            
             $flow["LINKPDF"], 
-         /*  'SERVISID' => $flow["SERVISID"],            
-           'SERVISAD' => $flow["SERVISAD"],            
-           'LINKPDF' => $flow["LINKPDF"], */
+        
            );
     }     
       $app->response()->header("Content-Type", "application/json");
@@ -5197,6 +5196,61 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
  //   $app->response()->header("Content-Type", "application/json");
   //  $app->response()->body(json_encode($resDataGrid));
 });
+*/
+
+$app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesYedekParcaPDFServisli(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+   
+   //
+   //  print_r($resDataGrid);
+     $flows = array();
+                
+    foreach ($resDataGrid as $flow) {
+        $flows[] = array(
+                $flow["SERVISID"],
+                html_entity_decode($flow["SERVISAD"]),
+                $flow["LINKPDF"]                 
+                ); 
+        //$flows[] = array(
+        //    "SERVISID" => $flow["SERVISID"],            
+        //    'SERVISAD' => $flow["SERVISAD"],            
+        //    'LINKPDF' => $flow["LINKPDF"], 
+        //);
+    }     
+    $app->response()->header("Content-Type", "application/json");
+    $resultArray = array();
+  
+    $resultArray['data'] = $flows;
+    $app->response()->body(json_encode($resultArray));
+    
+    
+    
+    /*$app->response()->header("Content-Type", "application/json");
+    $app->response()->body(json_encode($resDataGrid));
+     * *
+     */
+});
+
 
 /**
  * @since 21-06-2018
