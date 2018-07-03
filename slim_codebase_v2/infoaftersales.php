@@ -5179,16 +5179,12 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
     $flows = array();
                 
     foreach ($resDataGrid as $flow) {
+        
         $flows[] = array(
-                $flow["SERVISID"],
-                html_entity_decode($flow["SERVISAD"]),
-                $flow["LINKPDF"]                 
-                ); 
-        //$flows[] = array(
-        //    "SERVISID" => $flow["SERVISID"],            
-        //    'SERVISAD' => $flow["SERVISAD"],            
-        //    'LINKPDF' => $flow["LINKPDF"], 
-        //);
+            "SERVISID" => $flow["SERVISID"],            
+           'SERVISAD' => $flow["SERVISAD"],            
+           'LINKPDF' => $flow["LINKPDF"], 
+         );
     }     
     $app->response()->header("Content-Type", "application/json");
     $resultArray = array();
