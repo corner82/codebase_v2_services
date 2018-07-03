@@ -5181,9 +5181,9 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
     foreach ($resDataGrid as $flow) {
         
         $flows[] = array(
-             $flow["SERVISID"],            
-            $flow["SERVISAD"],            
-            $flow["LINKPDF"], 
+            "SERVISID" => $flow["SERVISID"],            
+           'SERVISAD' => $flow["SERVISAD"],            
+           'LINKPDF' => $flow["LINKPDF"], 
            );
     }     
     $app->response()->header("Content-Type", "application/json");
