@@ -10271,23 +10271,23 @@ select  rownum as rid , asd.* from (
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
-                select   SERVISID,  
+            select  
+                SERVISID,  
                 (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
-                 TYPE ,                    
-                 to_number(OCAK_MAYIS2017) OCAKMAYIS2017,               
-                 to_number(OCAK_MAYIS2018) OCAKMAYIS2018   ,         
-                 to_number(KARSILASTIRMA_1718_OM) KARSILASTIRMA_1718_OM   ,   
-                 to_number(TOPLAM_2017) TOPLAM_2017 ,               
-                 to_number(Y3ILLIK_ORTALAMA) Y3ILLIK_ORTALAMA  ,            
-                 to_number(AYLIK_GERCEKLESME_MIKTARI) AYLIK_GERCEKLESME_MIKTARI  ,
-                 to_number(AYLIK_7ICIN_GEREKEN_MIKTAR) AYLIK_7ICIN_GEREKEN_MIKTAR , 
-                 to_number(AYLIK_8ICIN_GEREKEN_MIKTAR) AYLIK_8ICIN_GEREKEN_MIKTAR ,
-                 to_number(AYLIK_9ICIN_GEREKEN_MIKTAR) AYLIK_9ICIN_GEREKEN_MIKTAR  ,
-                 to_number(YILLIK_7ICIN_GEREKEN_MIKTAR) YILLIK_7ICIN_GEREKEN_MIKTAR  ,
-                 to_number(YILLIK_8ICIN_GEREKEN_MIKTAR) YILLIK_8ICIN_GEREKEN_MIKTAR ,
-                 to_number(YILLIK_9ICIN_GEREKEN_MIKTAR) YILLIK_9ICIN_GEREKEN_MIKTAR  ,
-                 PARTNERCODE                
-
+                 TYPE ,
+                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 0), '999,999,999,999,999') OCAKMAYIS2017,
+                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2), '999,999,999,999,999.99') OCAKMAYIS2018,
+                  trim( TO_CHAR(ROUND(nvl(KARSILASTIRMA_1718_OM,0), 2),'990D99','NLS_NUMERIC_CHARACTERS = ''.,'' '))  KARSILASTIRMA_1718_OM ,  
+                 TO_CHAR(ROUND(nvl(TOPLAM_2017,0), 2), '999,999,999,999,999.99') TOPLAM_2017,                 
+                 TO_CHAR(ROUND(nvl(Y3ILLIK_ORTALAMA,0), 2), '999,999,999,999,999.99') Y3ILLIK_ORTALAMA,                 
+                 TO_CHAR(ROUND(nvl(AYLIK_GERCEKLESME_MIKTARI,0), 2), '999,999,999,999,999.99') AYLIK_GERCEKLESME_MIKTARI,                 
+                 TO_CHAR(ROUND(nvl(AYLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_7ICIN_GEREKEN_MIKTAR,                 
+                 TO_CHAR(ROUND(nvl(AYLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_8ICIN_GEREKEN_MIKTAR,                 
+                 TO_CHAR(ROUND(nvl(AYLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_9ICIN_GEREKEN_MIKTAR,
+                 TO_CHAR(ROUND(nvl(YILLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_7ICIN_GEREKEN_MIKTAR,
+                 TO_CHAR(ROUND(nvl(YILLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_8ICIN_GEREKEN_MIKTAR,
+                 TO_CHAR(ROUND(nvl(YILLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_9ICIN_GEREKEN_MIKTAR,
+                 PARTNERCODE 
                from   SASON.PERFORMANS_YPHEDEF  zz
               where servisid not in (1,134,136)
 
@@ -10324,23 +10324,23 @@ select  rownum as rid , asd.* from (
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
-            select   SERVISID,  
+            select   
+                SERVISID,  
                 (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
-                 TYPE ,                    
-                 to_number(OCAK_MAYIS2017) OCAK_MAYIS2017,               
-                 to_number(OCAK_MAYIS2018) OCAK_MAYIS2018   ,         
-                 to_number(KARSILASTIRMA_1718_OM) KARSILASTIRMA_1718_OM   ,   
-                 to_number(TOPLAM_2017) TOPLAM_2017 ,               
-                 to_number(Y3ILLIK_ORTALAMA) Y3ILLIK_ORTALAMA  ,            
-                 to_number(AYLIK_GERCEKLESME_MIKTARI) AYLIK_GERCEKLESME_MIKTARI  ,
-                 to_number(AYLIK_7ICIN_GEREKEN_MIKTAR) AYLIK_7ICIN_GEREKEN_MIKTAR , 
-                 to_number(AYLIK_8ICIN_GEREKEN_MIKTAR) AYLIK_8ICIN_GEREKEN_MIKTAR ,
-                 to_number(AYLIK_9ICIN_GEREKEN_MIKTAR) AYLIK_9ICIN_GEREKEN_MIKTAR  ,
-                 to_number(YILLIK_7ICIN_GEREKEN_MIKTAR) YILLIK_7ICIN_GEREKEN_MIKTAR  ,
-                 to_number(YILLIK_8ICIN_GEREKEN_MIKTAR) YILLIK_8ICIN_GEREKEN_MIKTAR ,
-                 to_number(YILLIK_9ICIN_GEREKEN_MIKTAR) YILLIK_9ICIN_GEREKEN_MIKTAR  ,
-                 PARTNERCODE                
-
+                 TYPE ,
+                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 0), '999,999,999,999,999') OCAKMAYIS2017,
+                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2), '999,999,999,999,999.99') OCAKMAYIS2018,
+                  trim( TO_CHAR(ROUND(nvl(KARSILASTIRMA_1718_OM,0), 2),'990D99','NLS_NUMERIC_CHARACTERS = ''.,'' '))  KARSILASTIRMA_1718_OM ,  
+                 TO_CHAR(ROUND(nvl(TOPLAM_2017,0), 2), '999,999,999,999,999.99') TOPLAM_2017,                 
+                 TO_CHAR(ROUND(nvl(Y3ILLIK_ORTALAMA,0), 2), '999,999,999,999,999.99') Y3ILLIK_ORTALAMA,                 
+                 TO_CHAR(ROUND(nvl(AYLIK_GERCEKLESME_MIKTARI,0), 2), '999,999,999,999,999.99') AYLIK_GERCEKLESME_MIKTARI,                 
+                 TO_CHAR(ROUND(nvl(AYLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_7ICIN_GEREKEN_MIKTAR,                 
+                 TO_CHAR(ROUND(nvl(AYLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_8ICIN_GEREKEN_MIKTAR,                 
+                 TO_CHAR(ROUND(nvl(AYLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_9ICIN_GEREKEN_MIKTAR,
+                 TO_CHAR(ROUND(nvl(YILLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_7ICIN_GEREKEN_MIKTAR,
+                 TO_CHAR(ROUND(nvl(YILLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_8ICIN_GEREKEN_MIKTAR,
+                 TO_CHAR(ROUND(nvl(YILLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_9ICIN_GEREKEN_MIKTAR,
+                 PARTNERCODE 
                from   SASON.PERFORMANS_YPHEDEF  zz
                where 
                --servisid in (96)
