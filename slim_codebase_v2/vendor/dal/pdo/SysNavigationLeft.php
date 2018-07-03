@@ -648,7 +648,7 @@ class SysNavigationLeft extends \DAL\DalSlim {
             ) AS xtable 
                 WHERE 
                     active =0 
-             order by collapse , parent , menu_name
+             order by collapse desc , parent , menu_name
                                  ";           
             //ORDER BY a.parent, a.z_index
             $statement = $pdo->prepare($sql);
