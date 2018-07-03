@@ -5217,7 +5217,8 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
     
     
     $resDataGrid = $BLL->getAfterSalesYedekParcaPDFServisli(array(
-        'url' =>  $_GET['url'],   
+        'url' =>  $_GET['url'],    
+        'src' =>  94,    
         'language_code' => $vLanguageCode,       
     ));
    
