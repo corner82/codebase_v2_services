@@ -5178,10 +5178,12 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoAfterSales/", function () us
     ///////////////
     $flows = array();
                 
-    foreach ($resDataGrid as $flow) {
-        
+    foreach ($resDataGrid as $flow) {        
         $flows[] = array(
-            "SERVISID" => $flow["SERVISID"],            
+            $flow["SERVISID"],            
+            $flow["SERVISAD"],            
+            $flow["LINKPDF"], 
+           'SERVISID' => $flow["SERVISID"],            
            'SERVISAD' => $flow["SERVISAD"],            
            'LINKPDF' => $flow["LINKPDF"], 
            );
