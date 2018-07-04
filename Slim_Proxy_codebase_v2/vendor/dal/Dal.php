@@ -87,10 +87,11 @@ class Dal {
             $pdo = $this->getPdo();
             
             $sql = "              
-                    SELECT id,pkey,sf_private_key_value FROM (
+                    SELECT id,pkey,sf_private_key_value,role_id FROM (
                             SELECT id, 	
                                 CRYPT(sf_private_key_value,CONCAT('_J9..',REPLACE('".$publicKey."','*','/'))) = CONCAT('_J9..',REPLACE('".$publicKey."','*','/')) as pkey,	                                
-                                sf_private_key_value
+                                sf_private_key_value,
+                                role_id
                             FROM info_users WHERE active=0 AND deleted =0) AS logintable
                         WHERE pkey = TRUE
 
@@ -114,8 +115,8 @@ class Dal {
             return array("found" => false, "errorInfo" => $e->getMessage());
         }
     }
-    
-    
+        
+
      /**
      * is public key present for the request
      * @author Okan CIRAN

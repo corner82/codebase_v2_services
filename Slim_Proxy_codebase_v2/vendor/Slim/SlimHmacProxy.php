@@ -580,7 +580,8 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'pkFillGrid_infoUsersSocialmedia' => 'restApiDefaultCall',
                                     
                                     'pkFillSingularUsersSocialMedia_infoUsersSocialmedia' => 'restApiDefaultCall',
-                                    'pkUpdateMakeActiveOrPassive_infoUsersSocialmedia' => 'restApiDefaultCall',                                    'pkDeletedAct_infoUsersSocialmedia' => 'restApiDefaultCall',
+                                    'pkUpdateMakeActiveOrPassive_infoUsersSocialmedia' => 'restApiDefaultCall',                                   
+                                    'pkDeletedAct_infoUsersSocialmedia' => 'restApiDefaultCall',
                                     'pkFillCompanyUsersSocialMediaNpk_infoUsersSocialmedia' => 'restApiDefaultCall',
         //**---- infoUsersSocialmedia ------------------- 
         //** SysSocialMedia ----------------------
@@ -1276,6 +1277,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
             
             //$this->hmacObj->setPrivateKey('e249c439ed7697df2a4b045d97d4b9b7e1854c3ff8dd668c779013653913572e');
             $this->hmacObj->setPrivateKey($resultSet['resultSet'][0]['sf_private_key_value']);
+            $this->hmacObj->setRoleId($resultSet['resultSet'][0]['role_id']);
             $this->hmacObj->setRequestParams($this->getRequestParamsWithoutPublicKey());
             $this->hmacObj->makeHmac();
             //print_r($this->hmacObj);
@@ -1323,6 +1325,14 @@ class SlimHmacProxy extends \Proxy\Proxy {
     
 
     public function setEndPointByClosure(Array $EndPointClosure = null) {
+        $xxroleid = $this->hmacObj->getRoleID(); 
+        print_r($xxroleid) ;        
+        
+            
+        
+        
+        
+        
         $endPointFunction = $this->getRestApiEndPointFunction();
         $endPointFunctionLen = strlen($endPointFunction);
         $endPointFunctionPos = strrpos($endPointFunction, "_");

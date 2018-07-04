@@ -16,6 +16,8 @@ class Hmac {
     protected $publicKey;
     
      protected $RealIp;
+     
+     protected $roleId;
     
     protected $privateKey;
     
@@ -147,6 +149,16 @@ class Hmac {
     public function getPrivateKey() {
         return $this->privateKey;
     }
+    
+    public function setRoleId($roleId = null) {
+        $this->roleId = $roleId;
+    }
+    
+    public function getRoleID() {
+        return $this->roleId;
+    }
+    
+    
     
     public function setRequestParams($requestParams = null) {
         $this->requestParams = $requestParams;
