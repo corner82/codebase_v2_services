@@ -9371,7 +9371,7 @@ select  rownum as rid , asd.* from (
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     select 
-                        TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a,
+                        TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')) a,
                         /*CASE
                             WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 0 THEN '0 TL' 
                             WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR), 0),0) , '999,999,999,999,999'), ' TL')
@@ -9382,8 +9382,8 @@ select  rownum as rid , asd.* from (
                         1 as controler
                         FROM faturalar a
                         WHERE  
-                         a.ISLEMTARIHI > 
-                          to_date(to_char(sysdate-180, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                         -- a.ISLEMTARIHI >  to_date(to_char(sysdate-180, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                          to_number(to_char(a.ISLEMTARIHI,'yyyy'))  =  to_number(to_char(sysdate,'yyyy')) and  
                          a.faturaturid = 4
                     UNION
                     select
@@ -9496,8 +9496,8 @@ select  rownum as rid , asd.* from (
                         1 as controler
                         FROM faturalar a
                         WHERE  
-                         a.ISLEMTARIHI > 
-                          to_date(to_char(sysdate-180, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
+                      --   a.ISLEMTARIHI >      to_date(to_char(sysdate-180, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and 
+                       to_number(to_char(a.ISLEMTARIHI,'yyyy'))  =  to_number(to_char(sysdate,'yyyy')) and 
                          a.faturaturid = 4
                          --and a.servisid in (94)
                          ".$servicesQuery."
