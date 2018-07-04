@@ -1328,10 +1328,8 @@ class SlimHmacProxy extends \Proxy\Proxy {
         $xxroleid = $this->hmacObj->getRoleID(); 
      //   print_r($xxroleid) ;        
         
+            // https://manservices.man.com.tr/SlimProxyBoot.php?url=pkTransferRolesPrivilege_sysAclRrp&pk=GtrdEYOWnj8mOFs
             
-        
-        
-        
         
         $endPointFunction = $this->getRestApiEndPointFunction();
         $endPointFunctionLen = strlen($endPointFunction);
