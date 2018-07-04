@@ -1326,7 +1326,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
 
     public function setEndPointByClosure(Array $EndPointClosure = null) {
         $xxroleid = $this->hmacObj->getRoleID(); 
-        print_r($xxroleid) ;        
+     //   print_r($xxroleid) ;        
         
             
         
