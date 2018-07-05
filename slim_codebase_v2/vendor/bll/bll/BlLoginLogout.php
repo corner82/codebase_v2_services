@@ -150,8 +150,10 @@ class BlLoginLogout extends \BLL\BLLSlim{
      * @since 05/07/2018
      */
     public function servicesFormPk( $params = array()) {
+        print_r('--***---') ; 
         $DAL = $this->slimApp->getDALManager()->get('blLoginLogoutPDO');
         $resultSet = $DAL->servicesFormPk(  $params);  
+         print_r('--xxx---') ; 
         return $resultSet['resultSet'];
     }
     

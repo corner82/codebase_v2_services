@@ -577,7 +577,8 @@ class BlLoginLogout extends \DAL\DalSlim {
                                   user_id =  ".$params['user_id']."
                   ) AS  character varying(200)) ,'{','')  ,'}','') AS services_id   
                     ";                       
-            $statement = $pdo->prepare($sql);                        
+            $statement = $pdo->prepare($sql);    
+              echo debugPDO($sql, $params);
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             $errorInfo = $statement->errorInfo();
