@@ -42,7 +42,7 @@ class InfoDealerOwner extends \DAL\DalSlim {
                         WHERE 
                             a.active =0 and a.deleted =0 and 
                             a.user_id = '.$opUserIdValue.' and 
-                            a.language_id = 647 ) ' ;   
+                            a.language_id = 647 ) and ' ;   
                     }
                 }
  
@@ -70,8 +70,8 @@ class InfoDealerOwner extends \DAL\DalSlim {
 
                                  ";
              $statement = $pdo->prepare( $sql);
-             print_r('/////3//////')   ; 
-             echo debugPDO($sql, $params);
+            
+           //  echo debugPDO($sql, $params);
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             $errorInfo = $statement->errorInfo();
