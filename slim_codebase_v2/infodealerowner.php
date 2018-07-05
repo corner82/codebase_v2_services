@@ -59,8 +59,9 @@ $app->get("/pkfillServicesDdlist_infoDealerOwner/", function () use ($app ) {
     if (isset($_GET['component_type'])) {
         $componentType = strtolower(trim($_GET['component_type']));
     }
-    print_r('/////111//////')   ; 
-    $pk = $headerParams['X-Public']; 
+  
+    $headerParams = $app->request()->headers();
+    $pk = $headerParams['X-Public'];
     
     $resCombobox = $BLL->fillServicesDdlist(array(
         'pk' => $pk,    
