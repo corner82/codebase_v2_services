@@ -9706,6 +9706,12 @@ select  rownum as rid , asd.* from (
         //print_r($today);
         //print_r($dayAfter);
         try {
+             $servicesQuery = '   dsf.servisid not in (1,134,136) and ';
+
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     SELECT  
@@ -9715,7 +9721,7 @@ select  rownum as rid , asd.* from (
                                       sum(yedekparcatoplami) yedekparcatoplami
                                       FROM  sason.ypfaaliyet dsf
                                    WHERE
-                                          dsf.servisid not in (1,134,136) and 
+                                         ".$servicesQuery."  
                                          dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')   
 
                        ) asd               
@@ -9742,13 +9748,14 @@ select  rownum as rid , asd.* from (
      * @throws \PDOException
      */
     public function getAfterSalesDashboardFaalYedekParcaWithServices($args = array()) { 
-        $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
-    
-        if (isset($_GET['src'])  && $_GET['src']!='') {
-            //and ie.servisid in (94,96,98)
-            $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
-        }
+      
         try {
+            $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
              SELECT 
@@ -9845,6 +9852,12 @@ select  rownum as rid , asd.* from (
      */
     public function getAfterSalesDetayFaalYedekParca($args = array()) {
         try {
+           $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+    
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     
@@ -9869,13 +9882,12 @@ select  rownum as rid , asd.* from (
                          TO_CHAR(ROUND(sum(nvl(servisdisiystoplam,0)), 0), '999,999,999,999,999') kutu2usttoplam,  /*  2. toplamalanı */
                          TO_CHAR(ROUND(sum(nvl(servisdisiyansanayi,0)), 0), '999,999,999,999,999') servisdisiyansanayi,
                          TO_CHAR(ROUND(sum(nvl(servisdisimyok,0)), 0), '999,999,999,999,999') servisdisimyok,
-                         TO_CHAR(ROUND(sum(nvl(servisdisitoplam,0)), 0), '999,999,999,999,999') servisdisitoplam      /*   3. toplam alanı*/
-
+                         TO_CHAR(ROUND(sum(nvl(servisdisitoplam,0)), 0), '999,999,999,999,999') servisdisitoplam      /*   3. toplam alanı*/ 
 
                          FROM  sason.ypfaaliyet dsf 
-                        WHERE
-                    dsf.servisid not in (1,134,136) and      
-                    dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                        WHERE 
+                            dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                            ".$servicesQuery."                              
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -9902,6 +9914,14 @@ select  rownum as rid , asd.* from (
         //print_r($today);
         //print_r($dayAfter);
         try {
+            
+            $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+    
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+            }
+            
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     SELECT  
@@ -9910,9 +9930,9 @@ select  rownum as rid , asd.* from (
                                   SELECT 
                                      sum( yagtoplam ) yagtoplam
                                      FROM  sason.ypfaaliyet dsf
-                                  WHERE
-                                         dsf.servisid not in (1,134,136) and 
+                                  WHERE 
                                         dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')   
+                                        ".$servicesQuery."   
                       ) asd                         
                     ";
              
@@ -9936,6 +9956,12 @@ select  rownum as rid , asd.* from (
      */
     public function getAfterSalesDetayFaalYag($args = array()) {
         try {
+             $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+    
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     
@@ -9964,9 +9990,9 @@ select  rownum as rid , asd.* from (
 
 
                          FROM  sason.ypfaaliyet dsf 
-                        WHERE
-                    dsf.servisid not in (1,134,136) and      
-                    dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                        WHERE 
+                            dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                             ".$servicesQuery."   
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -9987,14 +10013,14 @@ select  rownum as rid , asd.* from (
      * @return Array
      * @throws \PDOException
      */
-    public function getAfterSalesDashboardFaalYagToplamWithServices($args = array()) { 
-        $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
-    
-        if (isset($_GET['src'])  && $_GET['src']!='') {
-            //and ie.servisid in (94,96,98)
-            $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
-        }
+    public function getAfterSalesDashboardFaalYagToplamWithServices($args = array()) {  
         try {
+            $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
              
@@ -10044,6 +10070,12 @@ select  rownum as rid , asd.* from (
         //print_r($today);
         //print_r($dayAfter);
         try {
+            $servicesQuery = ' and a.servisid not in (1,134,136) ';
+
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' and a.servisid in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     select    
@@ -10085,8 +10117,8 @@ select  rownum as rid , asd.* from (
                          WHERE  h.servisstokid = a.id
                                AND A.ID = C.SERVISSTOKID
                                AND C.STOKMIKTAR <> 0
-                               AND a.servisid = c.servisid
-                               AND a.SERVISID  not in (1,134 ,136) 
+                               AND a.servisid = c.servisid                             
+                               ".$servicesQuery." 
                             ) p,
                        servisstokturler a
                  WHERE p.servisstokturid = a.id
@@ -10110,7 +10142,7 @@ select  rownum as rid , asd.* from (
     
     
     
-              /**
+   /**
      * @param array | null $args
      * @return Array
      * @throws \PDOException
@@ -10206,6 +10238,12 @@ select  rownum as rid , asd.* from (
      */
     public function getAfterSalesDetayFaalStok($args = array()) {
         try {
+            $servicesQuery = ' and dsf.servisid not in (1,134,136) ';
+
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' and dsf.servisid in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     
@@ -10231,12 +10269,11 @@ select  rownum as rid , asd.* from (
                          TO_CHAR(ROUND(sum(nvl(servisdisiyansanayi,0)), 0), '999,999,999,999,999') servisdisiyansanayi,
                          TO_CHAR(ROUND(sum(nvl(servisdisimyok,0)), 0), '999,999,999,999,999') servisdisimyok,
                          TO_CHAR(ROUND(sum(nvl(servisdisitoplam,0)), 0), '999,999,999,999,999') servisdisitoplam      /*   3. toplam alanı*/
-
-
+ 
                          FROM  sason.ypfaaliyet dsf 
-                        WHERE
-                    dsf.servisid not in (1,134,136) and      
-                    dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                        WHERE 
+                            dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                            ".$servicesQuery."  
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -10266,32 +10303,36 @@ select  rownum as rid , asd.* from (
      * @throws \PDOException
      */
     public function getAfterSalesYedekParcaHedefServissiz($args = array()) {
-        
-       
         try {
+             $servicesQuery = ' WHERE zz.servisid not in (1,134,136) ';
+
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' WHERE  zz.servisid in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
-            select  
-                SERVISID,  
-                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
-                 TYPE ,
-                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 0), '999,999,999,999,999') OCAKMAYIS2017,
-                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2), '999,999,999,999,999.99') OCAKMAYIS2018,
-                  trim( TO_CHAR(ROUND(nvl(KARSILASTIRMA_1718_OM,0), 2),'990D99','NLS_NUMERIC_CHARACTERS = ''.,'' '))  KARSILASTIRMA_1718_OM ,  
-                 TO_CHAR(ROUND(nvl(TOPLAM_2017,0), 2), '999,999,999,999,999.99') TOPLAM_2017,                 
-                 TO_CHAR(ROUND(nvl(Y3ILLIK_ORTALAMA,0), 2), '999,999,999,999,999.99') Y3ILLIK_ORTALAMA,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_GERCEKLESME_MIKTARI,0), 2), '999,999,999,999,999.99') AYLIK_GERCEKLESME_MIKTARI,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_7ICIN_GEREKEN_MIKTAR,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_8ICIN_GEREKEN_MIKTAR,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_9ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_7ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_8ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_9ICIN_GEREKEN_MIKTAR,
-                 PARTNERCODE 
-               from   SASON.PERFORMANS_YPHEDEF  zz
-              where servisid not in (1,134,136)
+                select  
+                    SERVISID,  
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
+                     TYPE ,
+                     TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 0), '999,999,999,999,999') OCAKMAYIS2017,
+                     TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2), '999,999,999,999,999.99') OCAKMAYIS2018,
+                      trim( TO_CHAR(ROUND(nvl(KARSILASTIRMA_1718_OM,0), 2),'990D99','NLS_NUMERIC_CHARACTERS = ''.,'' '))  KARSILASTIRMA_1718_OM ,  
+                     TO_CHAR(ROUND(nvl(TOPLAM_2017,0), 2), '999,999,999,999,999.99') TOPLAM_2017,                 
+                     TO_CHAR(ROUND(nvl(Y3ILLIK_ORTALAMA,0), 2), '999,999,999,999,999.99') Y3ILLIK_ORTALAMA,                 
+                     TO_CHAR(ROUND(nvl(AYLIK_GERCEKLESME_MIKTARI,0), 2), '999,999,999,999,999.99') AYLIK_GERCEKLESME_MIKTARI,                 
+                     TO_CHAR(ROUND(nvl(AYLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_7ICIN_GEREKEN_MIKTAR,                 
+                     TO_CHAR(ROUND(nvl(AYLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_8ICIN_GEREKEN_MIKTAR,                 
+                     TO_CHAR(ROUND(nvl(AYLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_9ICIN_GEREKEN_MIKTAR,
+                     TO_CHAR(ROUND(nvl(YILLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_7ICIN_GEREKEN_MIKTAR,
+                     TO_CHAR(ROUND(nvl(YILLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_8ICIN_GEREKEN_MIKTAR,
+                     TO_CHAR(ROUND(nvl(YILLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_9ICIN_GEREKEN_MIKTAR,
+                     PARTNERCODE 
+                from  SASON.PERFORMANS_YPHEDEF  zz
+                ".$servicesQuery."  
 
-               order by servisid , id 
+                order by servisid , id 
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -10312,7 +10353,7 @@ select  rownum as rid , asd.* from (
      * @throws \PDOException
      */
     public function getAfterSalesYedekParcaHedefServisli($args = array()) {
-        $servicesQuery = '';
+        $servicesQuery = ' servisid  not in ( 1,134,136) ';
         $servicesQuery2 = '';
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //servisid in (96)
@@ -10365,10 +10406,14 @@ select  rownum as rid , asd.* from (
      * @return Array
      * @throws \PDOException
      */
-    public function getAfterSalesYedekParcaPDFServissiz($args = array()) {
-        
-        
+    public function getAfterSalesYedekParcaPDFServissiz($args = array()) { 
         try {
+             $servicesQuery = ' WHERE  SERVISID not in (1,134,136) ';
+
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //and ie.servisid in (94,96,98)
+                $servicesQuery = ' WHERE  SERVISID in ('.$_GET['src'].')  '; 
+            }
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                 select  
@@ -10377,6 +10422,7 @@ select  rownum as rid , asd.* from (
                     concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) LINKPDF
 
                  from SASON.PERFORMANS_PDF a
+                 ".$servicesQuery."
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -10398,14 +10444,14 @@ select  rownum as rid , asd.* from (
      * @throws \PDOException
      */
     public function getAfterSalesYedekParcaPDFServisli($args = array()) {
-        $servicesQuery = '';
+        $servicesQuery = ' SERVISID not IN (1,134,136)';
         $servicesQuery2 = '';
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //servisid = 94
             $servicesQuery = ' servisid  in ('.$_GET['src'].')  ';
            
         }
-        else      $servicesQuery = ' servisid  in (94)  ';
+      
         
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
