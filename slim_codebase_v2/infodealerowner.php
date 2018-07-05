@@ -68,7 +68,7 @@ $app->get("/pkfillServicesDdlist_infoDealerOwner/", function () use ($app ) {
     ));
  
     $flows = array();
-    $flows[] = array("text" => "Lütfen Seçiniz", "value" => 0, "selected" => true, "imageSrc" => "", "description" => "Lütfen Seçiniz",);
+  //  $flows[] = array("text" => "Lütfen Seçiniz", "value" => 0, "selected" => true, "imageSrc" => "", "description" => "Lütfen Seçiniz",);
     foreach ($resCombobox as $flow) {
         $flows[] = array(
             "text" => html_entity_decode($flow["AD"]),
