@@ -12,6 +12,9 @@ final class Helper {
     
     
     public static function haveRecord($result = null) {
+          print_r( 'eeeeeeeeeee') ; 
+        print_r($result['resultSet'][0]['control']) ; 
+          print_r( 'xxxxxxxxxxxxx') ; 
         if(isset($result['resultSet'][0]['control'])) return true;
         return false;
     }
