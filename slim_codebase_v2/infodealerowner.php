@@ -60,8 +60,10 @@ $app->get("/fillServicesDdlist_infoDealerOwner/", function () use ($app ) {
         $componentType = strtolower(trim($_GET['component_type']));
     }
     
-    //$pk = $headerParams['X-Public']; 
-    $resCombobox = $BLL->fillServicesDdlist();
+    $pk = $headerParams['X-Public']; 
+    $resCombobox = $BLL->fillServicesDdlist(array(
+        'pk' => $pk,    
+    ));
  
     $flows = array();
     $flows[] = array("text" => "Lütfen Seçiniz", "value" => 0, "selected" => true, "imageSrc" => "", "description" => "Lütfen Seçiniz",);

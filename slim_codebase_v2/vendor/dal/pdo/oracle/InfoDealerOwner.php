@@ -27,6 +27,15 @@ class InfoDealerOwner extends \DAL\DalSlim {
      */
     public function fillServicesDdlist($params = array()) {
         try {
+            $pk = 0;
+            $servicesQuery = ' a.servisid in (0) and  ';
+           if (isset($params['pk'])  && $params['pk']!='') {
+               //a.servisid in (94, 96) and 
+               $pk = $params['pk'];
+               $servicesQuery = ' a.servisid in ('.$pk.') and '; 
+            } 
+            
+            
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');   
             $sql ="
                /*  select SERVISID ID, 
@@ -37,10 +46,12 @@ class InfoDealerOwner extends \DAL\DalSlim {
                     order by id      */ 
                     
                    SELECT
-                        vtsxy.SERVISID ID,  
-                        vtsxy.GIZLIAD AD
-                    FROM SASON.PERFORMANSSERVISLER vtsxy
-                    WHERE vtsxy.active =0 
+                        a.SERVISID ID,  
+                        a.GIZLIAD AD
+                    FROM SASON.PERFORMANSSERVISLER a
+                    WHERE 
+                        ".$servicesQuery." 
+                        a.active =0 
                     order by id
 
 
