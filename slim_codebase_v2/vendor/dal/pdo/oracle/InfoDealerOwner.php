@@ -40,6 +40,9 @@ public function fillServicesDdlist($params = array()) {
 
                   $opUserServiceIdArray = $this->slimApp-> getBLLManager()->get('blLoginLogoutBLL');     
                   $opUserServiceId = $opUserServiceIdArray->servicesFormPk($opUserIdParams); 
+                  
+                  print_r($opUserServiceId) ;
+                  
                   if (\Utill\Dal\Helper::haveRecord($opUserServiceId)) {
                         $opUserServiceIdsValue = $opUserServiceId ['resultSet'][0]['services_id']; 
                   }
