@@ -26,14 +26,24 @@ class InfoDealerOwner extends \DAL\DalSlim {
      * @throws \PDOException
      */
     public function fillServicesDdlist($params = array()) {
-        try {
-            $pk = 0;
-            $servicesQuery = ' a.servisid in (0) and  ';
-           if (isset($params['pk'])  && $params['pk']!='') {
-               //a.servisid in (94, 96) and 
-               $pk = $params['pk'];
-               $servicesQuery = ' a.servisid in ('.$pk.') and '; 
-            } 
+        try { 
+            $opUserIdValue = -1; 
+            $opUserRoleIdValue = -1;   
+            $servicesQuery = ' a.servisid in (-1) and  ';
+          
+            
+            if (isset($params['pk'])  && $params['pk']!='') {
+               $opUserIdParams = array('pk' =>  $params['pk'],);
+                $opUserIdArray = $this->slimApp-> getBLLManager()->get('opUserIdBLL');  
+                $opUserId = $opUserIdArray->getUserId($opUserIdParams);
+                if (\Utill\Dal\Helper::haveRecord($opUserId)) {
+                    $opUserIdValue = $opUserId ['resultSet'][0]['user_id']; 
+                    $opUserRoleIdValue = $opUserId ['resultSet'][0]['role_id'];  
+                    $servicesQuery = ' a.servisid in ('.$opUserRoleIdValue.') and '; 
+                }
+            }
+             
+       
             
             
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');   
