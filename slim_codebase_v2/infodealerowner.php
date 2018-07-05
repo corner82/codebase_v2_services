@@ -59,13 +59,13 @@ $app->get("/pkfillServicesDdlist_infoDealerOwner/", function () use ($app ) {
     if (isset($_GET['component_type'])) {
         $componentType = strtolower(trim($_GET['component_type']));
     }
- 
+    print_r('/////111//////')   ; 
     $pk = $headerParams['X-Public']; 
     
     $resCombobox = $BLL->fillServicesDdlist(array(
         'pk' => $pk,    
     ));
- 
+ print_r('/////222//////')   ; 
     $flows = array();
     $flows[] = array("text" => "Lütfen Seçiniz", "value" => 0, "selected" => true, "imageSrc" => "", "description" => "Lütfen Seçiniz",);
     foreach ($resCombobox as $flow) {

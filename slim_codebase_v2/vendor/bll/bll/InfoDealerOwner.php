@@ -26,8 +26,10 @@ class InfoDealerOwner extends \BLL\BLLSlim{
      * @param array $params
      * @return array
      */
-    public function fillServicesDdlist($params = array()) { 
-        $DAL = $this->slimApp->getDALManager()->get('infoDealerOwnerOraclePDO'); 
+    public function fillServicesDdlist($params = array()) {
+           print_r('/////11//////')   ; 
+        $DAL = $this->slimApp->getDALManager()->get('infoDealerOwnerOraclePDO');
+           print_r('/////22//////')   ; 
         $resultSet = $DAL->fillServicesDdlist($params);
         return $resultSet['resultSet'];
     }
