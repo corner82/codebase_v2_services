@@ -66,7 +66,7 @@ $app->get("/pkfillServicesDdlist_infoDealerOwner/", function () use ($app ) {
     $resCombobox = $BLL->fillServicesDdlist(array(
         'pk' => $pk,    
     ));
- print_r('/////222//////')   ; 
+ 
     $flows = array();
     $flows[] = array("text" => "Lütfen Seçiniz", "value" => 0, "selected" => true, "imageSrc" => "", "description" => "Lütfen Seçiniz",);
     foreach ($resCombobox as $flow) {
