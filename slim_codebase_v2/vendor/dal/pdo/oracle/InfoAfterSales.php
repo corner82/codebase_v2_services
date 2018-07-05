@@ -38,7 +38,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                     
                    SELECT
                         vtsxy.SERVISID ID,  
-                        vtsxy.GIZLIAD AD
+                        vtsxy.SERVISADI AD
                     FROM SASON.PERFORMANSSERVISLER vtsxy
                     WHERE vtsxy.active =0 
                     order by id
