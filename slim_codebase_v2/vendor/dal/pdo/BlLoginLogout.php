@@ -250,7 +250,7 @@ class BlLoginLogout extends \DAL\DalSlim {
         try {
             $pdo = $this->slimApp->getServiceManager()->get('pgConnectFactory');
             $sql = "              
-                    SELECT id,pkey,sf_private_key_value FROM (
+                    SELECT id,pkey,sf_private_key_value,role_id FROM (
                             SELECT COALESCE(NULLIF(root_id, 0),id) AS id, 	
                                 CRYPT(sf_private_key_value,CONCAT('_J9..',REPLACE('".$params['pk']."','*','/'))) = CONCAT('_J9..',REPLACE('".$params['pk']."','*','/')) AS pkey,	                                
                                 sf_private_key_value

@@ -39,6 +39,11 @@ class DalManagerConfig {
             'factories' => [
                 'infoAfterSalesOraclePDO' => 'DAL\Factory\PDO\Oracle\InfoAfterSalesFactory',
                 'infoSalesOraclePDO' => 'DAL\Factory\PDO\Oracle\InfoSalesFactory',
+                'infoDealerOwnerOraclePDO' => 'DAL\Factory\PDO\Oracle\InfoDealerOwnerFactory',
+                
+                
+                
+              
                 'reportConfigurationPDO' => 'DAL\Factory\PDO\ReportConfigurationFactory',
                 'cmpnyEqpmntPDO' => 'DAL\Factory\PDO\CmpnyEqpmntFactory',
                 'sysNavigationLeftPDO' => 'DAL\Factory\PDO\SysNavigationLeftFactory',                
@@ -102,6 +107,10 @@ class DalManagerConfig {
                 'mobilSetDbConfigxPDO' => 'DAL\Factory\PDO\MobilSetDbConfigxFactory',
                 'mobileUserMessagesPDO' => 'DAL\Factory\PDO\MobileUserMessagesFactory',
                 'mblSinavlarPDO' => 'DAL\Factory\PDO\MblSinavlarFactory',
+                
+                
+                
+                
                 
                 
             ],

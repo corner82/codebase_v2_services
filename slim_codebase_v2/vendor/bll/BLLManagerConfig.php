@@ -33,6 +33,8 @@ class BLLManagerConfig{
              'invokables' => array(
                  'afterSalesBLL' => 'BLL\BLL\InfoAfterSales',
                  'salesBLL' => 'BLL\BLL\InfoSales',
+                 'dealerOwnerBLL' => 'BLL\BLL\InfoDealerOwner',
+              
                  //'test' => 'Utill\BLL\Test\Test'
                  'reportConfigurationBLL' => 'BLL\BLL\ReportConfiguration',
                  'cmpnyEqpmntBLL' => 'BLL\BLL\CmpnyEqpmnt',
@@ -99,14 +101,8 @@ class BLLManagerConfig{
                 'actUsersActionStatisticsBLL' => 'BLL\BLL\ActUsersActionStatistics',
                 'sysNotificationRestservicesBLL' => 'BLL\BLL\SysNotificationRestservices',
                 'sysSectorsBLL' => 'BLL\BLL\SysSectors',
-                /*'mblLoginBLL' => 'BLL\BLL\mblLogin',
-                'mobilSettingsBLL' => 'BLL\BLL\MobilSettings',
-                'mobilSetDbConfigxBLL' => 'BLL\BLL\MobilSetDbConfigx',
-                'mobileUserMessagesBLL' => 'BLL\BLL\MobileUserMessages',
-                'mblSinavlarBLL' => 'BLL\BLL\MblSinavlar',*/
-                 
-                 
-                 
+             
+                  
                  
              ),
              'factories' => [

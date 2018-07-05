@@ -20,6 +20,190 @@ class SlimHmacProxy extends \Proxy\Proxy {
     protected $redirectMap = array('getReports_test' => 'restApiDefaultCall',
                                     'getDynamicForm_test' => 'restApiDefaultCall',
                                     'getOracleConnTest' => 'restApiDefaultCall',
+        
+        
+          //** DealerOwner ----------------------
+                                    'getAfterSalesDetayIsEmriAcikWithoutServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAracGirisSayilari_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAracGirisSayilariWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAracGirisSayilariAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAracGirisSayilariAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAracGirisSayilariYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAracGirisSayilariYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardAracGirisSayilari_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardAracGirisSayilariWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDashboardDowntime_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardDowntimeWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGridDowntime_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGridDowntimeWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDashboardVerimlilik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardVerimlilikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayVerimlilikYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayVerimlilikYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDashboardKapasite_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardKapasiteWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayKapasiteYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayKapasiteYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDashboardEtkinlik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardEtkinlikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayEtkinlikYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayEtkinlikYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDashboardYedekParcaTS_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardYedekParcaTSWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaTS_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaTSWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaTSAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaTSAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaTSYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaTSYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDashboardYedekParcaYS_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardYedekParcaYSWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaYS_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaYSWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaYSAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaYSAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaYSYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayYedekParcaYSYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+        
+                                    'getAfterSalesDashboardAtolyeCirosu_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardAtolyeCirosuWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosu_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAtolyeCirosuYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    
+                                    'getAfterSalesDashboardGarantiCirosu_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardGarantiCirosuWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosu_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGarantiCirosuYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    
+        
+                                    
+                                    'getAfterSalesDashboardDirekSatisCirosu_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardDirekSatisCirosuWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosu_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayDirekSatisCirosuYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+        
+        
+                                    'getAfterSalesDashboardMMCSI_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardMMCSIWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayMMCSIYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayMMCSIYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGridMMCSI_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGridMMCSIWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDashboardMMCXI_infoDealerOwner'  => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardMMCXIWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayMMCXIYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayMMCXIYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGridMMCXI_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayGridMMCXIWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDetayIsEmriAcikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcikAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcikAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcikYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcikYillik_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'fillServicesDdlist_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayBayiStok_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDetayCiro_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayCiroWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayCiroAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayCiroAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayCiroYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayCiroYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDetaySatisFaturalari_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetaySatisFaturalariWeeklyWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetaySatisFaturalariAylik_infoDealerOwner' => 'restApiDefaultCall', 
+                                    'getAfterSalesDetaySatisFaturalariAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetaySatisFaturalariYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetaySatisFaturalariYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsemriFaturalari_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsemriFaturalariWeeklyWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsemriFaturalariAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsemriFaturalariAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsemriFaturalariYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsemriFaturalariYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIcmalFaturalari_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIcmalFaturalariWeeklyWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIcmalFaturalariAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIcmalFaturalariAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIcmalFaturalariYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIcmalFaturalariYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAlisFaturalari_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAlisFaturalariWeeklyWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAlisFaturalariAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAlisFaturalariAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAlisFaturalariYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayAlisFaturalariYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcilanKapanan_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcilanKapananWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcilanKapananAylik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcilanKapananAylikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcilanKapananYillik_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayIsEmriAcilanKapananYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardIsEmriData_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardIsEmriDataWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaturaData_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaturaDataWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardCiroYedekParca_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardStoklar_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardStoklarWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayStoklarGrid_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayStoklarGridWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner' => 'restApiDefaultCall',
+                                     
+        
+        
+                                    'getAfterSalesDashboardFaalYedekParca_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDetayFaalYedekParca_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaalYagToplam_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaalStokToplam_infoDealerOwner' => 'restApiDefaultCall',
+        
+        
+        
+                                    'getAfterSalesDashboardFaalYedekParcaWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaalYedekParcaServisDisiWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+                                    'getAfterSalesDashboardFaalYagToplamWithServices_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesDashboardFaalStokToplamWithServices_infoDealerOwner' => 'restApiDefaultCall',
+        
+        
+        
+        
+        
+        
+                                    'getAfterSalesYedekParcaHedefServisli_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesYedekParcaHedefServissiz_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesYedekParcaPDFServissiz_infoDealerOwner' => 'restApiDefaultCall',
+                                    'getAfterSalesYedekParcaPDFServisli_infoDealerOwner' => 'restApiDefaultCall',
+        
+        
+         //**---- DealerOwner ------------------- 
+        
+        
 
           //** afterSales ----------------------
                                     'getAfterSalesDetayIsEmriAcikWithoutServices_infoAfterSales' => 'restApiDefaultCall',
@@ -1325,6 +1509,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
     
 
     public function setEndPointByClosure(Array $EndPointClosure = null) {
+        
         $xxroleid = $this->hmacObj->getRoleID(); 
      //   print_r($xxroleid) ;        
         
@@ -1341,6 +1526,11 @@ class SlimHmacProxy extends \Proxy\Proxy {
             case "_test":
                 echo "_test!";
                 break;
+            
+            case "_infoDealerOwner": 
+                $this->setRestApiEndPoint('infodealerowner.php/');
+                break;
+            
             case "_infoSales": 
                 $this->setRestApiEndPoint('infosales.php/');
                 break;
