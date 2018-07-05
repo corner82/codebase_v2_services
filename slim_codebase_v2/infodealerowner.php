@@ -52,7 +52,7 @@ $app->add(new \Slim\Middleware\MiddlewareMQManager());
  * @since 09-08-2016
  
  */
-$app->get("/pkfillServicesDdlist_infoDealerOwner/", function () use ($app ) {   
+$app->get("/fillServicesDdlist_infoDealerOwner/", function () use ($app ) {   
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
 
     $componentType = 'ddslick';
