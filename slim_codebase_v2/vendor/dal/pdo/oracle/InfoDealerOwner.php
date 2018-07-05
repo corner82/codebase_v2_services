@@ -46,7 +46,7 @@ public function fillServicesDdlist($params = array()) {
                   if (\Utill\Dal\Helper::haveRecord($opUserServiceId)) {
                      
                 print_r( 'rrrrrr') ; 
-        print_r( $opUserServiceId ['resultSet'][0]  )  ; 
+        print_r( $opUserServiceId ['resultSet'][0]['services_id'] )  ; 
           print_r( 'tttttttttttt') ; 
                       
                         $opUserServiceIdsValue = $opUserServiceId ['resultSet'][0]['services_id']; 
