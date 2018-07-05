@@ -38,18 +38,15 @@ public function fillServicesDdlist($params = array()) {
 
                  $opUserIdParams = array('user_id' => $opUserIdValue,);
 
-                  $opUserServiceIdArray = $this->slimApp-> getBLLManager()->get('blLoginLogoutBLL');     
-                  $opUserServiceId = $opUserServiceIdArray->servicesFormPk($opUserIdParams); 
+                  $opUserServiceId = $this->slimApp-> getBLLManager()->get('blLoginLogoutBLL');     
+                  $opUserServiceIdArray = $opUserServiceId->servicesFormPk($opUserIdParams); 
                   
-                
+               
               
-                  if (\Utill\Dal\Helper::haveRecord($opUserServiceId)) {
-                     
-         
-        print_r( $opUserServiceId ['resultSet'][0]['services_id'] )  ; 
-          print_r( 'tttttttttttt') ; 
+                  if (\Utill\Dal\Helper::haveRecord($opUserServiceIdArray)) {
+    
                       
-                        $opUserServiceIdsValue = $opUserServiceId ['resultSet'][0]['services_id']; 
+                        $opUserServiceIdsValue = $opUserServiceIdArray[0]['services_id']; 
                   }
 
             }
