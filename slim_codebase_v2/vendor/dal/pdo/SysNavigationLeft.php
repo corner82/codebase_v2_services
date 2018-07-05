@@ -993,7 +993,7 @@ class SysNavigationLeft extends \DAL\DalSlim {
                 ORDER BY a.parent, a.z_index           
                                  ";
             $statement = $pdo->prepare($sql);            
-            //echo debugPDO($sql, $params);
+            echo debugPDO($sql, $params);
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
             $errorInfo = $statement->errorInfo();
