@@ -42,7 +42,12 @@ public function fillServicesDdlist($params = array()) {
                   $opUserServiceId = $opUserServiceIdArray->servicesFormPk($opUserIdParams); 
                   
                   print_r($opUserServiceId) ;
-                         print_r( 'rrrrrr') ; 
+                     print_r( '------1-------') ; 
+                    print_r( $opUserServiceId ['resultSet'][0]  )  ; 
+                           print_r( '------2-------') ; 
+                          print_r( $opUserServiceId ['resultSet'][0]['services_id'] )  ; 
+                                 print_r( '------3-------') ; 
+              
                   if (\Utill\Dal\Helper::haveRecord($opUserServiceId)) {
                      
          
