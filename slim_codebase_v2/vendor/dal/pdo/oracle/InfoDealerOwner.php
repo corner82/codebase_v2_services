@@ -36,13 +36,13 @@ class InfoDealerOwner extends \DAL\DalSlim {
                 if (\Utill\Dal\Helper::haveRecord($opUserId)) {
                     $opUserIdValue = $opUserId ['resultSet'][0]['user_id']; 
                     $opUserRoleIdValue = $opUserId ['resultSet'][0]['role_id'];  
-                    $servicesQuery =    ' a.servisid in (  
-                        SELECT  distinct firm_id  
-                        FROM   info_firm_users
+                    $servicesQuery =    ' vtsxy.servisid in (  
+                        SELECT  distinct a.firm_id  
+                        FROM   info_firm_users a
                         WHERE 
-                            active =0 and deleted =0 and 
-                            user_id = '.$opUserIdValue.' and 
-                            language_id = 647 ) ' ;   
+                            a.active =0 and a.deleted =0 and 
+                            a.user_id = '.$opUserIdValue.' and 
+                            a.language_id = 647 ) ' ;   
                     }
                 }
  
@@ -59,13 +59,13 @@ class InfoDealerOwner extends \DAL\DalSlim {
                     order by id      */ 
                     
                    SELECT
-                        a.SERVISID ID,  
-                        a.GIZLIAD AD
-                    FROM SASON.PERFORMANSSERVISLER a
+                        vtsxy.SERVISID ID,  
+                       vtsxy.GIZLIAD AD
+                    FROM SASON.PERFORMANSSERVISLER vtsxy
                     WHERE 
                         ".$servicesQuery." 
-                        a.active =0 
-                    order by id
+                         vtsxy.active =0 
+                    order by vtsxy.id
 
 
                                  ";
