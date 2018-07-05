@@ -25,46 +25,37 @@ class InfoDealerOwner extends \DAL\DalSlim {
      * @return array
      * @throws \PDOException
      */
-    public function fillServicesDdlist($params = array()) {
-        try { 
+public function fillServicesDdlist($params = array()) {
+        try {  
+        $servicesQuery = ' 1=2 and  '; 
+        if (isset($params['pk'])  && $params['pk']!='') {
+           $opUserIdParams = array('pk' =>  $params['pk'],);
+            $opUserIdArray = $this->slimApp-> getBLLManager()->get('opUserIdBLL');  
+            $opUserId = $opUserIdArray->getUserId($opUserIdParams);
+            if (\Utill\Dal\Helper::haveRecord($opUserId)) {
+                $opUserIdValue = $opUserId ['resultSet'][0]['user_id']; 
+             //   $opUserRoleIdValue = $opUserId ['resultSet'][0]['role_id'];  
+
+                 $opUserIdParams = array('user_id' => $opUserIdValue,);
+
+                  $opUserServiceIdArray = $this->slimApp-> getBLLManager()->get('blLoginLogoutPDO');     
+                  $opUserServiceId = $opUserServiceIdArray->servicesFormPk($opUserIdParams); 
+                  if (\Utill\Dal\Helper::haveRecord($opUserServiceId)) {
+                        $opUserServiceIdsValue = $opUserServiceId ['resultSet'][0]['services_id']; 
+                  }
+
+            }
+        }
             
-            $servicesQuery = ' 1=2 and  '; 
-            if (isset($params['pk'])  && $params['pk']!='') {
-               $opUserIdParams = array('pk' =>  $params['pk'],);
-                $opUserIdArray = $this->slimApp-> getBLLManager()->get('opUserIdBLL');  
-                $opUserId = $opUserIdArray->getUserId($opUserIdParams);
-                if (\Utill\Dal\Helper::haveRecord($opUserId)) {
-                    $opUserIdValue = $opUserId ['resultSet'][0]['user_id']; 
-                    $opUserRoleIdValue = $opUserId ['resultSet'][0]['role_id'];  
-                    $servicesQuery =    ' vtsxy.servisid in (  
-                        SELECT  distinct a.firm_id  
-                        FROM   info_firm_users a
-                        WHERE 
-                            a.active =0 and a.deleted =0 and 
-                            a.user_id = '.$opUserIdValue.' and 
-                            a.language_id = 647 ) and ' ;   
-                    }
-                }
- 
- 
-            
-            
-            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');   
-            $sql ="
-               /*  select SERVISID ID, 
-                       ISORTAKAD AD 
-                from vt_servisler where 
-                    DURUMID = 1 AND 
-                    dilkod = 'Turkish' 
-                    order by id      */ 
-                    
+        $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');   
+        $sql ="     
                    SELECT
                         vtsxy.SERVISID ID,  
                        vtsxy.GIZLIAD AD
                     FROM SASON.PERFORMANSSERVISLER vtsxy
                     WHERE 
-                        ".$servicesQuery." 
-                         vtsxy.active =0 
+                       vtsxy.servicid in (  ".$opUserServiceIdsValue." ) and 
+                       vtsxy.active =0 
                     order by vtsxy.id
 
 
