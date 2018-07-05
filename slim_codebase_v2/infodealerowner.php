@@ -52,7 +52,7 @@ $app->add(new \Slim\Middleware\MiddlewareMQManager());
  * @since 09-08-2016
  
  */
-$app->get("/fillServicesDdlist_infoDealerOwner/", function () use ($app ) {   
+$app->get("/pkfillServicesDdlist_infoDealerOwner/", function () use ($app ) {   
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
 
     $componentType = 'ddslick';
@@ -90,7 +90,7 @@ $app->get("/fillServicesDdlist_infoDealerOwner/", function () use ($app ) {
  * @since 06-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAlisFaturalari_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAlisFaturalari_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -125,7 +125,7 @@ $app->get("/getAfterSalesDetayAlisFaturalari_infoDealerOwner/", function () use 
  * @since 06-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAlisFaturalariWeeklyWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAlisFaturalariWeeklyWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -160,7 +160,7 @@ $app->get("/getAfterSalesDetayAlisFaturalariWeeklyWithServices_infoDealerOwner/"
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAlisFaturalariAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAlisFaturalariAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -195,7 +195,7 @@ $app->get("/getAfterSalesDetayAlisFaturalariAylik_infoDealerOwner/", function ()
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAlisFaturalariAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAlisFaturalariAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -230,7 +230,7 @@ $app->get("/getAfterSalesDetayAlisFaturalariAylikWithServices_infoDealerOwner/",
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAlisFaturalariYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAlisFaturalariYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -265,7 +265,7 @@ $app->get("/getAfterSalesDetayAlisFaturalariYillik_infoDealerOwner/", function (
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAlisFaturalariYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAlisFaturalariYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -300,7 +300,7 @@ $app->get("/getAfterSalesDetayAlisFaturalariYillikWithServices_infoDealerOwner/"
  * @since 06-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsemriFaturalari_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsemriFaturalari_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -335,7 +335,7 @@ $app->get("/getAfterSalesDetayIsemriFaturalari_infoDealerOwner/", function () us
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsemriFaturalariWeeklyWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsemriFaturalariWeeklyWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -370,7 +370,7 @@ $app->get("/getAfterSalesDetayIsemriFaturalariWeeklyWithServices_infoDealerOwner
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsemriFaturalariAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsemriFaturalariAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -405,7 +405,7 @@ $app->get("/getAfterSalesDetayIsemriFaturalariAylik_infoDealerOwner/", function 
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsemriFaturalariAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsemriFaturalariAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -440,7 +440,7 @@ $app->get("/getAfterSalesDetayIsemriFaturalariAylikWithServices_infoDealerOwner/
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsemriFaturalariYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsemriFaturalariYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -475,7 +475,7 @@ $app->get("/getAfterSalesDetayIsemriFaturalariYillik_infoDealerOwner/", function
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsemriFaturalariYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsemriFaturalariYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -509,7 +509,7 @@ $app->get("/getAfterSalesDetayIsemriFaturalariYillikWithServices_infoDealerOwner
  * @since 06-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetaySatisFaturalari_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetaySatisFaturalari_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -543,7 +543,7 @@ $app->get("/getAfterSalesDetaySatisFaturalari_infoDealerOwner/", function () use
  * @since 06-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetaySatisFaturalariWeeklyWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetaySatisFaturalariWeeklyWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -577,7 +577,7 @@ $app->get("/getAfterSalesDetaySatisFaturalariWeeklyWithServices_infoDealerOwner/
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetaySatisFaturalariAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetaySatisFaturalariAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -611,7 +611,7 @@ $app->get("/getAfterSalesDetaySatisFaturalariAylik_infoDealerOwner/", function (
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetaySatisFaturalariAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetaySatisFaturalariAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -645,7 +645,7 @@ $app->get("/getAfterSalesDetaySatisFaturalariAylikWithServices_infoDealerOwner/"
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetaySatisFaturalariYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetaySatisFaturalariYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -679,7 +679,7 @@ $app->get("/getAfterSalesDetaySatisFaturalariYillik_infoDealerOwner/", function 
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetaySatisFaturalariYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetaySatisFaturalariYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -715,7 +715,7 @@ $app->get("/getAfterSalesDetaySatisFaturalariYillikWithServices_infoDealerOwner/
  * @since 06-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIcmalFaturalari_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIcmalFaturalari_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -750,7 +750,7 @@ $app->get("/getAfterSalesDetayIcmalFaturalari_infoDealerOwner/", function () use
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIcmalFaturalariWeeklyWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIcmalFaturalariWeeklyWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -785,7 +785,7 @@ $app->get("/getAfterSalesDetayIcmalFaturalariWeeklyWithServices_infoDealerOwner/
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIcmalFaturalariAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIcmalFaturalariAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -820,7 +820,7 @@ $app->get("/getAfterSalesDetayIcmalFaturalariAylik_infoDealerOwner/", function (
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIcmalFaturalariAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIcmalFaturalariAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -855,7 +855,7 @@ $app->get("/getAfterSalesDetayIcmalFaturalariAylikWithServices_infoDealerOwner/"
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIcmalFaturalariYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIcmalFaturalariYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -890,7 +890,7 @@ $app->get("/getAfterSalesDetayIcmalFaturalariYillik_infoDealerOwner/", function 
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIcmalFaturalariYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIcmalFaturalariYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -925,7 +925,7 @@ $app->get("/getAfterSalesDetayIcmalFaturalariYillikWithServices_infoDealerOwner/
  * @since 30-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -960,7 +960,7 @@ $app->get("/getAfterSalesDetayIsEmriAcikWithServices_infoDealerOwner/", function
  * @since 30-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcikWithoutServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcikWithoutServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -996,7 +996,7 @@ $app->get("/getAfterSalesDetayIsEmriAcikWithoutServices_infoDealerOwner/", funct
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcikAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcikAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1031,7 +1031,7 @@ $app->get("/getAfterSalesDetayIsEmriAcikAylik_infoDealerOwner/", function () use
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcikAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcikAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1066,7 +1066,7 @@ $app->get("/getAfterSalesDetayIsEmriAcikAylikWithServices_infoDealerOwner/", fun
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcikYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcikYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1101,7 +1101,7 @@ $app->get("/getAfterSalesDetayIsEmriAcikYillik_infoDealerOwner/", function () us
  * @since 06-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcikYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcikYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1137,7 +1137,7 @@ $app->get("/getAfterSalesDetayIsEmriAcikYillikWithServices_infoDealerOwner/", fu
  * @since 05-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcilanKapanan_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcilanKapanan_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1172,7 +1172,7 @@ $app->get("/getAfterSalesDetayIsEmriAcilanKapanan_infoDealerOwner/", function ()
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcilanKapananWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcilanKapananWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1207,7 +1207,7 @@ $app->get("/getAfterSalesDetayIsEmriAcilanKapananWithServices_infoDealerOwner/",
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcilanKapananAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcilanKapananAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1242,7 +1242,7 @@ $app->get("/getAfterSalesDetayIsEmriAcilanKapananAylik_infoDealerOwner/", functi
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcilanKapananAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcilanKapananAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1277,7 +1277,7 @@ $app->get("/getAfterSalesDetayIsEmriAcilanKapananAylikWithServices_infoDealerOwn
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcilanKapananYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcilanKapananYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1312,7 +1312,7 @@ $app->get("/getAfterSalesDetayIsEmriAcilanKapananYillik_infoDealerOwner/", funct
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayIsEmriAcilanKapananYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayIsEmriAcilanKapananYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1346,7 +1346,7 @@ $app->get("/getAfterSalesDetayIsEmriAcilanKapananYillikWithServices_infoDealerOw
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardStoklar_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardStoklar_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1380,7 +1380,7 @@ $app->get("/getAfterSalesDashboardStoklar_infoDealerOwner/", function () use ($a
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardStoklarWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardStoklarWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1414,7 +1414,7 @@ $app->get("/getAfterSalesDashboardStoklarWithServices_infoDealerOwner/", functio
  * @since 12-06-2016
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayStoklarGrid_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayStoklarGrid_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1442,7 +1442,7 @@ $app->get("/getAfterSalesDetayStoklarGrid_infoDealerOwner/", function () use ($a
  * @since 11-06-2016
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayStoklarGridWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayStoklarGridWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1471,7 +1471,7 @@ $app->get("/getAfterSalesDetayStoklarGridWithServices_infoDealerOwner/", functio
  * @since 31-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardAracGirisSayilari_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardAracGirisSayilari_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1506,7 +1506,7 @@ $app->get("/getAfterSalesDashboardAracGirisSayilari_infoDealerOwner/", function 
  * @since 31-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardAracGirisSayilariWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardAracGirisSayilariWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1541,7 +1541,7 @@ $app->get("/getAfterSalesDashboardAracGirisSayilariWithServices_infoDealerOwner/
  * @since 31-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAracGirisSayilari_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAracGirisSayilari_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1577,7 +1577,7 @@ $app->get("/getAfterSalesDetayAracGirisSayilari_infoDealerOwner/", function () u
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAracGirisSayilariWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAracGirisSayilariWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1612,7 +1612,7 @@ $app->get("/getAfterSalesDetayAracGirisSayilariWithServices_infoDealerOwner/", f
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAracGirisSayilariAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAracGirisSayilariAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1647,7 +1647,7 @@ $app->get("/getAfterSalesDetayAracGirisSayilariAylik_infoDealerOwner/", function
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAracGirisSayilariAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAracGirisSayilariAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1682,7 +1682,7 @@ $app->get("/getAfterSalesDetayAracGirisSayilariAylikWithServices_infoDealerOwner
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAracGirisSayilariYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAracGirisSayilariYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1716,7 +1716,7 @@ $app->get("/getAfterSalesDetayAracGirisSayilariYillik_infoDealerOwner/", functio
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAracGirisSayilariYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAracGirisSayilariYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1750,7 +1750,7 @@ $app->get("/getAfterSalesDetayAracGirisSayilariYillikWithServices_infoDealerOwne
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardDowntime_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardDowntime_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1784,7 +1784,7 @@ $app->get("/getAfterSalesDashboardDowntime_infoDealerOwner/", function () use ($
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardDowntimeWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardDowntimeWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1814,7 +1814,7 @@ $app->get("/getAfterSalesDashboardDowntimeWithServices_infoDealerOwner/", functi
  * @since 12-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGridDowntime_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGridDowntime_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1847,7 +1847,7 @@ $app->get("/getAfterSalesDetayGridDowntime_infoDealerOwner/", function () use ($
  * @since 12-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGridDowntimeWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGridDowntimeWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1880,7 +1880,7 @@ $app->get("/getAfterSalesDetayGridDowntimeWithServices_infoDealerOwner/", functi
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardVerimlilik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardVerimlilik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1914,7 +1914,7 @@ $app->get("/getAfterSalesDashboardVerimlilik_infoDealerOwner/", function () use 
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardVerimlilikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardVerimlilikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1945,7 +1945,7 @@ $app->get("/getAfterSalesDashboardVerimlilikWithServices_infoDealerOwner/", func
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayVerimlilikYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayVerimlilikYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -1979,7 +1979,7 @@ $app->get("/getAfterSalesDetayVerimlilikYillik_infoDealerOwner/", function () us
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayVerimlilikYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayVerimlilikYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2013,7 +2013,7 @@ $app->get("/getAfterSalesDetayVerimlilikYillikWithServices_infoDealerOwner/", fu
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardKapasite_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardKapasite_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2047,7 +2047,7 @@ $app->get("/getAfterSalesDashboardKapasite_infoDealerOwner/", function () use ($
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardKapasiteWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardKapasiteWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2078,7 +2078,7 @@ $app->get("/getAfterSalesDashboardKapasiteWithServices_infoDealerOwner/", functi
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayKapasiteYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayKapasiteYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2112,7 +2112,7 @@ $app->get("/getAfterSalesDetayKapasiteYillik_infoDealerOwner/", function () use 
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayKapasiteYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayKapasiteYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2146,7 +2146,7 @@ $app->get("/getAfterSalesDetayKapasiteYillikWithServices_infoDealerOwner/", func
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardEtkinlik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardEtkinlik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2180,7 +2180,7 @@ $app->get("/getAfterSalesDashboardEtkinlik_infoDealerOwner/", function () use ($
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardEtkinlikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardEtkinlikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2211,7 +2211,7 @@ $app->get("/getAfterSalesDashboardEtkinlikWithServices_infoDealerOwner/", functi
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayEtkinlikYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayEtkinlikYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2245,7 +2245,7 @@ $app->get("/getAfterSalesDetayEtkinlikYillik_infoDealerOwner/", function () use 
  * @since 11-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayEtkinlikYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayEtkinlikYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2279,7 +2279,7 @@ $app->get("/getAfterSalesDetayEtkinlikYillikWithServices_infoDealerOwner/", func
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardYedekParcaTS_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardYedekParcaTS_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2313,7 +2313,7 @@ $app->get("/getAfterSalesDashboardYedekParcaTS_infoDealerOwner/", function () us
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardYedekParcaTSWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardYedekParcaTSWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2348,7 +2348,7 @@ $app->get("/getAfterSalesDashboardYedekParcaTSWithServices_infoDealerOwner/", fu
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaTS_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaTS_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2384,7 +2384,7 @@ $app->get("/getAfterSalesDetayYedekParcaTS_infoDealerOwner/", function () use ($
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaTSWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaTSWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2419,7 +2419,7 @@ $app->get("/getAfterSalesDetayYedekParcaTSWithServices_infoDealerOwner/", functi
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaTSAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaTSAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2454,7 +2454,7 @@ $app->get("/getAfterSalesDetayYedekParcaTSAylik_infoDealerOwner/", function () u
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaTSAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaTSAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2489,7 +2489,7 @@ $app->get("/getAfterSalesDetayYedekParcaTSAylikWithServices_infoDealerOwner/", f
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaTSYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaTSYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2523,7 +2523,7 @@ $app->get("/getAfterSalesDetayYedekParcaTSYillik_infoDealerOwner/", function () 
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaTSYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaTSYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2561,7 +2561,7 @@ $app->get("/getAfterSalesDetayYedekParcaTSYillikWithServices_infoDealerOwner/", 
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardYedekParcaYS_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardYedekParcaYS_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2595,7 +2595,7 @@ $app->get("/getAfterSalesDashboardYedekParcaYS_infoDealerOwner/", function () us
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardYedekParcaYSWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardYedekParcaYSWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2630,7 +2630,7 @@ $app->get("/getAfterSalesDashboardYedekParcaYSWithServices_infoDealerOwner/", fu
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaYS_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaYS_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2665,7 +2665,7 @@ $app->get("/getAfterSalesDetayYedekParcaYS_infoDealerOwner/", function () use ($
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaYSWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaYSWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2700,7 +2700,7 @@ $app->get("/getAfterSalesDetayYedekParcaYSWithServices_infoDealerOwner/", functi
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaYSAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaYSAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2735,7 +2735,7 @@ $app->get("/getAfterSalesDetayYedekParcaYSAylik_infoDealerOwner/", function () u
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaYSAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaYSAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2770,7 +2770,7 @@ $app->get("/getAfterSalesDetayYedekParcaYSAylikWithServices_infoDealerOwner/", f
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaYSYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaYSYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2804,7 +2804,7 @@ $app->get("/getAfterSalesDetayYedekParcaYSYillik_infoDealerOwner/", function () 
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayYedekParcaYSYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayYedekParcaYSYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2847,7 +2847,7 @@ $app->get("/getAfterSalesDetayYedekParcaYSYillikWithServices_infoDealerOwner/", 
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardAtolyeCirosu_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardAtolyeCirosu_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2881,7 +2881,7 @@ $app->get("/getAfterSalesDashboardAtolyeCirosu_infoDealerOwner/", function () us
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardAtolyeCirosuWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardAtolyeCirosuWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2916,7 +2916,7 @@ $app->get("/getAfterSalesDashboardAtolyeCirosuWithServices_infoDealerOwner/", fu
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAtolyeCirosu_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAtolyeCirosu_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2951,7 +2951,7 @@ $app->get("/getAfterSalesDetayAtolyeCirosu_infoDealerOwner/", function () use ($
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAtolyeCirosuWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAtolyeCirosuWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -2986,7 +2986,7 @@ $app->get("/getAfterSalesDetayAtolyeCirosuWithServices_infoDealerOwner/", functi
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAtolyeCirosuAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAtolyeCirosuAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3021,7 +3021,7 @@ $app->get("/getAfterSalesDetayAtolyeCirosuAylik_infoDealerOwner/", function () u
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAtolyeCirosuAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAtolyeCirosuAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3056,7 +3056,7 @@ $app->get("/getAfterSalesDetayAtolyeCirosuAylikWithServices_infoDealerOwner/", f
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAtolyeCirosuYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAtolyeCirosuYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3090,7 +3090,7 @@ $app->get("/getAfterSalesDetayAtolyeCirosuYillik_infoDealerOwner/", function () 
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayAtolyeCirosuYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayAtolyeCirosuYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3131,7 +3131,7 @@ $app->get("/getAfterSalesDetayAtolyeCirosuYillikWithServices_infoDealerOwner/", 
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardGarantiCirosu_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardGarantiCirosu_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3165,7 +3165,7 @@ $app->get("/getAfterSalesDashboardGarantiCirosu_infoDealerOwner/", function () u
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardGarantiCirosuWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardGarantiCirosuWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3200,7 +3200,7 @@ $app->get("/getAfterSalesDashboardGarantiCirosuWithServices_infoDealerOwner/", f
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosu_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosu_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3235,7 +3235,7 @@ $app->get("/getAfterSalesDetayGarantiCirosu_infoDealerOwner/", function () use (
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3270,7 +3270,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuWithServices_infoDealerOwner/", funct
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3305,7 +3305,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuAylik_infoDealerOwner/", function () 
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3340,7 +3340,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuAylikWithServices_infoDealerOwner/", 
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3374,7 +3374,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuYillik_infoDealerOwner/", function ()
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3419,7 +3419,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuYillikWithServices_infoDealerOwner/",
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardDirekSatisCirosu_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardDirekSatisCirosu_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3454,7 +3454,7 @@ $app->get("/getAfterSalesDashboardDirekSatisCirosu_infoDealerOwner/", function (
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardDirekSatisCirosuWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardDirekSatisCirosuWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3485,7 +3485,7 @@ $app->get("/getAfterSalesDashboardDirekSatisCirosuWithServices_infoDealerOwner/"
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayDirekSatisCirosu_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayDirekSatisCirosu_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3520,7 +3520,7 @@ $app->get("/getAfterSalesDetayDirekSatisCirosu_infoDealerOwner/", function () us
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayDirekSatisCirosuWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayDirekSatisCirosuWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3555,7 +3555,7 @@ $app->get("/getAfterSalesDetayDirekSatisCirosuWithServices_infoDealerOwner/", fu
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayDirekSatisCirosuAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayDirekSatisCirosuAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3590,7 +3590,7 @@ $app->get("/getAfterSalesDetayDirekSatisCirosuAylik_infoDealerOwner/", function 
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayDirekSatisCirosuAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayDirekSatisCirosuAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3625,7 +3625,7 @@ $app->get("/getAfterSalesDetayDirekSatisCirosuAylikWithServices_infoDealerOwner/
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayDirekSatisCirosuYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayDirekSatisCirosuYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3659,7 +3659,7 @@ $app->get("/getAfterSalesDetayDirekSatisCirosuYillik_infoDealerOwner/", function
  * @since 20-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayDirekSatisCirosuYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayDirekSatisCirosuYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3701,7 +3701,7 @@ $app->get("/getAfterSalesDetayDirekSatisCirosuYillikWithServices_infoDealerOwner
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardGarantiCirosu_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardGarantiCirosu_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3736,7 +3736,7 @@ $app->get("/getAfterSalesDashboardGarantiCirosu_infoDealerOwner/", function () u
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosu_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosu_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3771,7 +3771,7 @@ $app->get("/getAfterSalesDetayGarantiCirosu_infoDealerOwner/", function () use (
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3806,7 +3806,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuWithServices_infoDealerOwner/", funct
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3841,7 +3841,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuAylik_infoDealerOwner/", function () 
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3876,7 +3876,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuAylikWithServices_infoDealerOwner/", 
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3910,7 +3910,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuYillik_infoDealerOwner/", function ()
  * @since 16-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGarantiCirosuYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGarantiCirosuYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3955,7 +3955,7 @@ $app->get("/getAfterSalesDetayGarantiCirosuYillikWithServices_infoDealerOwner/",
  * @since 06-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayCiro_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayCiro_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -3990,7 +3990,7 @@ $app->get("/getAfterSalesDetayCiro_infoDealerOwner/", function () use ($app ) {
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayCiroWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayCiroWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4025,7 +4025,7 @@ $app->get("/getAfterSalesDetayCiroWithServices_infoDealerOwner/", function () us
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayCiroAylik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayCiroAylik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4060,7 +4060,7 @@ $app->get("/getAfterSalesDetayCiroAylik_infoDealerOwner/", function () use ($app
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayCiroAylikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayCiroAylikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4095,7 +4095,7 @@ $app->get("/getAfterSalesDetayCiroAylikWithServices_infoDealerOwner/", function 
  * @since 08-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayCiroYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayCiroYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4129,7 +4129,7 @@ $app->get("/getAfterSalesDetayCiroYillik_infoDealerOwner/", function () use ($ap
  * @since 14-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayCiroYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayCiroYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4163,7 +4163,7 @@ $app->get("/getAfterSalesDetayCiroYillikWithServices_infoDealerOwner/", function
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardMMCSI_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardMMCSI_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4197,7 +4197,7 @@ $app->get("/getAfterSalesDashboardMMCSI_infoDealerOwner/", function () use ($app
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardMMCSIWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardMMCSIWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4228,7 +4228,7 @@ $app->get("/getAfterSalesDashboardMMCSIWithServices_infoDealerOwner/", function 
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayMMCSIYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayMMCSIYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4262,7 +4262,7 @@ $app->get("/getAfterSalesDetayMMCSIYillik_infoDealerOwner/", function () use ($a
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayMMCSIYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayMMCSIYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4297,7 +4297,7 @@ $app->get("/getAfterSalesDetayMMCSIYillikWithServices_infoDealerOwner/", functio
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGridMMCSI_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGridMMCSI_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4331,7 +4331,7 @@ $app->get("/getAfterSalesDetayGridMMCSI_infoDealerOwner/", function () use ($app
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGridMMCSIWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGridMMCSIWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4364,7 +4364,7 @@ $app->get("/getAfterSalesDetayGridMMCSIWithServices_infoDealerOwner/", function 
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardMMCXI_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardMMCXI_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4398,7 +4398,7 @@ $app->get("/getAfterSalesDashboardMMCXI_infoDealerOwner/", function () use ($app
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardMMCXIWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardMMCXIWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4429,7 +4429,7 @@ $app->get("/getAfterSalesDashboardMMCXIWithServices_infoDealerOwner/", function 
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayMMCXIYillik_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayMMCXIYillik_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4463,7 +4463,7 @@ $app->get("/getAfterSalesDetayMMCXIYillik_infoDealerOwner/", function () use ($a
  * @since 09-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayMMCXIYillikWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayMMCXIYillikWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4498,7 +4498,7 @@ $app->get("/getAfterSalesDetayMMCXIYillikWithServices_infoDealerOwner/", functio
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGridMMCXI_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGridMMCXI_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4532,7 +4532,7 @@ $app->get("/getAfterSalesDetayGridMMCXI_infoDealerOwner/", function () use ($app
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayGridMMCXIWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayGridMMCXIWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4566,7 +4566,7 @@ $app->get("/getAfterSalesDetayGridMMCXIWithServices_infoDealerOwner/", function 
  * @since 06-05-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayBayiStok_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayBayiStok_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4601,7 +4601,7 @@ $app->get("/getAfterSalesDetayBayiStok_infoDealerOwner/", function () use ($app 
  * @since 24-04-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4639,7 +4639,7 @@ $app->get("/getAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", funct
  * @since 24-04-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardIsEmriData_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardIsEmriData_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4675,7 +4675,7 @@ $app->get("/getAfterSalesDashboardIsEmriData_infoDealerOwner/", function () use 
  * @since 24-04-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardIsEmriDataWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardIsEmriDataWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4711,7 +4711,7 @@ $app->get("/getAfterSalesDashboardIsEmriDataWithServices_infoDealerOwner/", func
  * @since 24-04-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaturaData_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaturaData_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4746,7 +4746,7 @@ $app->get("/getAfterSalesDashboardFaturaData_infoDealerOwner/", function () use 
  * @since 24-04-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaturaDataWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaturaDataWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4782,7 +4782,7 @@ $app->get("/getAfterSalesDashboardFaturaDataWithServices_infoDealerOwner/", func
  * @since 24-04-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardCiroYedekParca_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardCiroYedekParca_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4824,7 +4824,7 @@ $app->get("/getAfterSalesDashboardCiroYedekParca_infoDealerOwner/", function () 
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaalYedekParca_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaalYedekParca_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4857,7 +4857,7 @@ $app->get("/getAfterSalesDashboardFaalYedekParca_infoDealerOwner/", function () 
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDetayFaalYedekParca_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDetayFaalYedekParca_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4878,7 +4878,7 @@ $app->get("/getAfterSalesDetayFaalYedekParca_infoDealerOwner/", function () use 
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaalYedekParcaWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaalYedekParcaWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4897,7 +4897,7 @@ $app->get("/getAfterSalesDashboardFaalYedekParcaWithServices_infoDealerOwner/", 
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaalYedekParcaServisDisiWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaalYedekParcaServisDisiWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4917,7 +4917,7 @@ $app->get("/getAfterSalesDashboardFaalYedekParcaServisDisiWithServices_infoDeale
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaalYagToplam_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaalYagToplam_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4950,7 +4950,7 @@ $app->get("/getAfterSalesDashboardFaalYagToplam_infoDealerOwner/", function () u
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaalYagToplamWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaalYagToplamWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4972,7 +4972,7 @@ $app->get("/getAfterSalesDashboardFaalYagToplamWithServices_infoDealerOwner/", f
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaalStokToplam_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaalStokToplam_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -5007,7 +5007,7 @@ $app->get("/getAfterSalesDashboardFaalStokToplam_infoDealerOwner/", function () 
  * @since 13-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesDashboardFaalStokToplamWithServices_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardFaalStokToplamWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -5034,7 +5034,7 @@ $app->get("/getAfterSalesDashboardFaalStokToplamWithServices_infoDealerOwner/", 
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesYedekParcaHedefServissiz_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesYedekParcaHedefServissiz_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -5093,7 +5093,7 @@ $app->get("/getAfterSalesYedekParcaHedefServissiz_infoDealerOwner/", function ()
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesYedekParcaHedefServisli_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesYedekParcaHedefServisli_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -5154,7 +5154,7 @@ $app->get("/getAfterSalesYedekParcaHedefServisli_infoDealerOwner/", function () 
  * @author Mustafa Zeynel Dağlı
  */
  
-$app->get("/getAfterSalesYedekParcaPDFServissiz_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesYedekParcaPDFServissiz_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -5206,7 +5206,7 @@ $app->get("/getAfterSalesYedekParcaPDFServissiz_infoDealerOwner/", function () u
  * @since 21-06-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/getAfterSalesYedekParcaPDFServisli_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesYedekParcaPDFServisli_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
