@@ -30,8 +30,7 @@ class InfoDealerOwner extends \DAL\DalSlim {
             $opUserIdValue = -1; 
             $opUserRoleIdValue = -1;   
             $servicesQuery = ' a.servisid in (-1) and  ';
-          
-            print_r('////1///////')   ; 
+           
             
             if (isset($params['pk'])  && $params['pk']!='') {
                $opUserIdParams = array('pk' =>  $params['pk'],);
@@ -44,8 +43,7 @@ class InfoDealerOwner extends \DAL\DalSlim {
                 }
             }
              
-       print_r('/////2//////')   ; 
-            
+       
             
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');   
             $sql ="
@@ -63,12 +61,10 @@ class InfoDealerOwner extends \DAL\DalSlim {
                     WHERE 
                         ".$servicesQuery." 
                         a.active =0 
-                    order by id
-
-
+                    order by id 
                                  ";
              $statement = $pdo->prepare( $sql);
-             print_r('/////3//////')   ; 
+          
              echo debugPDO($sql, $params);
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
