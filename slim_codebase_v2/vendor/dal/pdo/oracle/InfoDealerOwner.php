@@ -42,7 +42,7 @@ public function fillServicesDdlist($params = array()) {
                   $opUserServiceIdArray = $opUserServiceId->servicesFormPk($opUserIdParams);   
                   if (\Utill\Dal\Helper::haveRecord($opUserServiceIdArray)) { 
                       
-                        $opUserServiceIdsValue =  [0]['services_id']; 
+                        $opUserServiceIdsValue = $opUserServiceIdArray ['resultSet'][0]['services_id']; 
                   }
 
             }
@@ -55,9 +55,9 @@ public function fillServicesDdlist($params = array()) {
                        vtsxy.GIZLIAD AD
                     FROM SASON.PERFORMANSSERVISLER vtsxy
                     WHERE 
-                       vtsxy.servicid in (  ".$opUserServiceIdsValue." ) and 
+                       vtsxy.servisid in (  ".$opUserServiceIdsValue." ) and 
                        vtsxy.active =0 
-                    order by vtsxy.id
+                    order by vtsxy.GIZLIAD
 
 
                                  ";
