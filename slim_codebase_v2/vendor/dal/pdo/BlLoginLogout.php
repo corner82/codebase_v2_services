@@ -568,7 +568,7 @@ class BlLoginLogout extends \DAL\DalSlim {
         try {
             $pdo = $this->slimApp->getServiceManager()->get('pgConnectFactory');          
             $sql = "  
-                SELECT  
+                SELECT  1 as control , 
                 REPLACE( REPLACE(  CAST (  ARRAY (  
                         SELECT  distinct firm_id fROM public.info_firm_users
                           WHERE 
