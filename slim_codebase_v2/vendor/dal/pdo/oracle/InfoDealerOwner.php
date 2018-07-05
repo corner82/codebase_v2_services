@@ -52,12 +52,12 @@ public function fillServicesDdlist($params = array()) {
         $sql ="     
                    SELECT
                         vtsxy.SERVISID ID,  
-                       vtsxy.GIZLIAD AD
+                       vtsxy.SERVISADI AD
                     FROM SASON.PERFORMANSSERVISLER vtsxy
                     WHERE 
                        vtsxy.servisid in (  ".$opUserServiceIdsValue." ) and 
                        vtsxy.active =0 
-                    order by vtsxy.GIZLIAD
+                    order by vtsxy.SERVISADI
 
 
                                  ";
