@@ -253,7 +253,7 @@ class BlLoginLogout extends \DAL\DalSlim {
                     SELECT id,pkey,sf_private_key_value,role_id FROM (
                             SELECT COALESCE(NULLIF(root_id, 0),id) AS id, 	
                                 CRYPT(sf_private_key_value,CONCAT('_J9..',REPLACE('".$params['pk']."','*','/'))) = CONCAT('_J9..',REPLACE('".$params['pk']."','*','/')) AS pkey,	                                
-                                sf_private_key_value
+                                sf_private_key_value,role_id 
                             FROM info_users WHERE active=0 AND deleted=0) AS logintable
                         WHERE pkey = TRUE
                     "; 
