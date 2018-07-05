@@ -123,7 +123,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'pkgetAfterSalesDetayIsEmriAcikYillikWithServices_infoDealerOwner' => 'restApiDefaultCall',
                                     'pkgetAfterSalesDetayIsEmriAcikYillik_infoDealerOwner' => 'restApiDefaultCall',
         
-                                    'fillServicesDdlist_infoDealerOwner' => 'restApiDefaultCall',
+                                    'pkfillServicesDdlist_infoDealerOwner' => 'restApiDefaultCall',
                                     'pkgetAfterSalesDetayBayiStok_infoDealerOwner' => 'restApiDefaultCall',
         
                                     'pkgetAfterSalesDetayCiro_infoDealerOwner' => 'restApiDefaultCall',
