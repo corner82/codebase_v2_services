@@ -9706,7 +9706,7 @@ select  rownum as rid , asd.* from (
         //print_r($today);
         //print_r($dayAfter);
         try {
-             $servicesQuery = '   dsf.servisid not in (1,134,136) and ';
+             $servicesQuery = ' and dsf.servisid not in (1,134,136)   ';
 
             if (isset($_GET['src'])  && $_GET['src']!='') {
                 //and ie.servisid in (94,96,98)
@@ -9720,9 +9720,9 @@ select  rownum as rid , asd.* from (
                                    SELECT 
                                       sum(yedekparcatoplami) yedekparcatoplami
                                       FROM  sason.ypfaaliyet dsf
-                                   WHERE
+                                   WHERE 
+                                         dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')  
                                          ".$servicesQuery."  
-                                         dsf.YEDEKPARCAFALIYETRAPORTARIHI <   to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')   
 
                        ) asd               
                     ";
@@ -10359,7 +10359,7 @@ select  rownum as rid , asd.* from (
             //servisid in (96)
             $servicesQuery = ' servisid  in ('.$_GET['src'].')  ';
             // and vv.servisid in (94,96,98)
-            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].') and  ';
+            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].')    ';
         }
         
         try {
