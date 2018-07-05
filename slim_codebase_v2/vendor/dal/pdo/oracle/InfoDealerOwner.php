@@ -27,7 +27,7 @@ class InfoDealerOwner extends \DAL\DalSlim {
      */
 public function fillServicesDdlist($params = array()) {
         try {  
-        $servicesQuery = ' 1=2 and  '; 
+        $opUserServiceIdsValue = ' -1  '; 
         if (isset($params['pk'])  && $params['pk']!='') {
            $opUserIdParams = array('pk' =>  $params['pk'],);
             $opUserIdArray = $this->slimApp-> getBLLManager()->get('opUserIdBLL');  
