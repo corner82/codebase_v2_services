@@ -17,10 +17,10 @@ namespace DAL\PDO\Oracle;
 class InfoDealerOwner extends \DAL\DalSlim {
 
     
-     /**  
-     * @author Mustafa Zeynel Dağlı
-     * @ ddslick doldurmak için satış sonrası servisler tablosundan danısman kayıtları döndürür !!
-     * @version 30/05/2018
+/**  
+     * @author Okan CIRAN
+     * @ ddslick doldurmak için satış sonrası user bazlı servisler kayıtlarını  döndürür !!
+     * @version 05/07/2018
      * @param array | null $args
      * @return array
      * @throws \PDOException
@@ -33,18 +33,13 @@ public function fillServicesDdlist($params = array()) {
             $opUserIdArray = $this->slimApp-> getBLLManager()->get('opUserIdBLL');  
             $opUserId = $opUserIdArray->getUserId($opUserIdParams);
             if (\Utill\Dal\Helper::haveRecord($opUserId)) {
-                $opUserIdValue = $opUserId ['resultSet'][0]['user_id']; 
-             //   $opUserRoleIdValue = $opUserId ['resultSet'][0]['role_id'];  
-
-                 $opUserIdParams = array('user_id' => $opUserIdValue,);
-
+                $opUserIdValue = $opUserId ['resultSet'][0]['user_id'];  
+                 $opUserIdParams = array('user_id' => $opUserIdValue,); 
                   $opUserServiceId = $this->slimApp-> getBLLManager()->get('blLoginLogoutBLL');     
                   $opUserServiceIdArray = $opUserServiceId->servicesFormPk($opUserIdParams);   
-                  if (\Utill\Dal\Helper::haveRecord($opUserServiceIdArray)) { 
-                      
+                  if (\Utill\Dal\Helper::haveRecord($opUserServiceIdArray)) {  
                         $opUserServiceIdsValue = $opUserServiceIdArray ['resultSet'][0]['services_id']; 
-                  }
-
+                  } 
             }
         }
             
@@ -57,9 +52,7 @@ public function fillServicesDdlist($params = array()) {
                     WHERE 
                        vtsxy.servisid in (  ".$opUserServiceIdsValue." ) and 
                        vtsxy.active =0 
-                    order by vtsxy.SERVISADI
-
-
+                    order by vtsxy.SERVISADI  
                                  ";
              $statement = $pdo->prepare( $sql);
             
@@ -83,6 +76,26 @@ public function fillServicesDdlist($params = array()) {
      * @throws \PDOException
      */
     public function getAfterSalesDetayAlisFaturalari($args = array()) {
+        
+      $opUserServiceIdsValue = ' -1  '; 
+        if (isset($args['pk'])  && $args['pk']!='') {
+           $opUserIdParams = array('pk' =>  $args['pk'],);
+            $opUserIdArray = $this->slimApp-> getBLLManager()->get('opUserIdBLL');  
+            $opUserId = $opUserIdArray->getUserId($opUserIdParams);
+            if (\Utill\Dal\Helper::haveRecord($opUserId)) {
+                $opUserIdValue = $opUserId ['resultSet'][0]['user_id'];  
+                 $opUserIdParams = array('user_id' => $opUserIdValue,); 
+                  $opUserServiceId = $this->slimApp-> getBLLManager()->get('blLoginLogoutBLL');     
+                  $opUserServiceIdArray = $opUserServiceId->servicesFormPk($opUserIdParams);   
+                  if (\Utill\Dal\Helper::haveRecord($opUserServiceIdArray)) {  
+                        $opUserServiceIdsValue = $opUserServiceIdArray ['resultSet'][0]['services_id']; 
+                  } 
+            }
+        }   
+        
+        
+        
+        
         $today = date('d/m/Y');
         $dayAfter = date('d/m/Y', strtotime(' +1 day'));
         $weekBefore = date('d/m/Y', strtotime(' -6 day'));
@@ -99,9 +112,9 @@ public function fillServicesDdlist($params = array()) {
                             WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')))= 3 THEN '1'
                             ELSE TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')) END as FATURATUTAR*/
                 FROM faturalar a
-                WHERE /*a.servisid  and*/ 
-                a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
-                and a.faturaturid=4 
+                WHERE  a.servisid  in (  ".$opUserServiceIdsValue." ) and 
+                    a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
+                    and a.faturaturid=4 
                 GROUP BY to_char(a.ISLEMTARIHI, 'dd/mm/yyyy')
             ORDER BY to_char(a.ISLEMTARIHI, 'dd/mm/yyyy') asc
             ";
@@ -127,6 +140,26 @@ public function fillServicesDdlist($params = array()) {
      * @throws \PDOException
      */
     public function getAfterSalesDetayAlisFaturalariWeeklyWithServices($args = array()) {
+        
+        $opUserServiceIdsValue = ' -1  ';
+        if (isset($params['pk']) && $params['pk'] != '') {
+            $opUserIdParams = array('pk' => $params['pk'],);
+            $opUserIdArray = $this->slimApp->getBLLManager()->get('opUserIdBLL');
+            $opUserId = $opUserIdArray->getUserId($opUserIdParams);
+            if (\Utill\Dal\Helper::haveRecord($opUserId)) {
+                $opUserIdValue = $opUserId ['resultSet'][0]['user_id'];
+                $opUserIdParams = array('user_id' => $opUserIdValue,);
+                $opUserServiceId = $this->slimApp->getBLLManager()->get('blLoginLogoutBLL');
+                $opUserServiceIdArray = $opUserServiceId->servicesFormPk($opUserIdParams);
+                if (\Utill\Dal\Helper::haveRecord($opUserServiceIdArray)) {
+                    $opUserServiceIdsValue = $opUserServiceIdArray ['resultSet'][0]['services_id'];
+                }
+            }
+        }
+
+
+
+
         $today = date('d/m/Y');
         $dayAfter = date('d/m/Y', strtotime(' +1 day'));
         $weekBefore = date('d/m/Y', strtotime(' -6 day'));
@@ -151,10 +184,10 @@ public function fillServicesDdlist($params = array()) {
              left join (
                select distinct 
                    to_date(x.kayittarih,'dd/mm/yyyy') tar   
-               from servisisemirler x WHERE                   
+               from servisisemirler x 
+               WHERE    
                  x.kayittarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$today."','dd/mm/yyyy')  
-                --x.kayittarih between  to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy')
-                                      
+                --x.kayittarih between  to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy') 
              ) tarihicin on 1=1
              LEFT JOIN (
              select    a.servisid ,  
@@ -166,19 +199,17 @@ public function fillServicesDdlist($params = array()) {
                             ELSE TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')) END as FATURATUTAR*/
                 
                 FROM faturalar a
-                WHERE ".$servicesQuery." 
-                --a.servisid in (94, 96) and 
-                a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')
-                --a.ISLEMTARIHI    between  to_date('21.05.2018', 'dd/mm/yyyy') AND to_date('28.05.2018', 'dd/mm/yyyy')
-                and a.faturaturid=4 
+                WHERE   /* ".$servicesQuery."  */ 
+                    a.servisid   in (  ".$opUserServiceIdsValue." ) and 
+                    a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')
+                    --a.ISLEMTARIHI    between  to_date('21.05.2018', 'dd/mm/yyyy') AND to_date('28.05.2018', 'dd/mm/yyyy')
+                    and a.faturaturid=4 
                 GROUP BY a.servisid, to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') --  to_char(a.ISLEMTARIHI, 'dd/mm/yyyy') 
 
              
              ) data1 on data1.servisid = vv.servisid and data1.TARIH = tarihicin.tar
-             WHERE 
-                 -- vv.servisid not in (1,134,136)
-                 ".$servicesQuery2." 
-                 --vv.servisid in (94, 96) and 
+             WHERE  
+                 ".$servicesQuery2."  
                  vv.dilkod ='Turkish' 
              ORDER BY vv.servisid, tarih asc
             ";
@@ -204,6 +235,23 @@ public function fillServicesDdlist($params = array()) {
      * @throws \PDOException
      */
     public function getAfterSalesDetayAlisFaturalariAylik($args = array()) {
+        
+         $opUserServiceIdsValue = ' -1  ';
+        if (isset($params['pk']) && $params['pk'] != '') {
+            $opUserIdParams = array('pk' => $params['pk'],);
+            $opUserIdArray = $this->slimApp->getBLLManager()->get('opUserIdBLL');
+            $opUserId = $opUserIdArray->getUserId($opUserIdParams);
+            if (\Utill\Dal\Helper::haveRecord($opUserId)) {
+                $opUserIdValue = $opUserId ['resultSet'][0]['user_id'];
+                $opUserIdParams = array('user_id' => $opUserIdValue,);
+                $opUserServiceId = $this->slimApp->getBLLManager()->get('blLoginLogoutBLL');
+                $opUserServiceIdArray = $opUserServiceId->servicesFormPk($opUserIdParams);
+                if (\Utill\Dal\Helper::haveRecord($opUserServiceIdArray)) {
+                    $opUserServiceIdsValue = $opUserServiceIdArray ['resultSet'][0]['services_id'];
+                }
+            }
+        }
+        
         $today = date('d/m/Y');
         $dayAfter = date('d/m/Y', strtotime(' +1 day'));
         $treeMonthsBefore = date('d/m/Y', strtotime(' -90 day'));
