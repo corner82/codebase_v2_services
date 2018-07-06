@@ -9596,7 +9596,7 @@ SELECT  vv.servisid ,
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     select 
-                        TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) a,
+                        TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')) a,
                         /*CASE
                             WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))= 0 THEN '0 TL' 
                             WHEN LENGTH(TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')))< 4 THEN CONCAT(TO_CHAR(round(NVL(sum(a.NETTUTAR), 0),0) , '999,999,999,999,999'), ' TL')
