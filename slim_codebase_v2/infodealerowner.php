@@ -4636,10 +4636,10 @@ $app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", fun
 
 /**
  * 
- * @since 24-04-2018
- * @author Mustafa Zeynel Dağlı
+ * @since 06-07-2018
+ * @author Okan CIRAN
  */
-$app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteriWithServices_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4657,7 +4657,7 @@ $app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", fun
     }     
     
     
-    $resDataGrid = $BLL->getAfterSalesDashboardIsEmriLastDataMusteri(array(
+    $resDataGrid = $BLL->getAfterSalesDashboardIsEmriLastDataMusteriWithServices(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
@@ -4673,10 +4673,10 @@ $app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", fun
 
 /**
  * 
- * @since 06-07-2018
- * @author Okan CIRAN
+ * @since 24-04-2018
+ * @author Mustafa Zeynel Dağlı
  */
-$app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardIsEmriData_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4694,7 +4694,7 @@ $app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", fun
     }     
     
     
-    $resDataGrid = $BLL->pkgetAfterSalesDashboardIsEmriLastDataMusteri(array(
+    $resDataGrid = $BLL->getAfterSalesDashboardIsEmirData(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));
