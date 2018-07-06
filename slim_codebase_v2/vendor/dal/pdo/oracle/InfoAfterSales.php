@@ -9252,11 +9252,11 @@ select  rownum as rid , asd.* from (
         $today = date('d/m/Y');
         $dayAfter = date('d/m/Y', strtotime(' +1 day'));
         try { 
-        $servicesQuery = ' SERVISID not IN (1,134,136)';
+        $servicesQuery = ' WHERE a.SERVISID not IN (1,134,136)';
         $servicesQuery2 = '';
         if (isset($_GET['src'])  && $_GET['src']!='') {
             //servisid = 94
-            $servicesQuery = ' servisid  in ('.$_GET['src'].')  '; 
+            $servicesQuery = 'WHERE a.servisid  in ('.$_GET['src'].')  '; 
         } 
             
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
