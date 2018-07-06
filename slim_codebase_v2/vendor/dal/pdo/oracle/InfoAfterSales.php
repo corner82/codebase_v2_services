@@ -126,7 +126,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
              SELECT  vv.servisid , /*(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */
-                                   (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
             tarihicin.tar tarih ,
             nvl(data1.FATURATUTAR,0) FATURATUTAR 
              
@@ -255,7 +255,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad,  */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
             tarihicin.tar as tarih ,
             tarihicin.yil as yil ,
             
@@ -391,7 +391,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as ay,
                 tarihicin.yil as yil,
                 nvl(data1.FATURATUTAR,0) FATURATUTAR
@@ -521,7 +521,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT  vv.servisid ,/*  (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad,  */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
             tarihicin.tar tarih ,
             nvl(data1.FATURATUTAR,0) FATURATUTAR 
              
@@ -644,7 +644,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = " 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.tar as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.FATURATUTAR,0) FATURATUTAR
@@ -773,7 +773,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as ay,
                 tarihicin.yil as yil,            
                 nvl(data1.FATURATUTAR,0) FATURATUTAR
@@ -893,7 +893,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad,  */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
             tarihicin.tar tarih ,
             nvl(data1.FATURATUTAR,0) FATURATUTAR 
              
@@ -1015,7 +1015,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT  vv.servisid , /*  (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                      (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                      (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.tar as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.FATURATUTAR,0) FATURATUTAR
@@ -1139,7 +1139,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                     (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as ay,
                 tarihicin.yil as yil,            
                 nvl(data1.FATURATUTAR,0) FATURATUTAR
@@ -1259,7 +1259,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = " 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad,  */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
             tarihicin.tar tarih ,
             nvl(data1.FATURATUTAR,0) FATURATUTAR  
               from vt_servisler vv  
@@ -1379,7 +1379,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.tar as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.FATURATUTAR,0) FATURATUTAR
@@ -1504,7 +1504,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "  
                 
             SELECT  vv.servisid , /*  (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                     (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as ay,
                 tarihicin.yil as yil,            
                 nvl(data1.FATURATUTAR,0) FATURATUTAR
@@ -1582,7 +1582,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT   vv.servisid ,  /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad,  */ 
-                                       (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                       (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
             tarihicin.tar tarih ,
             nvl(data1.OGUN_KAPATILMAYAN_EMIRLER,0) OGUN_KAPATILMAYAN_EMIRLER  
               from vt_servisler vv  
@@ -1756,7 +1756,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT  vv.servisid , /*  (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                      (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                      (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.tar as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.MIKTAR,0) MIKTAR
@@ -1889,7 +1889,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = " 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as ay,
                 tarihicin.yil as yil,            
                 nvl(data1.MIKTAR,0) oay_kapatilmayan_emirler  
@@ -2002,7 +2002,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad,  */ 
-                                     (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.tar tarih ,
                 nvl(data1.acilan_is_emri,0) acilan_is_emri ,
                 nvl(data1.kapanan_is_emri,0) kapanan_is_emri 
@@ -2155,7 +2155,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
             SELECT  vv.servisid , /*  (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                      (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                      (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.tar as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.acilan_is_emri,0) acilan_is_emri ,
@@ -2305,7 +2305,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
             SELECT  vv.servisid ,  /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                      (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad,    
+                                      (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad,    
                 tarihicin.ay as ay,
                 tarihicin.yil as yil,            
                 tarihicin.ay as tarih, 
@@ -2506,7 +2506,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                    SELECT
                             p.HSERVISID SERVISID, 
                             /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = p.HSERVISID   )  as servisad,  */
-                            (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = p.HSERVISID) as servisad, 
+                            (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = p.HSERVISID) as servisad, 
                            p.stokmiktar * p.ortalamamaliyet stoktutar              
                       FROM(SELECT servisstokturid,
                                a.id,
@@ -2625,7 +2625,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                    SELECT
                             p.HSERVISID SERVISID, 
                             /*(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = p.HSERVISID   )  as servisad,  */
-                            (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = p.HSERVISID) as servisad, 
+                            (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = p.HSERVISID) as servisad, 
                            p.stokmiktar * p.ortalamamaliyet stoktutar              
                       FROM(SELECT servisstokturid,
                                a.id,
@@ -2736,7 +2736,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                    SELECT
                             p.HSERVISID SERVISID, 
                             /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = p.HSERVISID   )  as servisad,  */ 
-                            (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = p.HSERVISID) as servisad, 
+                            (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = p.HSERVISID) as servisad, 
                            p.stokmiktar * p.ortalamamaliyet stoktutar              
                       FROM(SELECT servisstokturid,
                                a.id,
@@ -2995,7 +2995,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 
             SELECT
                         /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = servis.servisid) as servisad, */ 
-                        (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = servis.servisid) as servisad, 
+                        (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = servis.servisid) as servisad, 
                         --sum(ags.arac_giris) as ARAC_GIRIS_SAYISI
                         servis.servisid,
                         tarihler.tarih, 
@@ -3116,7 +3116,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad,  
+                                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad,  
                 tarihicin.tar as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.arac_giris,0) arac_giris  
@@ -3187,7 +3187,7 @@ class InfoAfterSales extends \DAL\DalSlim {
 
                SELECT  vv.servisid , 
                   /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                   tarihicin.ay as tarih,
                   tarihicin.yil as yil,            
                   nvl(data1.arac_giris,0) arac_giris  
@@ -3256,7 +3256,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "     
             SELECT  vv.servisid , 
                 /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                   (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.arac_giris,0) arac_giris  
@@ -3408,7 +3408,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                            (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                            (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                         tarihicin.ay as tarih,
                         tarihicin.yil as yil,            
                         nvl(data1.DOWNTIME,0) DOWNTIME  
@@ -3481,7 +3481,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "  
                     SELECT  vv.servisid , 
                     /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                     tarihicin.ay as tarih,
                     tarihicin.yil as yil,            
                     nvl(data1.DOWNTIME,0) DOWNTIME  
@@ -3558,7 +3558,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "  
                     SELECT  vv.servisid , 
                         /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                        (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                        (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                         tarihicin.ay as tarih,
                         tarihicin.yil as yil,            
                         nvl(data1.DOWNTIME,0) DOWNTIME  
@@ -3719,7 +3719,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                             (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                             (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                         tarihicin.ay as tarih,
                         tarihicin.yil as yil,            
                         nvl(data1.DOWNTIME,0) DOWNTIME  
@@ -3798,7 +3798,7 @@ class InfoAfterSales extends \DAL\DalSlim {
 
                SELECT  vv.servisid , 
                   /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                     (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                   tarihicin.ay as tarih,
                   tarihicin.yil as yil,            
                   nvl(data1.arac_giris,0) arac_giris  
@@ -3870,7 +3870,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "     
             SELECT  vv.servisid , 
                 /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.arac_giris,0) arac_giris  
@@ -4019,7 +4019,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                             (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                             (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                         tarihicin.ay as tarih,
                         tarihicin.yil as yil,            
                         nvl(data1.DOWNTIME,0) DOWNTIME  
@@ -4098,7 +4098,7 @@ class InfoAfterSales extends \DAL\DalSlim {
 
                SELECT  vv.servisid , 
                   /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                     (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                   tarihicin.ay as tarih,
                   tarihicin.yil as yil,            
                   nvl(data1.arac_giris,0) arac_giris  
@@ -4170,7 +4170,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "     
             SELECT  vv.servisid , 
                 /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                   (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.arac_giris,0) arac_giris  
@@ -4319,7 +4319,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                             (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                             (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                         tarihicin.ay as tarih,
                         tarihicin.yil as yil,            
                         nvl(data1.DOWNTIME,0) DOWNTIME  
@@ -4398,7 +4398,7 @@ class InfoAfterSales extends \DAL\DalSlim {
 
                SELECT  vv.servisid , 
                   /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */
-                     (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                     (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                   tarihicin.ay as tarih,
                   tarihicin.yil as yil,            
                   nvl(data1.arac_giris,0) arac_giris  
@@ -4469,7 +4469,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "     
             SELECT  vv.servisid , /*(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */
-                                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.arac_giris,0) arac_giris  
@@ -4741,7 +4741,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 SELECT servisid , 
                 --(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad, 
-                (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                    tarih ,
                             sum(yedekparcatoplamsatis)   yedekparcatoplamsatis 
                      FROM (  
@@ -4893,7 +4893,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 SELECT servisid , 
                     --(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad,
-                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                     tarih,
                     yil,            
                     sum(yedekparcatoplamsatis) yedekparcatoplamsatis
@@ -5054,8 +5054,8 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "     
                    SELECT servisid  ,  
-                    --(Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
-                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    --(Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                     ay,
                     yil,            
                     sum(yedekparcatoplamsatis) yedekparcatoplamsatis
@@ -5338,7 +5338,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "
                 SELECT servisid , 
                       /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad,  */ 
-                         (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                         (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                     tarih ,
                     sum(yagsatistutar)   yagsatistutar 
                  FROM (  
@@ -5497,7 +5497,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 
             SELECT servisid , 
                 /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad,  */ 
-                   (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                 tarih,
                 yil,            
                 sum(yagsatistutar) yagsatistutar
@@ -5663,7 +5663,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $sql = "     
                 SELECT servisid , 
                 --(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = asd.servisid) as servisad, 
-                (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                     ay,
                     yil,            
                     sum(yagsatistutar) yagsatistutar
@@ -5811,7 +5811,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 
             select TO_CHAR(ROUND(sum(de.atolyecirosucari2),0), '999,999,999,999,999') atolyecirosucari from(
                     select  servisid ,  
-                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
                     TO_CHAR(ROUND(sum(nvl(atolyecirosucari,0)), 0), '999,999,999,999,999') atolyecirosucari, 
                     sum(nvl(atolyecirosucari,0)) atolyecirosucari2
                     
@@ -5976,7 +5976,7 @@ class InfoAfterSales extends \DAL\DalSlim {
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
-                        SELECT servisid , (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
+                        SELECT servisid , (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
                         tarih,
 
                         sum(atolyecirosucari)   atolyecirosucari
@@ -6186,7 +6186,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
                 
-                SELECT servisid ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                SELECT servisid ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                     tarih,
                     yil,            
                     sum( atolyecirosucari ) atolyecirosucari
@@ -6409,7 +6409,7 @@ class InfoAfterSales extends \DAL\DalSlim {
 
 
 
-SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+SELECT servisid  ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
     ay,
     yil,    
                             
@@ -6581,7 +6581,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
             $sql = " 
              select TO_CHAR(ROUND(sum(de.atolyecirosugaranti2),0), '999,999,999,999,999') atolyecirosugaranti from(   
                 select  servisid ,  
-                (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
                         TO_CHAR(ROUND(sum(nvl(atolyecirosugaranti,0)), 0), '999,999,999,999,999') atolyecirosugaranti, 
                         sum(nvl(atolyecirosugaranti,0)) atolyecirosugaranti2
                         from ( 
@@ -6745,7 +6745,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
                     
 
             SELECT servisid , 
-                (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
                tarih,
                sum(atolyecirosugaranti)   atolyecirosugaranti 
             FROM (  
@@ -6954,7 +6954,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
                 
-           SELECT servisid ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+           SELECT servisid ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
     tarih,
     yil,            
     sum(  atolyecirosugaranti )  atolyecirosugaranti
@@ -7177,7 +7177,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
                 
 
             SELECT servisid  ,  
-            (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+            (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
             ay,
             yil,      
             TO_CHAR(ROUND(sum(nvl(atolyecirosugaranti,0)), 0), '999,999,999,999,999') atolyecirosugaranti        
@@ -7349,7 +7349,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = " 
                 select TO_CHAR(ROUND(sum(de.direksatistutar2),0), '999,999,999,999,999') direksatistutar from(  
-                    select  servisid ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
+                    select  servisid ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
                     TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar,
                     sum(nvl(direksatistutar,0)) direksatistutar2
                     from ( 
@@ -7506,7 +7506,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
-            SELECT servisid , (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
+            SELECT servisid , (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
                tarih,
                sum(direksatistutar)   direksatistutar
 
@@ -7716,7 +7716,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
                 SELECT servisid ,  
-                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                     tarih,
                     yil,            
                     sum(direksatistutar) direksatistutar
@@ -7936,7 +7936,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "     
-                SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+                SELECT servisid  ,  (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
     ay,
     yil,    
     TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar    
@@ -8098,7 +8098,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
                 
             SELECT
                         /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = servis.servisid) as servisad, */ 
-                        (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = servis.servisid) as servisad, 
+                        (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = servis.servisid) as servisad, 
                         --sum(ags.arac_giris) as ARAC_GIRIS_SAYISI
                         servis.servisid,
                         tarihler.tarih, 
@@ -8199,7 +8199,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
             $sql = "
                 
             SELECT  vv.servisid , /*  (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                        (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                        (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.tar as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.arac_giris,0) arac_giris  
@@ -8318,7 +8318,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
             $sql = "     
             SELECT  vv.servisid , 
                 /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                   (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as tarih,
                 tarihicin.yil as yil,            
                 nvl(data1.arac_giris,0) arac_giris  
@@ -8565,7 +8565,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
                 
                 SELECT  vv.servisid , 
                 /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                   (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                                 tarihicin.ay as ay,
                                 tarihicin.yil as yil,            
                                 nvl(data1.memnuniyet,0) memnuniyet
@@ -8632,7 +8632,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                     SELECT  vv.servisid , 
-             (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+             (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                             tarihicin.ay as ay,
                             tarihicin.yil as yil,            
                             nvl(data1.memnuniyet,0) memnuniyet
@@ -8704,7 +8704,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
                     
 
             SELECT  vv.servisid , 
-             (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+             (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                             tarihicin.ay as ay,
                             tarihicin.yil as yil,            
                             nvl(data1.memnuniyet,0) memnuniyet
@@ -8954,7 +8954,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "     
                     SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */ 
-                                             (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+                                             (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                         tarihicin.ay as ay,
                         tarihicin.yil as yil,            
                         nvl(data1.memnuniyet,0) memnuniyet
@@ -9023,7 +9023,7 @@ SELECT servisid  ,  (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy 
                     
 
 SELECT  vv.servisid , 
-             (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+             (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                             tarihicin.ay as ay,
                             tarihicin.yil as yil,            
                             nvl(data1.memnuniyet,0) memnuniyet
@@ -9090,7 +9090,7 @@ SELECT  vv.servisid ,
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                    SELECT  vv.servisid , 
-             (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
+             (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                             tarihicin.ay as ay,
                             tarihicin.yil as yil,            
                             nvl(data1.memnuniyet,0) memnuniyet
@@ -9194,34 +9194,39 @@ SELECT  vv.servisid ,
         $today = date('d/m/Y');
         $dayAfter = date('d/m/Y', strtotime(' +1 day'));
         try {
-            
-            
-            $servicesQuery = ' WHERE a.SERVISID not IN (1,134,136)';
-            $servicesQuery2 = '';
-            if (isset($_GET['src'])  && $_GET['src']!='') {
-                //servisid = 94
-                $servicesQuery = ' WHERE  a.servisid  in ('.$_GET['src'].')  ';
-
-            }
-       
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
-            $sql = " 
-            SELECT  rownum as rid , asd.* from ( 
-                SELECT      
-                    ORT.AD as SERVIS, 
-                    a.SERVISID,  
-                    a.id servisisemirid,  
-                    to_char(a.KAYITTARIH, 'DD/MM/YYYY HH24:MI:SS') as tarih,
-                    a.SERVISISORTAKID ,
-                    iso.ad
-                FROM servisisemirler a     
-                LEFT JOIN SASON.servisisortaklar iso ON iso.id = a.SERVISISORTAKID AND iso.durumid=1
-                LEFT JOIN SERVISLER ser ON A.SERVISID = ser.id AND ser.durumid=1
-                LEFT JOIN SASON.isortaklar ort on ser.ISORTAKID = ort.id   
-                ".$servicesQuery."
-                order by   a.KAYITTARIH  desc 
-            ) asd 
-            where rownum < 7 ";
+            $sql = "
+                    
+
+select  rownum as rid , asd.* from ( 
+  SELECT      
+                    ORT.AD as SERVIS,
+                    
+                   a.SERVISID, 
+                   --(SELECT vtsx.partnercode FROM vt_servisler vtsx where vtsx.servisid = a.SERVISID  and vtsx.dilkod = 'Turkish') as partnercode,
+                   --(SELECT vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = a.SERVISID) as servisad, 
+                   --(Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as servisad, 
+                   a.id servisisemirid, 
+                   
+                   to_char(a.KAYITTARIH, 'DD/MM/YYYY HH24:MI:SS') as tarih,
+                   a.SERVISISORTAKID ,
+                   iso.ad
+                 FROM servisisemirler a     
+                  LEFT JOIN SASON.servisisortaklar iso ON iso.id = a.SERVISISORTAKID AND iso.durumid=1
+                  LEFT JOIN SERVISLER ser ON A.SERVISID = ser.id AND ser.durumid=1
+                  LEFT JOIN SASON.isortaklar ort on ser.ISORTAKID = ort.id             
+                 --INNER JOIN servisisemirislemler b on a.id=b.servisisemirid
+                 --WHERE
+                 -- trunc (a.KAYITTARIH) = trunc(sysdate)  
+                  --  b.isemirtipid=2 AND 
+                --    rownum < 50
+                --    a.servisid {servisIdQuery} AND
+                   -- to_char(sysdate,'yyyy') =  to_char(KAYITTARIH,'yyyy')
+                 --GROUP BY a.servisid, to_number ( to_char(KAYITTARIH,'mm')), to_char(KAYITTARIH, 'Month') 
+                 order by   a.KAYITTARIH  desc 
+                -- isemirtipler
+                ) asd 
+                where rownum < 7 ";
              
             $statement = $pdo->prepare($sql);  
             //print_r($sql);
@@ -9237,61 +9242,6 @@ SELECT  vv.servisid ,
             return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
         }
     }
-    
-        
-    /**
-     * @param array | null $args
-     * @return Array
-     * @throws \PDOException
-     */
-    public function getAfterSalesDashboardIsEmriLastDataMusteriWithServices($args = array()) {
-        $today = date('d/m/Y');
-        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
-        try {
-            
-            
-            $servicesQuery = ' WHERE a.SERVISID not IN (1,134,136)';
-            $servicesQuery2 = '';
-            if (isset($_GET['src'])  && $_GET['src']!='') {
-                //servisid = 94
-                $servicesQuery = ' WHERE  a.servisid  in ('.$_GET['src'].')  ';
-
-            }
-       
-            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
-            $sql = " 
-            SELECT  rownum as rid , asd.* from ( 
-                SELECT      
-                    ORT.AD as SERVIS, 
-                    a.SERVISID,  
-                    a.id servisisemirid,  
-                    to_char(a.KAYITTARIH, 'DD/MM/YYYY HH24:MI:SS') as tarih,
-                    a.SERVISISORTAKID ,
-                    iso.ad
-                FROM servisisemirler a     
-                LEFT JOIN SASON.servisisortaklar iso ON iso.id = a.SERVISISORTAKID AND iso.durumid=1
-                LEFT JOIN SERVISLER ser ON A.SERVISID = ser.id AND ser.durumid=1
-                LEFT JOIN SASON.isortaklar ort on ser.ISORTAKID = ort.id   
-                ".$servicesQuery."
-                order by   a.KAYITTARIH  desc 
-            ) asd 
-            where rownum < 7 ";
-             
-            $statement = $pdo->prepare($sql);  
-            //print_r($sql);
-            
-            $statement->execute();
-            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
-            $errorInfo = $statement->errorInfo();
-            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
-                throw new \PDOException($errorInfo[0]);
-            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
-        } catch (\PDOException $e /* Exception $e */) {
-            //$debugSQLParams = $statement->debugDumpParams();
-            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
-        }
-    }
-    
     
      /**
      * @param array | null $args
@@ -10364,7 +10314,7 @@ SELECT  vv.servisid ,
             $sql = "  
                 select  
                     SERVISID,  
-                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
                      TYPE ,
                      TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 0), '999,999,999,999,999') OCAKMAYIS2017,
                      TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2), '999,999,999,999,999.99') OCAKMAYIS2018,
@@ -10417,7 +10367,7 @@ SELECT  vv.servisid ,
             $sql = "  
             select   
                 SERVISID,  
-                (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
+                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
                  TYPE ,
                  TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 0), '999,999,999,999,999') OCAKMAYIS2017,
                  TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2), '999,999,999,999,999.99') OCAKMAYIS2018,
@@ -10468,7 +10418,7 @@ SELECT  vv.servisid ,
             $sql = "  
                 select  
                      SERVISID , 
-                    (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as SERVISAD,  
+                    (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as SERVISAD,  
                     concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) LINKPDF
 
                  from SASON.PERFORMANS_PDF a
@@ -10507,7 +10457,7 @@ SELECT  vv.servisid ,
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                 select  
-                SERVISID , (Select vtsxy.SERVISAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as SERVISAD,  
+                SERVISID , (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as SERVISAD,  
                 concat('http://manperformance.man.com.tr:9000/miya_extras/pdf/',pdfname) LINKPDF
 
                  from SASON.PERFORMANS_PDF a
