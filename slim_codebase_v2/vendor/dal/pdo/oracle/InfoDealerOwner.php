@@ -10383,26 +10383,26 @@ SELECT  vv.servisid ,
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
             select  
-                SERVISID,  
-                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
-                 TYPE ,
-                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 0), '999,999,999,999,999') OCAKMAYIS2017,
-                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2), '999,999,999,999,999.99') OCAKMAYIS2018,
-                  trim( TO_CHAR(ROUND(nvl(KARSILASTIRMA_1718_OM,0), 2),'990D99','NLS_NUMERIC_CHARACTERS = ''.,'' '))  KARSILASTIRMA_1718_OM ,  
-                 TO_CHAR(ROUND(nvl(TOPLAM_2017,0), 2), '999,999,999,999,999.99') TOPLAM_2017,                 
-                 TO_CHAR(ROUND(nvl(Y3ILLIK_ORTALAMA,0), 2), '999,999,999,999,999.99') Y3ILLIK_ORTALAMA,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_GERCEKLESME_MIKTARI,0), 2), '999,999,999,999,999.99') AYLIK_GERCEKLESME_MIKTARI,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_7ICIN_GEREKEN_MIKTAR,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_8ICIN_GEREKEN_MIKTAR,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_9ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_7ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_8ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_9ICIN_GEREKEN_MIKTAR,
-                 PARTNERCODE 
-               from   SASON.PERFORMANS_YPHEDEF  zz
-              where servisid not in (1,134,136)
+                 SERVISID,  
+                (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
+                TYPE,
+                trim( TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  OCAKMAYIS2017,
+                trim( TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  OCAKMAYIS2018,
+                trim( TO_CHAR(ROUND(nvl(KARSILASTIRMA_1718_OM,0), 2),'990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  KARSILASTIRMA_1718_OM,
+                trim( TO_CHAR(ROUND(nvl(TOPLAM_2017,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  TOPLAM_2017,
+                trim( TO_CHAR(ROUND(nvl(Y3ILLIK_ORTALAMA,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  Y3ILLIK_ORTALAMA,
+                trim( TO_CHAR(ROUND(nvl(AYLIK_GERCEKLESME_MIKTARI,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  AYLIK_GERCEKLESME_MIKTARI,
+                trim( TO_CHAR(ROUND(nvl(AYLIK_7ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  AYLIK_7ICIN_GEREKEN_MIKTAR,
+                trim( TO_CHAR(ROUND(nvl(AYLIK_8ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  AYLIK_8ICIN_GEREKEN_MIKTAR,
+                trim( TO_CHAR(ROUND(nvl(AYLIK_9ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  AYLIK_9ICIN_GEREKEN_MIKTAR,
+                trim( TO_CHAR(ROUND(nvl(YILLIK_7ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  YILLIK_7ICIN_GEREKEN_MIKTAR,
+                trim( TO_CHAR(ROUND(nvl(YILLIK_8ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  YILLIK_8ICIN_GEREKEN_MIKTAR,
+                trim( TO_CHAR(ROUND(nvl(YILLIK_9ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  YILLIK_9ICIN_GEREKEN_MIKTAR,                 
+                PARTNERCODE 
+            from   SASON.PERFORMANS_YPHEDEF  zz
+            where servisid not in (1,134,136)
 
-               order by servisid , id 
+            order by servisid , id 
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
@@ -10435,28 +10435,28 @@ SELECT  vv.servisid ,
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
-            select   
-                SERVISID,  
-                (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
-                 TYPE ,
-                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 0), '999,999,999,999,999') OCAKMAYIS2017,
-                 TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2), '999,999,999,999,999.99') OCAKMAYIS2018,
-                  trim( TO_CHAR(ROUND(nvl(KARSILASTIRMA_1718_OM,0), 2),'990D99','NLS_NUMERIC_CHARACTERS = ''.,'' '))  KARSILASTIRMA_1718_OM ,  
-                 TO_CHAR(ROUND(nvl(TOPLAM_2017,0), 2), '999,999,999,999,999.99') TOPLAM_2017,                 
-                 TO_CHAR(ROUND(nvl(Y3ILLIK_ORTALAMA,0), 2), '999,999,999,999,999.99') Y3ILLIK_ORTALAMA,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_GERCEKLESME_MIKTARI,0), 2), '999,999,999,999,999.99') AYLIK_GERCEKLESME_MIKTARI,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_7ICIN_GEREKEN_MIKTAR,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_8ICIN_GEREKEN_MIKTAR,                 
-                 TO_CHAR(ROUND(nvl(AYLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') AYLIK_9ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_7ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_7ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_8ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_8ICIN_GEREKEN_MIKTAR,
-                 TO_CHAR(ROUND(nvl(YILLIK_9ICIN_GEREKEN_MIKTAR,0), 2), '999,999,999,999,999.99') YILLIK_9ICIN_GEREKEN_MIKTAR,
-                 PARTNERCODE 
-               from   SASON.PERFORMANS_YPHEDEF  zz
-               where 
+                select   
+                    SERVISID,  
+                    (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid =  zz.servisid) as servisad,   
+                    TYPE,
+                    trim( TO_CHAR(ROUND(nvl(OCAK_MAYIS2017,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  OCAKMAYIS2017,
+                    trim( TO_CHAR(ROUND(nvl(OCAK_MAYIS2018,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  OCAKMAYIS2018,
+                    trim( TO_CHAR(ROUND(nvl(KARSILASTIRMA_1718_OM,0), 2),'990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  KARSILASTIRMA_1718_OM,
+                    trim( TO_CHAR(ROUND(nvl(TOPLAM_2017,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  TOPLAM_2017,
+                    trim( TO_CHAR(ROUND(nvl(Y3ILLIK_ORTALAMA,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  Y3ILLIK_ORTALAMA,
+                    trim( TO_CHAR(ROUND(nvl(AYLIK_GERCEKLESME_MIKTARI,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  AYLIK_GERCEKLESME_MIKTARI,
+                    trim( TO_CHAR(ROUND(nvl(AYLIK_7ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  AYLIK_7ICIN_GEREKEN_MIKTAR,
+                    trim( TO_CHAR(ROUND(nvl(AYLIK_8ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  AYLIK_8ICIN_GEREKEN_MIKTAR,
+                    trim( TO_CHAR(ROUND(nvl(AYLIK_9ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  AYLIK_9ICIN_GEREKEN_MIKTAR,
+                    trim( TO_CHAR(ROUND(nvl(YILLIK_7ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  YILLIK_7ICIN_GEREKEN_MIKTAR,
+                    trim( TO_CHAR(ROUND(nvl(YILLIK_8ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  YILLIK_8ICIN_GEREKEN_MIKTAR,
+                    trim( TO_CHAR(ROUND(nvl(YILLIK_9ICIN_GEREKEN_MIKTAR,0), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  YILLIK_9ICIN_GEREKEN_MIKTAR,                 
+                    PARTNERCODE 
+                from   SASON.PERFORMANS_YPHEDEF  zz
+                where 
                --servisid in (96)
                 ".$servicesQuery."
-               order by id 
+                order by id 
                     ";
             $statement = $pdo->prepare($sql);            
             $statement->execute();
