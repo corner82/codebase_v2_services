@@ -517,7 +517,7 @@ $app->get("/getserverkontrol_sysSpecificDefinitions/", function () use ($app ) {
     if (isset($_GET['language_code'])) {
         $languageCode = strtolower(trim($_GET['language_code']));
     } 
-    
+    //http://localhost:8880/codebase_v2/Slim_Proxy_codebase_v2/SlimProxyBoot.php?country_id=91&city_id=66&boroughs_id=738&language_code=tr&url=getserverkontrol_sysSpecificDefinitions
     $menus = array();  
     $menus[] = array(
         "id" => '647',
