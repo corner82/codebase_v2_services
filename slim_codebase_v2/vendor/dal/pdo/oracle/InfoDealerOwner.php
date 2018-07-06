@@ -9258,38 +9258,83 @@ SELECT  vv.servisid ,
     public function getAfterSalesDashboardIsEmriLastDataMusteri($args = array()) {
         $today = date('d/m/Y');
         $dayAfter = date('d/m/Y', strtotime(' +1 day'));
-        try {
+        try { 
+            $servicesQuery = ' WHERE a.SERVISID not IN (1,134,136)';
+            $servicesQuery2 = '';
+            if (isset($_GET['src'])  && $_GET['src']!='') {
+                //servisid = 94
+                $servicesQuery = ' WHERE  a.servisid  in ('.$_GET['src'].')  ';
+            }
+            
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
-            $sql = "
-                    
-
-select  rownum as rid , asd.* from ( 
-  SELECT      
-                    ORT.AD as SERVIS,
-                    
-                   a.SERVISID, 
-                   --(SELECT vtsx.partnercode FROM vt_servisler vtsx where vtsx.servisid = a.SERVISID  and vtsx.dilkod = 'Turkish') as partnercode,
-                   --(SELECT vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = a.SERVISID) as servisad, 
-                   --(Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = a.servisid) as servisad, 
-                   a.id servisisemirid, 
-                   
-                   to_char(a.KAYITTARIH, 'DD/MM/YYYY HH24:MI:SS') as tarih,
-                   a.SERVISISORTAKID ,
-                   iso.ad
-                 FROM servisisemirler a     
-                  LEFT JOIN SASON.servisisortaklar iso ON iso.id = a.SERVISISORTAKID AND iso.durumid=1
-                  LEFT JOIN SERVISLER ser ON A.SERVISID = ser.id AND ser.durumid=1
-                  LEFT JOIN SASON.isortaklar ort on ser.ISORTAKID = ort.id             
-                 --INNER JOIN servisisemirislemler b on a.id=b.servisisemirid
-                 --WHERE
-                 -- trunc (a.KAYITTARIH) = trunc(sysdate)  
-                  --  b.isemirtipid=2 AND 
-                --    rownum < 50
-                --    a.servisid {servisIdQuery} AND
-                   -- to_char(sysdate,'yyyy') =  to_char(KAYITTARIH,'yyyy')
-                 --GROUP BY a.servisid, to_number ( to_char(KAYITTARIH,'mm')), to_char(KAYITTARIH, 'Month') 
+            $sql = " 
+            SELECT  rownum as rid , asd.* from ( 
+                SELECT      
+                    ORT.AD as SERVIS, 
+                    a.SERVISID,  
+                    a.id servisisemirid,  
+                    to_char(a.KAYITTARIH, 'DD/MM/YYYY HH24:MI:SS') as tarih,
+                    a.SERVISISORTAKID ,
+                    iso.ad
+                FROM servisisemirler a     
+                LEFT JOIN SASON.servisisortaklar iso ON iso.id = a.SERVISISORTAKID AND iso.durumid=1
+                LEFT JOIN SERVISLER ser ON A.SERVISID = ser.id AND ser.durumid=1
+                LEFT JOIN SASON.isortaklar ort on ser.ISORTAKID = ort.id  
+                ".$servicesQuery."
+                order by   a.KAYITTARIH  desc  
+            ) asd 
+            where rownum < 7 ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
+    
+        /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardIsEmriLastDataMusteriWithServices($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        try { 
+        $servicesQuery = ' SERVISID not IN (1,134,136)';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //servisid = 94
+            $servicesQuery = ' servisid  in ('.$_GET['src'].')  '; 
+        } 
+            
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = " 
+            SELECT  rownum as rid , asd.* from ( 
+                SELECT      
+                    ORT.AD as SERVIS, 
+                    a.SERVISID,  
+                    a.id servisisemirid,  
+                    to_char(a.KAYITTARIH, 'DD/MM/YYYY HH24:MI:SS') as tarih,
+                    a.SERVISISORTAKID ,
+                    iso.ad
+                FROM servisisemirler a     
+                LEFT JOIN SASON.servisisortaklar iso ON iso.id = a.SERVISISORTAKID AND iso.durumid=1
+                LEFT JOIN SERVISLER ser ON A.SERVISID = ser.id AND ser.durumid=1
+                LEFT JOIN SASON.isortaklar ort on ser.ISORTAKID = ort.id             
+                ".$servicesQuery."
                  order by   a.KAYITTARIH  desc 
-                -- isemirtipler
+                
                 ) asd 
                 where rownum < 7 ";
              
@@ -9307,6 +9352,7 @@ select  rownum as rid , asd.* from (
             return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
         }
     }
+    
     
      /**
      * @param array | null $args

@@ -9243,6 +9243,58 @@ select  rownum as rid , asd.* from (
         }
     }
     
+    /**
+     * @param array | null $args
+     * @return Array
+     * @throws \PDOException
+     */
+    public function getAfterSalesDashboardIsEmriLastDataMusteriWithServices($args = array()) {
+        $today = date('d/m/Y');
+        $dayAfter = date('d/m/Y', strtotime(' +1 day'));
+        try { 
+        $servicesQuery = ' SERVISID not IN (1,134,136)';
+        $servicesQuery2 = '';
+        if (isset($_GET['src'])  && $_GET['src']!='') {
+            //servisid = 94
+            $servicesQuery = ' servisid  in ('.$_GET['src'].')  '; 
+        } 
+            
+            $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
+            $sql = " 
+            SELECT  rownum as rid , asd.* from ( 
+                SELECT      
+                    ORT.AD as SERVIS, 
+                    a.SERVISID,  
+                    a.id servisisemirid,  
+                    to_char(a.KAYITTARIH, 'DD/MM/YYYY HH24:MI:SS') as tarih,
+                    a.SERVISISORTAKID ,
+                    iso.ad
+                FROM servisisemirler a     
+                LEFT JOIN SASON.servisisortaklar iso ON iso.id = a.SERVISISORTAKID AND iso.durumid=1
+                LEFT JOIN SERVISLER ser ON A.SERVISID = ser.id AND ser.durumid=1
+                LEFT JOIN SASON.isortaklar ort on ser.ISORTAKID = ort.id             
+                ".$servicesQuery."
+                 order by   a.KAYITTARIH  desc 
+                
+                ) asd 
+                where rownum < 7 ";
+             
+            $statement = $pdo->prepare($sql);  
+            //print_r($sql);
+            
+            $statement->execute();
+            $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
+            $errorInfo = $statement->errorInfo();
+            if ($errorInfo[0] != "00000" && $errorInfo[1] != NULL && $errorInfo[2] != NULL)
+                throw new \PDOException($errorInfo[0]);
+            return array("found" => true, "errorInfo" => $errorInfo, "resultSet" => $result);
+        } catch (\PDOException $e /* Exception $e */) {
+            //$debugSQLParams = $statement->debugDumpParams();
+            return array("found" => false, "errorInfo" => $e->getMessage()/* , 'debug' => $debugSQLParams */);
+        }
+    }
+    
+    
      /**
      * @param array | null $args
      * @return Array

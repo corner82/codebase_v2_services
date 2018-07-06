@@ -1403,6 +1403,18 @@ class InfoDealerOwner extends \BLL\BLLSlim{
         return $DAL->getAfterSalesDashboardIsEmriLastDataMusteri($params);
     }
     
+    
+        /**
+     * get aftersales last is emirleri data for dashboard
+     * @param array | null $params
+     * @return array
+     * @author Mustafa Zeynel Dağlı
+     */
+    public function getAfterSalesDashboardIsEmriLastDataMusteriWithServices($params = array()) {
+        $DAL = $this->slimApp->getDALManager()->get('infoDealerOwnerOraclePDO');
+        return $DAL->getAfterSalesDashboardIsEmriLastDataMusteriWithServices($params);
+    }
+    
     /**
      * get aftersales is emirleri summary data for dashboard
      * @param array | null $params

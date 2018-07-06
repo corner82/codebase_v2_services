@@ -4634,14 +4634,12 @@ $app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", fun
 });
 
 
-
-
 /**
  * 
  * @since 24-04-2018
  * @author Mustafa Zeynel Dağlı
  */
-$app->get("/pkgetAfterSalesDashboardIsEmriData_infoDealerOwner/", function () use ($app ) {
+$app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", function () use ($app ) {
     $stripper = $app->getServiceManager()->get('filterChainerCustom');
     $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
     $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
@@ -4659,7 +4657,44 @@ $app->get("/pkgetAfterSalesDashboardIsEmriData_infoDealerOwner/", function () us
     }     
     
     
-    $resDataGrid = $BLL->getAfterSalesDashboardIsEmirData(array(
+    $resDataGrid = $BLL->getAfterSalesDashboardIsEmriLastDataMusteri(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    /*$resultArray = array();
+    $resultArray['rows'] = $flows;
+    $app->response()->body(json_encode($resultArray));*/
+    $app->response()->body(json_encode($resDataGrid));
+});
+
+
+
+/**
+ * 
+ * @since 06-07-2018
+ * @author Okan CIRAN
+ */
+$app->get("/pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('dealerOwnerBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->pkgetAfterSalesDashboardIsEmriLastDataMusteri(array(
         'url' =>  $_GET['url'],   
         'language_code' => $vLanguageCode,       
     ));

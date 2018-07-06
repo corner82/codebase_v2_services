@@ -173,7 +173,9 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'pkgetAfterSalesDetayStoklarGrid_infoDealerOwner' => 'restApiDefaultCall',
                                     'pkgetAfterSalesDetayStoklarGridWithServices_infoDealerOwner' => 'restApiDefaultCall',
                                     'pkgetAfterSalesDashboardIsEmriLastDataMusteri_infoDealerOwner' => 'restApiDefaultCall',
+                                    'pkgetAfterSalesDashboardIsEmriLastDataMusteriWithServices_infoDealerOwner' => 'restApiDefaultCall',
                                      
+        
         
         
                                     'pkgetAfterSalesDashboardFaalYedekParca_infoDealerOwner' => 'restApiDefaultCall',
@@ -356,7 +358,9 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'getAfterSalesDetayStoklarGrid_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDetayStoklarGridWithServices_infoAfterSales' => 'restApiDefaultCall',
                                     'getAfterSalesDashboardIsEmriLastDataMusteri_infoAfterSales' => 'restApiDefaultCall',
-                                     
+                                    'getAfterSalesDashboardIsEmriLastDataMusteriWithServices_infoAfterSales' => 'restApiDefaultCall',
+        
+        
         
         
                                     'getAfterSalesDashboardFaalYedekParca_infoAfterSales' => 'restApiDefaultCall',

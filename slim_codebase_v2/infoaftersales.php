@@ -4631,6 +4631,41 @@ $app->get("/getAfterSalesDashboardIsEmriLastDataMusteri_infoAfterSales/", functi
 
 
 
+/**
+ * 
+ * @since 06-07-2018
+ * @author Okan CIRAN
+ */
+$app->get("/getAfterSalesDashboardIsEmriLastDataMusteriWithServices_infoAfterSales/", function () use ($app ) {
+    $stripper = $app->getServiceManager()->get('filterChainerCustom');
+    $stripChainerFactory = new \Services\Filter\Helper\FilterChainerFactory();    
+    $BLL = $app->getBLLManager()->get('afterSalesBLL');
+    
+    $vLanguageCode = 'tr';
+    if (isset($_GET['language_code'])) {
+         $stripper->offsetSet('language_code',$stripChainerFactory->get(stripChainers::FILTER_ONLY_LANGUAGE_CODE,
+                                                $app,
+                                                $_GET['language_code']));
+    }  
+
+    $stripper->strip();
+    if ($stripper->offsetExists('language_code')) {
+        $vLanguageCode = $stripper->offsetGet('language_code')->getFilterValue();
+    }     
+    
+    
+    $resDataGrid = $BLL->getAfterSalesDashboardIsEmriLastDataMusteriWithServices(array(
+        'url' =>  $_GET['url'],   
+        'language_code' => $vLanguageCode,       
+    ));
+     
+    $app->response()->header("Content-Type", "application/json");
+    /*$resultArray = array();
+    $resultArray['rows'] = $flows;
+    $app->response()->body(json_encode($resultArray));*/
+    $app->response()->body(json_encode($resDataGrid));
+});
+
 
 /**
  * 
