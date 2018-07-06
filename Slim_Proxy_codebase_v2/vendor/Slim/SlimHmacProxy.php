@@ -623,7 +623,7 @@ class SlimHmacProxy extends \Proxy\Proxy {
                                     'fillAnswerTypes_sysSpecificDefinitions' => 'restApiDefaultCall', 
                                     'fillQuestionSourceType_sysSpecificDefinitions' => 'restApiDefaultCall', 
                                     'fillEducationType_sysSpecificDefinitions' => 'restApiDefaultCall', 
-        
+                                    'getserverkontrol_sysSpecificDefinitions' => 'restApiDefaultCall', 
         
         
         //**---- sysSpecificDefinitions -------------------    
