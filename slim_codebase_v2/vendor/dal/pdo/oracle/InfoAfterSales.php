@@ -9387,6 +9387,7 @@ select  rownum as rid , asd.* from (
              
             $statement = $pdo->prepare($sql);  
             //print_r($sql);
+            echo debugPDO($sql, $params);
             
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
