@@ -128,16 +128,13 @@ class InfoAfterSales extends \DAL\DalSlim {
              SELECT  vv.servisid , /*(Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad, */
                                    (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
             tarihicin.tar tarih ,
-            nvl(data1.FATURATUTAR,0) FATURATUTAR 
-             
+            nvl(data1.FATURATUTAR,0) FATURATUTAR  
               from vt_servisler vv  
              left join (
-               select distinct 
-                   to_date(x.kayittarih,'dd/mm/yyyy') tar   
-               from servisisemirler x WHERE                   
-                 x.kayittarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$today."','dd/mm/yyyy')  
-                --x.kayittarih between  to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy')
-                                      
+                select distinct 
+                    to_date(x.tarih,'dd/mm/yyyy') tar   
+                from sason.tarihler x where
+                      x.tarih >  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  
              ) tarihicin on 1=1
              LEFT JOIN (
              select    a.servisid ,  
@@ -9317,14 +9314,18 @@ select  rownum as rid , asd.* from (
                             3 as controler
                         from servisisemirler  si
                         where  si.teknikolaraktamamla = 1
-                        and SI.TAMAMLANMATARIH   BETWEEN to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
+                        /* and SI.TAMAMLANMATARIH   BETWEEN to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy') */ 
+                        /* and to_date(to_char(SI.TAMAMLANMATARIH, 'dd/mm/yyyy'))    =  to_date(to_char(sysdate, 'dd/mm/yyyy')) */                        
+                        and to_date(to_char(SI.TAMAMLANMATARIH , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')
                     UNION 
                     select count(a.id) a, 
                         cast( 'Açılan İş Emri' AS varchar2(300)) as  aciklama,
                         2 as controler
                         from servisisemirler a
                         where  teknikolaraktamamla is null or teknikolaraktamamla = 0 AND 
-                        (a.KAYITTARIH between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')) 
+                        /*  (a.KAYITTARIH between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy'))  */ 
+                        /*   to_date(to_char(a.KAYITTARIH, 'dd/mm/yyyy'))  = --  to_date(to_char(sysdate, 'dd/mm/yyyy')) */ 
+                        to_date(to_char(a.KAYITTARIH , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')
                     ";
              
             $statement = $pdo->prepare($sql);  
@@ -9378,7 +9379,8 @@ select  rownum as rid , asd.* from (
                             3 as controler
                         from servisisemirler  si
                         where  si.teknikolaraktamamla = 1
-                        and SI.TAMAMLANMATARIH   BETWEEN to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy') 
+                        /* and SI.TAMAMLANMATARIH   BETWEEN to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy')  */ 
+                        and to_date(to_char(SI.TAMAMLANMATARIH , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')
                              --and servisid in (  94 )
                              ".$servicesQuery."
                     UNION 
@@ -9387,7 +9389,8 @@ select  rownum as rid , asd.* from (
                         2 as controler
                         from servisisemirler a
                         where  teknikolaraktamamla is null or teknikolaraktamamla = 0 AND 
-                        (a.KAYITTARIH between to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy')) 
+                        /* (a.KAYITTARIH between to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy'))  */ 
+                        and to_date(to_char(a.KAYITTARIH  , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')
                             -- and servisid in (  94)
                             ".$servicesQuery."
                     ";
@@ -9435,7 +9438,8 @@ select  rownum as rid , asd.* from (
                         FROM faturalar a
                         WHERE  
                          -- a.ISLEMTARIHI >  to_date(to_char(sysdate-180, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
-                          to_number(to_char(a.ISLEMTARIHI,'yyyy'))  =  to_number(to_char(sysdate,'yyyy')) and  
+                       /*    to_number(to_char(a.ISLEMTARIHI,'yyyy'))  =  to_number(to_char(sysdate,'yyyy')) and   */ 
+                          to_date(to_char(a.ISLEMTARIHI , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy') and 
                          a.faturaturid = 4
                     UNION
                     select
@@ -9549,8 +9553,9 @@ select  rownum as rid , asd.* from (
                         FROM faturalar a
                         WHERE  
                       --   a.ISLEMTARIHI >      to_date(to_char(sysdate-180, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and 
-                       to_number(to_char(a.ISLEMTARIHI,'yyyy'))  =  to_number(to_char(sysdate,'yyyy')) and 
-                         a.faturaturid = 4
+                       /* to_number(to_char(a.ISLEMTARIHI,'yyyy'))  =  to_number(to_char(sysdate,'yyyy')) and  */ 
+                            to_date(to_char(a.ISLEMTARIHI , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate-8 , 'dd/mm/yyyy'),'dd/mm/yyyy') and 
+                            a.faturaturid = 4
                          --and a.servisid in (94)
                          ".$servicesQuery."
                     UNION
@@ -9661,14 +9666,16 @@ select  rownum as rid , asd.* from (
            1 as controler
             from faturalar a
             where  durumid=1 and faturaturid in(1,2,3) and
-            (a.islemtarihi  between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy'))
+         /*    a.islemtarihi  between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy') */  
+             to_date(to_char( a.islemtarihi, 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')    
         UNION
         Select NVL(sum(a.toplam), 0) as a ,
            cast('Önceki Gün Toplam Ciro' as varchar2(300)) as aciklama,
            5 as controler
             from faturalar a
             where  durumid=1 and faturaturid in(1,2,3) and
-            (a.islemtarihi  between to_date('".$dayBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy'))
+           /* (a.islemtarihi  between to_date('".$dayBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')) */  
+           to_date(to_char( a.islemtarihi, 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')  
         UNION
         Select count(*) as a,
                cast('Müşteri Sayısı' as varchar2(300))  as aciklama,
@@ -9680,7 +9687,9 @@ select  rownum as rid , asd.* from (
                         from servisisemirler sie
                         inner join servisisortaklar sio on SIO.SERVISVARLIKID = SIE.SERVISVARLIKID
                         inner join servisvarliklar sv on SV.ID = SIO.SERVISVARLIKID
-                       WHERE  SIE.KAYITTARIH between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
+                       WHERE  
+                          /*   SIE.KAYITTARIH between to_date('".$today."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy') */  
+                            to_date(to_char(SIE.KAYITTARIH , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')   
                        GROUP BY sv.ad
                        ORDER BY musteri DESC
                    )
@@ -9695,7 +9704,9 @@ select  rownum as rid , asd.* from (
                         from servisisemirler sie
                         inner join servisisortaklar sio on SIO.SERVISVARLIKID = SIE.SERVISVARLIKID
                         inner join servisvarliklar sv on SV.ID = SIO.SERVISVARLIKID
-                       WHERE  SIE.KAYITTARIH between to_date('".$dayBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')
+                       WHERE  
+                          /*   SIE.KAYITTARIH between to_date('".$dayBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy') */  
+                            to_date(to_char(SIE.KAYITTARIH , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')   
                        GROUP BY sv.ad
                        ORDER BY musteri DESC
                    )
@@ -9709,9 +9720,10 @@ select  rownum as rid , asd.* from (
                            sum(ypd.tutar) as toplam
                      from servisler  s
                     left join sason.rptable_yedekparcadetay ypd on ypd.servisid = s.id  
-                    left join servisstokturler sst on ypd.SERVISSTOKTURID = sst.id 
-                                                   
-                    Where ypd.TARIH between to_date('".$today."', 'dd/mm/YYYY') AND to_date('".$dayAfter."', 'dd/mm/YYYY')
+                    left join servisstokturler sst on ypd.SERVISSTOKTURID = sst.id  
+                    Where 
+                      /*   ypd.TARIH between to_date('".$today."', 'dd/mm/YYYY') AND to_date('".$dayAfter."', 'dd/mm/YYYY') */  
+                        to_date(to_char( ypd.TARIH , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')   
                     GROUP BY sst.kod, to_date(ypd.TARIH, 'dd/mm/YYYY'), sst.kod
                     ORDER BY to_date(ypd.TARIH, 'dd/mm/YYYY') desc
                     )

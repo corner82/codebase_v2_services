@@ -183,11 +183,9 @@ public function fillServicesDdlist($params = array()) {
               from vt_servisler vv  
              left join (
                select distinct 
-                   to_date(x.kayittarih,'dd/mm/yyyy') tar   
-               from servisisemirler x 
-               WHERE    
-                 x.kayittarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$today."','dd/mm/yyyy')  
-                --x.kayittarih between  to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy') 
+                    to_date(x.tarih,'dd/mm/yyyy') tar   
+                from sason.tarihler x where
+                      x.tarih >  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  
              ) tarihicin on 1=1
              LEFT JOIN (
              select    a.servisid ,  
