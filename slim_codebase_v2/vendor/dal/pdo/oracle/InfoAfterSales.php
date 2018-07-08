@@ -9380,14 +9380,14 @@ select  rownum as rid , asd.* from (
                         from servisisemirler a
                         where  teknikolaraktamamla is null or teknikolaraktamamla = 0 AND 
                         /* (a.KAYITTARIH between to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy'))  */ 
-                        and to_date(to_char(a.KAYITTARIH  , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')
+                          to_date(to_char(a.KAYITTARIH  , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')
                             -- and servisid in (  94)
                             ".$servicesQuery."
                     ";
              
             $statement = $pdo->prepare($sql);  
             //print_r($sql);
-            echo debugPDO($sql, $args);
+            //echo debugPDO($sql, $args);
             
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
