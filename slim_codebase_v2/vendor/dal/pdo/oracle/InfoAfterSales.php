@@ -133,8 +133,9 @@ class InfoAfterSales extends \DAL\DalSlim {
              left join (
                 select distinct 
                     to_date(x.tarih,'dd/mm/yyyy') tar   
-                from sason.tarihler x where
-                      x.tarih >  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  
+                from sason.tarihler x 
+                where
+                    x.tarih between  to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  
              ) tarihicin on 1=1
              LEFT JOIN (
              select    a.servisid ,  
@@ -148,7 +149,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 FROM faturalar a
                 WHERE ".$servicesQuery." 
                 --a.servisid in (94, 96) and 
-                a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')
+                a.ISLEMTARIHI between to_date(to_char(sysdate-7, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate-1, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  
                 --a.ISLEMTARIHI    between  to_date('21.05.2018', 'dd/mm/yyyy') AND to_date('28.05.2018', 'dd/mm/yyyy')
                 and a.faturaturid=4 
                 GROUP BY a.servisid, to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') --  to_char(a.ISLEMTARIHI, 'dd/mm/yyyy') 
