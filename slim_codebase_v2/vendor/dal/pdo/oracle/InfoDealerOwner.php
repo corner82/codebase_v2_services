@@ -2795,7 +2795,9 @@ public function fillServicesDdlist($params = array()) {
                 SELECT              
                     asd.SERVISID , 
                     servisad,
-                    sum(asd.stoktutar)  stoktutar from (
+                      /*  sum(asd.stoktutar)  stoktutar */
+                    trim( TO_CHAR(ROUND(SUM(nvl(asd.stoktutar,0)), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  stoktutar 
+                from (
                    SELECT
                             p.HSERVISID SERVISID, 
                             /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = p.HSERVISID   )  as servisad,  */ 
@@ -9435,7 +9437,8 @@ SELECT  vv.servisid ,
                             3 as controler
                         from servisisemirler  si
                         where  si.teknikolaraktamamla = 1
-                        and SI.TAMAMLANMATARIH   BETWEEN to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy') 
+                      /*   and SI.TAMAMLANMATARIH   BETWEEN to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy') */ 
+                        and  to_date(to_char(SI.TAMAMLANMATARIH , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')
                              --and servisid in (  94 )
                              ".$servicesQuery."
                     UNION 
@@ -9444,7 +9447,8 @@ SELECT  vv.servisid ,
                         2 as controler
                         from servisisemirler a
                         where  teknikolaraktamamla is null or teknikolaraktamamla = 0 AND 
-                        (a.KAYITTARIH between to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy')) 
+                        /* a.KAYITTARIH between to_date('10/06/2018', 'dd/mm/yyyy') AND to_date('15/06/2018', 'dd/mm/yyyy') */ 
+                          to_date(to_char(a.KAYITTARIH  , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy')
                             -- and servisid in (  94)
                             ".$servicesQuery."
                     ";

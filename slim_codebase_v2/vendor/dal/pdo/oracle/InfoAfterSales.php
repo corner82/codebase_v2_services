@@ -2719,7 +2719,9 @@ class InfoAfterSales extends \DAL\DalSlim {
                 SELECT              
                     asd.SERVISID , 
                     servisad,
-                    sum(asd.stoktutar)  stoktutar from (
+                  /*  sum(asd.stoktutar)  stoktutar */
+                    trim( TO_CHAR(ROUND(SUM(nvl(asd.stoktutar,0)), 2),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  stoktutar 
+                from (
                    SELECT
                             p.HSERVISID SERVISID, 
                             /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = p.HSERVISID   )  as servisad,  */ 
