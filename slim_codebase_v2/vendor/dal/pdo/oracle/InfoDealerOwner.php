@@ -330,7 +330,7 @@ public function fillServicesDdlist($params = array()) {
                    to_number(to_char(to_date(x.kayittarih, 'dd/mm/yyyy'), 'ww')) tar  ,
                     to_number(to_char(x.kayittarih,'yyyy')) yil  
                from servisisemirler x WHERE                   
-                     to_number(to_char(to_date(x.kayittarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(to_date('21.05.2018', 'dd/mm/yyyy'), 'ww')) -3   and  to_number(to_char(to_date('21.05.2018', 'dd/mm/yyyy'), 'ww'))               
+                     to_number(to_char(to_date(x.kayittarih, 'dd/mm/yyyy'), 'ww'))  between   to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww')) -3   and to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww'))
              ) tarihicin on 1=1
              LEFT JOIN (
              select    a.servisid ,  
@@ -344,7 +344,7 @@ public function fillServicesDdlist($params = array()) {
                 FROM faturalar a
                 WHERE ".$servicesQuery."
                 a.servisid not in  (1,134,136) and 
-                to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww')) -3   and  to_number(to_char(to_date('21.05.2018', 'dd/mm/yyyy'), 'ww'))
+                 to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww')) -3   and  to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww'))
                 AND a.faturaturid=4 
                 AND to_number(to_char(a.ISLEMTARIHI,'yyyy'))  = to_number(to_char(to_date('".$today."','dd/mm/yyyy'),'yyyy')) 
                 GROUP BY a.servisid,  
