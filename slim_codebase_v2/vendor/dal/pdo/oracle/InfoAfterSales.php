@@ -265,7 +265,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                    to_number(to_char(to_date(x.kayittarih, 'dd/mm/yyyy'), 'ww')) tar  ,
                     to_number(to_char(x.kayittarih,'yyyy')) yil  
                from servisisemirler x WHERE                   
-                     to_number(to_char(to_date(x.kayittarih, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(to_date('21.05.2018', 'dd/mm/yyyy'), 'ww')) -3   and  to_number(to_char(to_date('21.05.2018', 'dd/mm/yyyy'), 'ww'))               
+                     to_number(to_char(to_date(x.kayittarih, 'dd/mm/yyyy'), 'ww'))  between   to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww')) -3   and to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww'))            
              ) tarihicin on 1=1
              LEFT JOIN (
              select    a.servisid ,  
@@ -279,7 +279,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 FROM faturalar a
                 WHERE ".$servicesQuery."
                 a.servisid not in  (1,134,136) and 
-                to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww')) -3   and  to_number(to_char(to_date('21.05.2018', 'dd/mm/yyyy'), 'ww'))
+                to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww'))  between  to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww')) -3   and  to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww'))
                 AND a.faturaturid=4 
                 AND to_number(to_char(a.ISLEMTARIHI,'yyyy'))  = to_number(to_char(to_date('".$today."','dd/mm/yyyy'),'yyyy')) 
                 GROUP BY a.servisid,  
@@ -530,8 +530,6 @@ class InfoAfterSales extends \DAL\DalSlim {
                -- from servisisemirler x WHERE
                from sason.tarihler x where                    
                  x.tarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$today."','dd/mm/yyyy')  
-                --x.tarih between  to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy') -1
-                                      
              ) tarihicin on 1=1
              LEFT JOIN (
             select   a.servisid,  
@@ -542,8 +540,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
                 FROM faturalar a
                 WHERE ".$servicesQuery."
-                 a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')
-                 --a.ISLEMTARIHI between   to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy')
+                 a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy') 
                 and a.faturaturid=3 
                 GROUP BY  a.servisid , to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') 
              
@@ -901,9 +898,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                    to_date(x.tarih,'dd/mm/yyyy') tar   
                -- from servisisemirler x WHERE
                from sason.tarihler x where                    
-                 x.tarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$today."','dd/mm/yyyy')  
-                --x.tarih between  to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy') -1
-                                      
+                 x.tarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$today."','dd/mm/yyyy')   
              ) tarihicin on 1=1
              LEFT JOIN (
             select   a.servisid,  
@@ -914,8 +909,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
                 FROM faturalar a
                 WHERE ".$servicesQuery."
-                 a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')
-                 --a.ISLEMTARIHI between   to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy')
+                 a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy') 
                 and a.faturaturid=3 
                 GROUP BY  a.servisid , to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') 
              
@@ -967,8 +961,8 @@ class InfoAfterSales extends \DAL\DalSlim {
                                ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
                    FROM faturalar a
                    WHERE 
-                   a.islemtarihi between to_date('".$treeMonthsBefore."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
-                   and a.faturaturid=3 
+                        a.islemtarihi between to_date('".$treeMonthsBefore."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
+                        and a.faturaturid=3 
                    GROUP BY  to_number(to_char(a.ISLEMTARIHI,'yyyy')),  to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww'))    
                    ORDER BY yil desc , tarih desc 
               ) test WHERE rownum<5
@@ -1266,9 +1260,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                    to_date(x.tarih,'dd/mm/yyyy') tar   
                -- from servisisemirler x WHERE
                from sason.tarihler x where                    
-                 x.tarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$today."','dd/mm/yyyy')  
-                 --x.tarih between  to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy') -1
-                                      
+                 x.tarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$today."','dd/mm/yyyy')   
              ) tarihicin on 1=1
              LEFT JOIN (
             select   a.servisid,  
@@ -1279,8 +1271,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
                 FROM faturalar a
                 WHERE ".$servicesQuery."
-                 a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy')
-                 --a.ISLEMTARIHI between   to_date('21/05/2018','dd/mm/yyyy')  and  to_date('28/05/2018','dd/mm/yyyy')
+                 a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy') 
                 and a.faturaturid=2 
                 GROUP BY  a.servisid , to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') 
              
@@ -1331,8 +1322,8 @@ class InfoAfterSales extends \DAL\DalSlim {
                                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
                     FROM faturalar a
                     WHERE /*a.servisid  and*/ 
-                    a.ISLEMTARIHI between to_date('".$treeMonthsBefore."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
-                    and a.faturaturid=2
+                        a.ISLEMTARIHI between to_date('".$treeMonthsBefore."', 'dd/mm/yyyy') AND to_date('".$dayAfter."', 'dd/mm/yyyy')
+                        and a.faturaturid=2
                     GROUP BY  to_number(to_char(a.ISLEMTARIHI,'yyyy')),  to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww'))    
                     ORDER BY yil desc , tarih desc
                 ) test WHERE rownum<5
@@ -1527,7 +1518,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                     FROM faturalar a
                     WHERE 
                         to_date(a.ISLEMTARIHI,'dd/mm/yyyy')  between  to_date(to_date(sysdate, 'dd/mm/yyyy') -365 , 'dd/mm/yyyy') and  to_date(sysdate, 'dd/mm/yyyy')                        
-                    and a.faturaturid=2
+                        and a.faturaturid=2
                     ".$servicesQuery."                     
                     GROUP BY 
                     a.servisid, 
@@ -1644,9 +1635,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                            to_date(x.kayittarih,'dd/mm/yyyy') tar   
                        from servisisemirler x 
                        WHERE                   
-                         x.kayittarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$dayAfter."','dd/mm/yyyy')  
-                            -- x.kayittarih between  to_date('21/05/2018','dd/mm/yyyy')  and  to_date('30/05/2018','dd/mm/yyyy')   
-                             --and x.servisid =  129                       
+                         x.kayittarih between  to_date('".$weekBefore."','dd/mm/yyyy')  and  to_date('".$dayAfter."','dd/mm/yyyy')   
                      ) tarihicin on 1=1
                 where
                         /*to_date(z.kayittarih,'dd/mm/yyyy') <> to_date(z.tamamlanmatarih,'dd/mm/yyyy') AND */ 
