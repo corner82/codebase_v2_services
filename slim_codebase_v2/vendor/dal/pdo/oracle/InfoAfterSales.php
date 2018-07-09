@@ -266,6 +266,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                     to_number(to_char(x.kayittarih,'yyyy')) yil  
                from servisisemirler x WHERE                   
                      to_number(to_char(to_date(x.kayittarih, 'dd/mm/yyyy'), 'ww'))  between   to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww')) -3   and to_number(to_char(to_date('".$today."', 'dd/mm/yyyy'), 'ww'))            
+                     AND to_number(to_char(x.kayittarih,'yyyy'))  = to_number(to_char(to_date('".$today."','dd/mm/yyyy'),'yyyy')) 
              ) tarihicin on 1=1
              LEFT JOIN (
              select    a.servisid ,  
