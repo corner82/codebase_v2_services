@@ -9431,8 +9431,8 @@ select  rownum as rid , asd.* from (
                         FROM faturalar a
                         WHERE  
                          -- a.ISLEMTARIHI >  to_date(to_char(sysdate-180, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and
-                       /*    to_number(to_char(a.ISLEMTARIHI,'yyyy'))  =  to_number(to_char(sysdate,'yyyy')) and   */ 
-                          to_date(to_char(a.ISLEMTARIHI , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate , 'dd/mm/yyyy'),'dd/mm/yyyy') and 
+                           to_number(to_char(a.ISLEMTARIHI,'yyyy'))  =  to_number(to_char(sysdate,'yyyy')) and   
+                      /*   to_date(to_char(a.ISLEMTARIHI , 'dd/mm/yyyy')  , 'dd/mm/yyyy') =  to_date(to_char(sysdate -180, 'dd/mm/yyyy'),'dd/mm/yyyy') and  */ 
                          a.faturaturid = 4
                     UNION
                     select
