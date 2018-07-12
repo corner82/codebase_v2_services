@@ -1286,6 +1286,7 @@ class InfoAfterSales extends \DAL\DalSlim {
 
             $statement = $pdo->prepare($sql);  
             //print_r($sql);
+            echo debugPDO($sql, $args);
             
             $statement->execute();
             $result = $statement->fetchAll(\PDO::FETCH_ASSOC);
