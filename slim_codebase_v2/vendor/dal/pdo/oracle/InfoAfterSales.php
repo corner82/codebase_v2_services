@@ -77,7 +77,8 @@ class InfoAfterSales extends \DAL\DalSlim {
                     --sum(a.toplam) toplam,
                     --TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')) as FATURATUTAR
                     --TRIM(TO_CHAR(sum(a.NETTUTAR) , '999,999,999,999,999'))
-                    nvl(REPLACE(to_char(sum(a.NETTUTAR)),',',','),0) FATURATUTAR
+                    nvl(REPLACE(to_char(sum(a.NETTUTAR)),'.',','),0) FATURATUTAR
+                    
                     /*CASE 
                             WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')))= 3 THEN '1'
                             ELSE TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -141,7 +142,7 @@ class InfoAfterSales extends \DAL\DalSlim {
              select    a.servisid ,  
                   --  to_char(a.ISLEMTARIHI, 'dd/mm/yyyy')  TARIH,
                   to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') Tarih,
-                  REPLACE(to_char(sum(a.NETTUTAR)),',',',') FATURATUTAR
+                  REPLACE(to_char(sum(a.NETTUTAR)),'.',',') FATURATUTAR
                     /*CASE 
                             WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')))= 3 THEN '1'
                             ELSE TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -199,7 +200,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                         --sum(a.toplam) toplam,
                         --TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')) as FATURATUTAR
                         --TRIM(TO_CHAR(sum(a.NETTUTAR) , '999,999,999,999,999'))
-                        nvl(REPLACE(to_char(sum(a.NETTUTAR)),',',','),0) FATURATUTAR
+                        nvl(REPLACE(to_char(sum(a.NETTUTAR)),'.',','),0) FATURATUTAR
                         /*CASE 
                                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')))= 3 THEN '1'
                                 ELSE TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -272,7 +273,7 @@ class InfoAfterSales extends \DAL\DalSlim {
              select    a.servisid ,  
                   to_number(to_char(a.ISLEMTARIHI,'yyyy')) yil,                 
                   to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww')) Tarih,
-                  REPLACE(to_char(sum(a.NETTUTAR)),',',',') FATURATUTAR
+                  REPLACE(to_char(sum(a.NETTUTAR)),'.',',') FATURATUTAR
                   /*CASE 
                         WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')))= 3 THEN '1'
                         ELSE TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')) END as FATURATUTAR*/ 
@@ -332,9 +333,9 @@ class InfoAfterSales extends \DAL\DalSlim {
                         --sum(a.toplam) toplam,
                         --TRIM(TO_CHAR(sum(a.NETTUTAR), '999,999,999,999,999')) as FATURATUTAR
                         --TRIM(TO_CHAR(sum(a.NETTUTAR) , '999,999,999,999,999'))
-                        --REPLACE(to_char(sum(a.toplam)),',','') FATURATUTAR
+                        --REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
                         sum(a.NETTUTAR) as tt,
-                        nvl(REPLACE(to_char(sum(a.NETTUTAR)),',',','),0) FATURATUTAR
+                        nvl(REPLACE(to_char(sum(a.NETTUTAR)),'.',','),0) FATURATUTAR
                         /*CASE 
                                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')))= 3 THEN '1'
                                 ELSE TRIM(TO_CHAR(ROUND(sum(a.NETTUTAR), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -411,7 +412,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                       to_number(to_char(a.ISLEMTARIHI,'yyyy')) yil ,
                       to_number(to_char(a.ISLEMTARIHI,'MM')) ay ,
                       --REPLACE('JACK and JUE','J','BL')
-                      REPLACE(to_char(sum(a.toplam)),',','') FATURATUTAR
+                      REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
                      /* CASE 
                         WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                         ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -468,7 +469,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             select 
             to_char(a.ISLEMTARIHI, 'dd/mm/yyyy') AS TARIH,
             --sum(a.toplam)  as FATURATUTAR
-            nvl(REPLACE(to_char(sum(a.toplam)),',',','),0) FATURATUTAR
+            nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
             --TRIM(TO_CHAR(ROUND(sum(a.toplam),0), '999,999,999,999,999')) as FATURATUTAR
             /*CASE 
                             WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
@@ -535,7 +536,7 @@ class InfoAfterSales extends \DAL\DalSlim {
              LEFT JOIN (
             select   a.servisid,  
             to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') AS TARIH,  
-            REPLACE(to_char(sum(a.toplam)),',','') FATURATUTAR
+            REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
             /*CASE 
                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -588,7 +589,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                   to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww')) tarih ,
                 --sum(a.toplam)  as FATURATUTAR
                 --TRIM(TO_CHAR(ROUND(sum(a.toplam),0), '999,999,999,999,999')) as FATURATUTAR
-                nvl(REPLACE(to_char(sum(a.toplam)),',',','),0) FATURATUTAR
+                nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
                 /*CASE 
                                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -658,7 +659,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                select   a.servisid,  
                   to_number(to_char(a.ISLEMTARIHI,'yyyy')) yil ,
                   to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww')) tarih ,
-                  REPLACE(to_char(sum(a.toplam)),',',',') FATURATUTAR
+                  REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
                 /*CASE 
                     WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                     ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -715,7 +716,7 @@ class InfoAfterSales extends \DAL\DalSlim {
 
                 --sum(a.toplam)  as FATURATUTAR
                 --TRIM(TO_CHAR(ROUND(sum(a.toplam),0), '999,999,999,999,999')) as FATURATUTAR
-                nvl(REPLACE(to_char(sum(a.toplam)),',',','),0) FATURATUTAR
+                nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
                 /*CASE 
                                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -787,7 +788,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                select  a.servisid, 
                       to_number(to_char(a.ISLEMTARIHI,'yyyy')) yil ,
                       to_number(to_char(a.ISLEMTARIHI,'MM')) ay ,
-                      REPLACE(to_char(sum(a.toplam)),',',',') FATURATUTAR
+                      REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
                       /*CASE 
                         WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                         ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -838,7 +839,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                     to_char(a.islemtarihi, 'dd/mm/yyyy') as TARIH,
                     --sum(a.toplam) FATURATUTAR
                     --TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) as FATURATUTAR
-                    nvl(REPLACE(to_char(sum(a.toplam)),',',','),0) FATURATUTAR
+                    nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
                     /*CASE 
                             WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                             ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -904,7 +905,7 @@ class InfoAfterSales extends \DAL\DalSlim {
              LEFT JOIN (
             select   a.servisid,  
             to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') AS TARIH,  
-            REPLACE(to_char(sum(a.toplam)),',','') FATURATUTAR
+            REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
             /*CASE 
                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -956,7 +957,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                     to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww')) tarih ,
                        --sum(a.toplam) FATURATUTAR
                        --TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) as FATURATUTAR
-                       nvl(REPLACE(to_char(sum(a.toplam)),',',','),0) FATURATUTAR
+                       nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
                        /*CASE 
                                WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                                ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1025,7 +1026,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                select   a.servisid,  
                   to_number(to_char(a.ISLEMTARIHI,'yyyy')) yil ,
                   to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww')) tarih ,
-                  REPLACE(to_char(sum(a.toplam)),',',',') FATURATUTAR
+                  REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
                 /*CASE 
                     WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                     ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1079,7 +1080,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                       to_number(to_char(a.ISLEMTARIHI,'MM')) ay ,
                        --sum(a.toplam) FATURATUTAR
                        --TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) as FATURATUTAR
-                       nvl(REPLACE(to_char(sum(a.toplam)),',',','),0) FATURATUTAR
+                       nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
                        /*CASE 
                                WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                                ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1150,7 +1151,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                select  a.servisid, 
                       to_number(to_char(a.ISLEMTARIHI,'yyyy')) yil ,
                       to_number(to_char(a.ISLEMTARIHI,'MM')) ay ,
-                      REPLACE(to_char(sum(a.toplam)),',',',') FATURATUTAR
+                      REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
                       /*CASE 
                         WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                         ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1202,7 +1203,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             to_char(a.ISLEMTARIHI, 'dd/mm/yyyy') as TARIH,
             --sum(a.toplam) FATURATUTAR
             --TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) as FATURATUTAR
-            nvl(REPLACE(to_char(sum(a.toplam)),',',''),0) FATURATUTAR
+            nvl(REPLACE(to_char(sum(a.toplam)),'.',''),0) FATURATUTAR
             /*CASE 
                             WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                             ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1318,7 +1319,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                    to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww')) tarih ,
                 --sum(a.toplam) FATURATUTAR
                 --TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) as FATURATUTAR
-                nvl(REPLACE(to_char(sum(a.toplam)),',',''),0) FATURATUTAR
+                nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
                 /*CASE 
                                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1387,7 +1388,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                select   a.servisid,  
                   to_number(to_char(a.ISLEMTARIHI,'yyyy')) yil ,
                   to_number(to_char(to_date(a.ISLEMTARIHI, 'dd/mm/yyyy'), 'ww')) tarih ,
-                  REPLACE(to_char(sum(a.toplam)),',',',') FATURATUTAR
+                  REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
                 /*CASE 
                     WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                     ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1441,7 +1442,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                        to_number(to_char(a.ISLEMTARIHI,'MM')) ay ,
                 --sum(a.toplam) FATURATUTAR
                 --TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) as FATURATUTAR
-                nvl(REPLACE(to_char(sum(a.toplam)),',',''),0) FATURATUTAR
+                nvl(REPLACE(to_char(sum(a.toplam)),'.',''),0) FATURATUTAR
                 /*CASE 
                                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1513,7 +1514,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                select  a.servisid, 
                       to_number(to_char(a.ISLEMTARIHI,'yyyy')) yil ,
                       to_number(to_char(a.ISLEMTARIHI,'MM')) ay ,
-                      REPLACE(to_char(sum(a.toplam)),',',',') FATURATUTAR
+                      REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
                       /*CASE 
                         WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                         ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
