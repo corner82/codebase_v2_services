@@ -1445,7 +1445,7 @@ public function fillServicesDdlist($params = array()) {
                                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.tar as tarih,
                 tarihicin.yil as yil,            
-                nvl(data1.FATURATUTAR,0) FATURATUTAR
+                trim( TO_CHAR(nvl(data1.FATURATUTAR,0),'99999999999999D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  FATURATUTAR 
               from vt_servisler vv  
              left join (
                select distinct 
@@ -1570,7 +1570,7 @@ public function fillServicesDdlist($params = array()) {
                                      (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
                 tarihicin.ay as ay,
                 tarihicin.yil as yil,            
-                nvl(data1.FATURATUTAR,0) FATURATUTAR
+               trim( TO_CHAR(nvl(data1.FATURATUTAR,0),'99999999999999D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  FATURATUTAR 
               from vt_servisler vv  
              left join (
                select distinct 
