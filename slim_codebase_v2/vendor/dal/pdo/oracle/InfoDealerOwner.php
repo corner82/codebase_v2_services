@@ -1323,8 +1323,8 @@ public function fillServicesDdlist($params = array()) {
             $sql = " 
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad,  */ 
                                   (Select vtsxy.GIZLIAD FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
-            tarihicin.tar tarih ,
-            nvl(data1.FATURATUTAR,0) FATURATUTAR  
+            tarihicin.tar tarih , 
+              trim( TO_CHAR(nvl(data1.FATURATUTAR,0),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  FATURATUTAR 
               from vt_servisler vv  
              left join (
                select distinct 
