@@ -543,7 +543,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                 FROM faturalar a
                 WHERE ".$servicesQuery."
                  a.ISLEMTARIHI between to_date('".$weekBefore."', 'dd/mm/yyyy') AND to_date('".$today."', 'dd/mm/yyyy') 
-                and a.faturaturid=3 
+                and a.faturaturid=1 
                 GROUP BY  a.servisid , to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') 
              
              ) data1 on data1.servisid = vv.servisid and data1.TARIH = tarihicin.tar
@@ -7273,7 +7273,9 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                    select 
-                    TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar 
+              /*   TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar  */
+                    
+                     trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar 
 
                     from ( 
                     select   
@@ -7340,42 +7342,48 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = " 
-                select TO_CHAR(ROUND(sum(de.direksatistutar2),0), '999,999,999,999,999') direksatistutar from(  
-                    select  servisid ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
-                    TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar,
-                    sum(nvl(direksatistutar,0)) direksatistutar2
+                select 
+                
+                  /*  TO_CHAR(ROUND(sum(de.direksatistutar2),0), '999,999,999,999,999') direksatistutar  */ 
+                    trim(TO_CHAR(ROUND(sum(nvl(de.direksatistutar2,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar     
+
+                from(   
+                    select  
+                        servisid ,  
+                        (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,  
+                        TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar,
+                        sum(nvl(direksatistutar,0)) direksatistutar2
                     from ( 
-                    select    
-                    /*
-                    1 - isemri 
-                    2 - icmal
-                    3 - satis
-                    */  
-                    servisid  , 
-                      CASE
-                             WHEN faturaturid= 3
-                             THEN
-                               sum (toplam)
-                          END  direksatistutar,
+                        select    
+                            /*
+                            1 - isemri 
+                            2 - icmal
+                            3 - satis
+                            */  
+                            servisid  , 
+                            CASE
+                                 WHEN faturaturid= 3
+                                 THEN
+                                   sum (toplam)
+                            END  direksatistutar, 
+                            CASE
+                                 WHEN faturaturid = 1
+                                 THEN
+                                   sum (toplam)
+                            END  atolyecirosucari  , 
+                            CASE
+                                 WHEN faturaturid = 2
+                                 THEN
+                                   sum (toplam)
+                            END  atolyecirosugaranti  
 
-                          CASE
-                             WHEN faturaturid = 1
-                             THEN
-                               sum (toplam)
-                          END  atolyecirosucari  , 
-                          CASE
-                             WHEN faturaturid = 2
-                             THEN
-                               sum (toplam)
-                          END  atolyecirosugaranti  
-
-                    from faturalar 
-                    where  
-                        durumid=1 and faturaturid in(1,2,3) and
-                        islemtarihi   < to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
-                        --and servisid in (94,96)  
-                        ".$servicesQuery."
-                    group  by  servisid ,faturaturid 
+                        from faturalar 
+                        where  
+                            durumid=1 and faturaturid in(1,2,3) and
+                            islemtarihi   < to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy') 
+                            --and servisid in (94,96)  
+                            ".$servicesQuery."
+                        group  by  servisid ,faturaturid 
                     ) asd 
                     group by  servisid ) de   
                     ";
@@ -7404,7 +7412,8 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
             $sql = "   
             SELECT  
                tarih, 
-                TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar
+              /*   TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar */ 
+                trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar    
             FROM (  
                       SELECT   vv.servisid,
                         to_char(tarihicin.tar) tarih ,
@@ -7498,10 +7507,12 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "
-            SELECT servisid , (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
-               tarih,
-               sum(direksatistutar)   direksatistutar
-
+            SELECT 
+                servisid , (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad,
+                tarih,
+               /* sum(direksatistutar)   direksatistutar*/
+                trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar   
+                
             FROM (  
                       SELECT   vv.servisid,
                         to_char(tarihicin.tar) tarih ,
@@ -7597,7 +7608,9 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
                     SELECT  
                         tarih,
                         yil, 
-                        TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar          
+                    /*    TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar         */ 
+                        
+                        trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar   
 
                       FROM (
                                 SELECT   distinct vv.servisid,
@@ -7711,7 +7724,9 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
                     (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
                     tarih,
                     yil,            
-                    sum(direksatistutar) direksatistutar
+                 /*   sum(direksatistutar) direksatistutar */
+                    
+                    trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar   
                   FROM ( 
 
                   SELECT   distinct vv.servisid,
@@ -7822,7 +7837,9 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
             SELECT  
                 ay,
                 yil,    
-                TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar    
+             /*   TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar    */ 
+                
+                trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar   
 
               FROM (     
                     SELECT  vv.servisid,
@@ -7928,81 +7945,82 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "     
-                SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
-    ay,
-    yil,    
-    TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar    
-    
-  FROM (     
-        SELECT  vv.servisid,
-            tarihicin.ay as ay,
-            tarihicin.yil as yil,            
-            nvl(data1.direksatistutar,0) direksatistutar,
-            nvl(data1.atolyecirosucari,0) atolyecirosucari,
-            nvl(data1.atolyecirosugaranti,0) atolyecirosugaranti    
-        from vt_servisler vv  
-         left join (
-               select distinct 
-                    to_number(to_char(x.tarih,'yyyy')) yil  ,
-                    to_number(to_char(x.tarih,'MM')) ay
-               from sason.tarihler x WHERE  
-                     --x.tarih between to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')  
-                     x.tarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy') , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')                
-             ) tarihicin on 1=1
-             LEFT JOIN ( 
-               select  distinct servisid, 
-                    yil,  
-                    to_number(to_char(to_date(tarihh, 'dd/mm/yyyy'), 'MM')) ay,  
-                    ROUND(sum(nvl(direksatistutar,0)), 0)  direksatistutar,                             
-                     ROUND(sum(nvl(atolyecirosucari,0)), 0)  atolyecirosucari,                             
-                    ROUND(sum(nvl(atolyecirosugaranti,0)), 0) atolyecirosugaranti                              
-                    from ( 
-                        select   servisid ,  
-                        /*
-                        1 - isemri 
-                        2 - icmal
-                        3 - satis
-                        */  
-                        to_date(a.islemtarihi, 'dd/mm/yyyy') as tarihh,
-                        to_number(to_char(a.islemtarihi,'yyyy')) yil,
-                          CASE
-                                 WHEN faturaturid= 3
-                                 THEN
-                                   sum (a.toplam)
-                              END  direksatistutar,
-                                                           
-                              CASE
-                                 WHEN faturaturid = 1
-                                 THEN
-                                   sum (a.toplam)
-                              END  atolyecirosucari  , 
-                              CASE
-                                 WHEN faturaturid = 2
-                                 THEN
-                                   sum (a.toplam)
-                              END  atolyecirosugaranti  
+        SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = asd.servisid) as servisad, 
+            ay,
+            yil,    
+         /*   TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar     */ 
+               trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar   
 
-                        from faturalar a 
-                        where  
-                            --a.servisid   in (94 ) and 
-                            ".$servicesQuery."
-                            a.durumid=1 and a.faturaturid in(1,2,3) and  
-                         --   a.islemtarihi BETWEEN to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
-                            a.islemtarihi BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy') , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')                                              
-                        GROUP BY to_date(a.islemtarihi, 'dd/mm/yyyy') ,a.faturaturid ,a.SERVISID, to_number(to_char(a.islemtarihi,'yyyy')) 
-                    ) asd
-              
-                GROUP BY SERVISID,yil ,to_number(to_char(to_date(tarihh, 'dd/mm/yyyy'), 'MM'))  
-             ) data1 on  data1.servisid = vv.servisid and  data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
-             WHERE 
-                  vv.servisid not in (1,134,136) and 
-                --vv.servisid   in (94) and
-                ".$servicesQuery2."
-                 vv.dilkod ='Turkish' 
-             ORDER BY servisid,yil, ay     
-            ) ASD 
-             group by servisid, yil, ay 
-             order by servisid, yil, ay      
+          FROM (     
+                SELECT  vv.servisid,
+                    tarihicin.ay as ay,
+                    tarihicin.yil as yil,            
+                    nvl(data1.direksatistutar,0) direksatistutar,
+                    nvl(data1.atolyecirosucari,0) atolyecirosucari,
+                    nvl(data1.atolyecirosugaranti,0) atolyecirosugaranti    
+                from vt_servisler vv  
+                 left join (
+                       select distinct 
+                            to_number(to_char(x.tarih,'yyyy')) yil  ,
+                            to_number(to_char(x.tarih,'MM')) ay
+                       from sason.tarihler x WHERE  
+                             --x.tarih between to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy')  and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')  
+                             x.tarih BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy') , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')                
+                     ) tarihicin on 1=1
+                     LEFT JOIN ( 
+                       select  distinct servisid, 
+                            yil,  
+                            to_number(to_char(to_date(tarihh, 'dd/mm/yyyy'), 'MM')) ay,  
+                            ROUND(sum(nvl(direksatistutar,0)), 0)  direksatistutar,                             
+                             ROUND(sum(nvl(atolyecirosucari,0)), 0)  atolyecirosucari,                             
+                            ROUND(sum(nvl(atolyecirosugaranti,0)), 0) atolyecirosugaranti                              
+                            from ( 
+                                select   servisid ,  
+                                /*
+                                1 - isemri 
+                                2 - icmal
+                                3 - satis
+                                */  
+                                to_date(a.islemtarihi, 'dd/mm/yyyy') as tarihh,
+                                to_number(to_char(a.islemtarihi,'yyyy')) yil,
+                                  CASE
+                                         WHEN faturaturid= 3
+                                         THEN
+                                           sum (a.toplam)
+                                      END  direksatistutar,
+
+                                      CASE
+                                         WHEN faturaturid = 1
+                                         THEN
+                                           sum (a.toplam)
+                                      END  atolyecirosucari  , 
+                                      CASE
+                                         WHEN faturaturid = 2
+                                         THEN
+                                           sum (a.toplam)
+                                      END  atolyecirosugaranti  
+
+                                from faturalar a 
+                                where  
+                                    --a.servisid   in (94 ) and 
+                                    ".$servicesQuery."
+                                    a.durumid=1 and a.faturaturid in(1,2,3) and  
+                                 --   a.islemtarihi BETWEEN to_date(to_char(sysdate-365, 'dd/mm/yyyy')  , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')
+                                    a.islemtarihi BETWEEN to_date(to_char(to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')-365, 'dd/mm/yyyy') , 'dd/mm/yyyy') and  to_date(to_char(sysdate, 'dd/mm/yyyy'), 'dd/mm/yyyy')                                              
+                                GROUP BY to_date(a.islemtarihi, 'dd/mm/yyyy') ,a.faturaturid ,a.SERVISID, to_number(to_char(a.islemtarihi,'yyyy')) 
+                            ) asd
+
+                        GROUP BY SERVISID,yil ,to_number(to_char(to_date(tarihh, 'dd/mm/yyyy'), 'MM'))  
+                     ) data1 on  data1.servisid = vv.servisid and  data1.ay = tarihicin.ay AND data1.yil = tarihicin.yil  
+                     WHERE 
+                          vv.servisid not in (1,134,136) and 
+                        --vv.servisid   in (94) and
+                        ".$servicesQuery2."
+                         vv.dilkod ='Turkish' 
+                     ORDER BY servisid,yil, ay     
+                    ) ASD 
+                     group by servisid, yil, ay 
+                     order by servisid, yil, ay      
 
             ";
              
