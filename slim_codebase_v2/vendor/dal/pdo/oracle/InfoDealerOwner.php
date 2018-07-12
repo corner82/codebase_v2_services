@@ -1338,7 +1338,7 @@ public function fillServicesDdlist($params = array()) {
              LEFT JOIN (
             select   a.servisid,  
             to_date(a.ISLEMTARIHI, 'dd/mm/yyyy') AS TARIH,
-            REPLACE(to_char(sum(a.toplam)),',','') FATURATUTAR
+            REPLACE(to_char(sum(a.toplam)),'.',',') FATURATUTAR
             /*CASE 
                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
