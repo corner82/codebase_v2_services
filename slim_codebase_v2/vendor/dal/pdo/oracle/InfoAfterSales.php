@@ -1203,7 +1203,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             to_char(a.ISLEMTARIHI, 'dd/mm/yyyy') as TARIH,
             --sum(a.toplam) FATURATUTAR
             --TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) as FATURATUTAR
-            nvl(REPLACE(to_char(sum(a.toplam)),'.',''),0) FATURATUTAR
+            nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
             /*CASE 
                             WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                             ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
@@ -1442,7 +1442,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                        to_number(to_char(a.ISLEMTARIHI,'MM')) ay ,
                 --sum(a.toplam) FATURATUTAR
                 --TRIM(TO_CHAR(sum(a.toplam), '999,999,999,999,999')) as FATURATUTAR
-                nvl(REPLACE(to_char(sum(a.toplam)),'.',''),0) FATURATUTAR
+                nvl(REPLACE(to_char(sum(a.toplam)),'.',','),0) FATURATUTAR
                 /*CASE 
                                 WHEN LENGTH(TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')))= 3 THEN '1'
                                 ELSE TRIM(TO_CHAR(ROUND(sum(a.toplam), 0), '999,999,999,999,999')) END as FATURATUTAR*/
