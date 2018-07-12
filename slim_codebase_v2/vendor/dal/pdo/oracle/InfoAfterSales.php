@@ -1254,7 +1254,7 @@ class InfoAfterSales extends \DAL\DalSlim {
             SELECT  vv.servisid , /* (Select vtsxy.ISORTAKAD FROM vt_servisler vtsxy where  vtsxy.dilkod = 'Turkish' and vtsxy.servisid = vv.servisid) as servisad,  */ 
                                   (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy where  vtsxy.servisid = vv.servisid) as servisad, 
             tarihicin.tar tarih ,
-             trim( TO_CHAR(nvl(data1.FATURATUTAR,0),'999G999G999G999G990D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  FATURATUTAR 
+             trim( TO_CHAR(nvl(data1.FATURATUTAR,0),'99999999999999D99','NLS_NUMERIC_CHARACTERS = '',.'' '))  FATURATUTAR 
               from vt_servisler vv  
              left join (
                select distinct 
