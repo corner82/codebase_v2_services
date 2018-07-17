@@ -10395,7 +10395,7 @@ select  rownum as rid , asd.* from (
                 //and ie.servisid in (94,96,98)
                 $yilQuery = ' and zz.yil in ('.$_GET['yil'].')  '; 
             }
-            $ayQuery = '  and zz.ay in ( SELECT max(x2.ay) from SASON.PERFORMANS_YPHEDEF x2 where x2.yil in  ( SELECT max(y1.yil) from  from  SASON.PERFORMANS_YPHEDEF y1  )    ) ';
+            $ayQuery = '  and zz.ay in ( SELECT max(x2.ay) from SASON.PERFORMANS_YPHEDEF x2 where x2.yil in  ( SELECT max(y1.yil) from SASON.PERFORMANS_YPHEDEF y1  )    ) ';
              if (isset($_GET['ay'])  && $_GET['ay']!='') {
                 //and ie.servisid in (94,96,98)
                 $ayQuery = ' and zz.ay in ('.$_GET['ay'].')  '; 
@@ -10461,7 +10461,7 @@ select  rownum as rid , asd.* from (
                 //and ie.servisid in (94,96,98)
                 $yilQuery = ' and zz.yil in ('.$_GET['yil'].')  '; 
             }
-            $ayQuery = '  and zz.ay in ( SELECT max(x2.ay) from SASON.PERFORMANS_YPHEDEF x2 where x2.yil in  ( SELECT max(y1.yil) from  from  SASON.PERFORMANS_YPHEDEF y1  )    ) ';
+            $ayQuery = '  and zz.ay in ( SELECT max(x2.ay) from SASON.PERFORMANS_YPHEDEF x2 where x2.yil in  ( SELECT max(y1.yil) from  SASON.PERFORMANS_YPHEDEF y1  )    ) ';
              if (isset($_GET['ay'])  && $_GET['ay']!='') {
                 //and ie.servisid in (94,96,98)
                 $ayQuery = ' and zz.ay in ('.$_GET['ay'].')  '; 
