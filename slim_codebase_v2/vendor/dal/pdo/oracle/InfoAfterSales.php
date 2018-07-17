@@ -10389,6 +10389,18 @@ select  rownum as rid , asd.* from (
                 //and ie.servisid in (94,96,98)
                 $servicesQuery = ' WHERE  zz.servisid in ('.$_GET['src'].')  '; 
             }
+            
+            $yilQuery = '  and zz.yil in ( SELECT max(x1.yil) from  SASON.PERFORMANS_YPHEDEF  x1 ) ';
+             if (isset($_GET['yil'])  && $_GET['yil']!='') {
+                //and ie.servisid in (94,96,98)
+                $yilQuery = ' and zz.yil in ('.$_GET['yil'].')  '; 
+            }
+            $ayQuery = '  and zz.ay in ( SELECT max(x2.ay) from SASON.PERFORMANS_YPHEDEF x2 where x2.yil in  ( SELECT max(y1.yil) from  from  SASON.PERFORMANS_YPHEDEF y1  )    ) ';
+             if (isset($_GET['ay'])  && $_GET['ay']!='') {
+                //and ie.servisid in (94,96,98)
+                $ayQuery = ' and zz.ay in ('.$_GET['ay'].')  '; 
+            }
+            
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                 select  
@@ -10410,6 +10422,10 @@ select  rownum as rid , asd.* from (
                     PARTNERCODE 
                 from  SASON.PERFORMANS_YPHEDEF  zz
                 ".$servicesQuery."  
+                ".$yilQuery."  
+                ".$ayQuery."  
+
+
 
                 order by servisid , id 
                     ";
@@ -10440,6 +10456,16 @@ select  rownum as rid , asd.* from (
             // and vv.servisid in (94,96,98)
             $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].')    ';
         }
+           $yilQuery = '  and zz.yil in ( SELECT max(x1.yil) from  SASON.PERFORMANS_YPHEDEF  x1 ) ';
+             if (isset($_GET['yil'])  && $_GET['yil']!='') {
+                //and ie.servisid in (94,96,98)
+                $yilQuery = ' and zz.yil in ('.$_GET['yil'].')  '; 
+            }
+            $ayQuery = '  and zz.ay in ( SELECT max(x2.ay) from SASON.PERFORMANS_YPHEDEF x2 where x2.yil in  ( SELECT max(y1.yil) from  from  SASON.PERFORMANS_YPHEDEF y1  )    ) ';
+             if (isset($_GET['ay'])  && $_GET['ay']!='') {
+                //and ie.servisid in (94,96,98)
+                $ayQuery = ' and zz.ay in ('.$_GET['ay'].')  '; 
+            }
         
         try {
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
@@ -10465,6 +10491,8 @@ select  rownum as rid , asd.* from (
             where 
                --servisid in (96)
                 ".$servicesQuery."
+                ".$yilQuery."
+                ".$ayQuery."
             order by id 
                     ";
             $statement = $pdo->prepare($sql);            
