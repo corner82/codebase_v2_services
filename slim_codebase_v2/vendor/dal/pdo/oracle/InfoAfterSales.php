@@ -10423,7 +10423,7 @@ select  rownum as rid , asd.* from (
                 from  SASON.PERFORMANS_YPHEDEF  zz
                 ".$servicesQuery."  
                 ".$yilQuery."  
-                ".$ayQuery."  
+            /*    ".$ayQuery."  */
 
 
 
@@ -10454,7 +10454,7 @@ select  rownum as rid , asd.* from (
             //servisid in (96)
             $servicesQuery = ' servisid  in ('.$_GET['src'].')  ';
             // and vv.servisid in (94,96,98)
-            $servicesQuery2 = '  vv.servisid in  ('.$_GET['src'].')    ';
+            $servicesQuery2 = '  zz.servisid in  ('.$_GET['src'].')    ';
         }
            $yilQuery = '  and zz.yil in ( SELECT max(x1.yil) from  SASON.PERFORMANS_YPHEDEF  x1 ) ';
              if (isset($_GET['yil'])  && $_GET['yil']!='') {
@@ -10492,7 +10492,7 @@ select  rownum as rid , asd.* from (
                --servisid in (96)
                 ".$servicesQuery."
                 ".$yilQuery."
-                ".$ayQuery."
+             /*   ".$ayQuery."*/
             order by id 
                     ";
             $statement = $pdo->prepare($sql);            
