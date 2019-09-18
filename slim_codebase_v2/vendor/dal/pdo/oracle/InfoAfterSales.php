@@ -2723,7 +2723,7 @@ class InfoAfterSales extends \DAL\DalSlim {
                     asd.SERVISID , 
                     servisad,
                   /*  sum(asd.stoktutar)  stoktutar */
-                    trim( TO_CHAR(ROUND(SUM(nvl(asd.stoktutar,0)), 2),'999G999G999G999G99','NLS_NUMERIC_CHARACTERS = '',.'' '))  stoktutar 
+                    trim( TO_CHAR(ROUND(SUM(nvl(asd.stoktutar,0)), 2),'999G999G999G999G990D','NLS_NUMERIC_CHARACTERS = '',.'' '))  stoktutar 
                 from (
                    SELECT
                             p.HSERVISID SERVISID, 
