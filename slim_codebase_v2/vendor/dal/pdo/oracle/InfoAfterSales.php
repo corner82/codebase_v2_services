@@ -7273,9 +7273,9 @@ SELECT servisid  ,  (Select vtsxy.SERVISADI FROM SASON.PERFORMANSSERVISLER vtsxy
             $pdo = $this->slimApp->getServiceManager()->get('oracleConnectFactory');
             $sql = "  
                    select 
-              /*   TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar  */
+                 TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0), '999,999,999,999,999') direksatistutar  
                     
-                     trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar 
+              /*       trim(TO_CHAR(ROUND(sum(nvl(direksatistutar,0)), 0) ,'999G999G999G999G990','NLS_NUMERIC_CHARACTERS = '',.'' '))  direksatistutar */
 
                     from ( 
                     select   
