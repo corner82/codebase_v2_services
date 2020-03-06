@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "ac20d7d3a2fd92fbd269650d6f2f7098",
@@ -92,6 +92,7 @@
                 "MIT"
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
+            "abandoned": "psr/container",
             "time": "2014-12-30T15:22:37+00:00"
         },
         {
@@ -336,16 +337,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v5.2.26",
+            "version": "v5.2.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "70362997bda4376378be7d92d81e2200550923f7"
+                "reference": "dde1db116511aa4956389d75546c5be4c2beb2a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/70362997bda4376378be7d92d81e2200550923f7",
-                "reference": "70362997bda4376378be7d92d81e2200550923f7",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/dde1db116511aa4956389d75546c5be4c2beb2a6",
+                "reference": "dde1db116511aa4956389d75546c5be4c2beb2a6",
                 "shasum": ""
             },
             "require": {
@@ -409,7 +410,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-11-04T09:26:05+00:00"
+            "time": "2018-11-15T22:32:31+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -895,7 +896,7 @@
                 "type": "zip",
                 "url": "https://packages.zendframework.com/composer/zendframework-zend-escaper-2.5.1-aa62dd.zip",
                 "reference": "9bc5f297f7f880cc2cd89d72b286838374b4525d",
-                "shasum": "06aeeeeb2fcc813f28e8a8d6338aee0605c1dfa7"
+                "shasum": "b34c48e16f3e96527e8b0708e45d59651d742bf1"
             },
             "require": {
                 "php": ">=5.3.23"
@@ -1239,7 +1240,7 @@
                 "type": "zip",
                 "url": "https://packages.zendframework.com/composer/zendframework-zend-loader-2.5.1-eda8fc.zip",
                 "reference": "c632cddeb2c1216235b8777d0d8ecde173a9b283",
-                "shasum": "18e4296563b12965b2a854e8e3b9f64ce38c413a"
+                "shasum": "c44a50906a23e80bb4f2f266f8c6c6b7ab368bd3"
             },
             "require": {
                 "php": ">=5.3.23"
